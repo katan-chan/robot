@@ -31,6 +31,8 @@ Thêm nhãn người chốt **[Claude tự quyết]**: điểm nhỏ, người t
 | 14.10 | Agent dùng **chung API** với trang controller: cùng loại lệnh (tiến/lùi, đi ngang, xoay, tốc độ, dừng), dạng JSON qua HTTP/WebSocket. Không làm API riêng. Kèm một lệnh dòng lệnh mỏng để agent gọi qua Bash (`... drive --vx 0.1 --for 2s`) | [Claude đề xuất] | Chờ chốt |
 | 14.11 | Agent **đọc** được trạng thái: vị trí và hướng thân, vận tốc, tải servo, kết quả kiểm tra khả thi, sự kiện gần nhất, và một ảnh chụp khung hình hiện tại. Nhờ vậy agent "thấy" được robot | [Claude đề xuất] | Chờ chốt |
 | 14.12 | Quyền truy cập: agent chạy trên máy này dùng cổng `127.0.0.1` (12.11) và phải tự khai tên, ví dụ `agent:claude`. Agent ở máy khác cần khoá như người (12.12). Tên agent được ghi vào log người lái (12.16) | [Claude đề xuất] | Chờ chốt |
+| 14.12a | Lệnh CLI có `--host` và `--key`. Mặc định nối `127.0.0.1`. Agent ở máy khác chỉ cần máy đó đã vào Tailscale, rồi chạy cùng CLI với `--host macbook-pro --key <token>`. Agent chạy trên cloud phải có auth key của Tailscale mới vào được mạng. Việc này để sau và cần xem xét bảo mật riêng | [Claude đề xuất] | Chờ chốt |
+| 14.12b | Robot thật sau này (Giai đoạn 8) dùng **cùng API và cùng CLI**. Agent không cần biết đang lái bản mô phỏng hay con thật | [Claude đề xuất] | Chờ chốt |
 | 14.13 | Người luôn được ưu tiên: người giành quyền lái từ agent bất cứ lúc nào. Nút dừng khẩn cấp thắng mọi lệnh của agent | [Claude đề xuất] | Chờ chốt |
 | 14.14 | MCP server (T6.1) để sau. Khi làm, MCP chỉ là lớp bọc mỏng quanh chính API này | [Claude đề xuất] | Chờ chốt |
 

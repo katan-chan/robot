@@ -67,4 +67,4 @@ Mọi quyết định đều sửa được về sau.
 
 | Mã | Nội dung ngắn | File |
 |---|---|---|
-| 14.10–14.14 | Cổng agent: chung API với controller, đọc trạng thái + ảnh, khai tên, người ưu tiên, MCP để sau | Bước 14 |
+| 14.10–14.14 (kèm 14.12a, 14.12b) | Cổng agent: CLI qua Tailscale, chung API với controller, đọc trạng thái + ảnh, khai tên, người ưu tiên, MCP để sau | Bước 14 |
