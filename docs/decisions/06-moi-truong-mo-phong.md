@@ -7,7 +7,7 @@ Ngày: 2026-10-20.
 | # | Quyết định | Người chốt | Trạng thái |
 |---|---|---|---|
 | 6.1 | Việc đầu tiên: dựng thành công môi trường mô phỏng, trước khi làm robot | [Người dùng] | Đang áp dụng |
-| 6.2 | Nội dung bước này (xem dưới) | [Claude đề xuất] | Chờ chốt |
+| 6.2 | Nội dung bước này (xem dưới) | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 
 ## Nội dung (6.2)
 

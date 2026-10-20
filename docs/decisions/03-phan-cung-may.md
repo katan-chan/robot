@@ -28,4 +28,4 @@ Ngày: 2026-10-20.
 | # | Quyết định | Người chốt | Trạng thái |
 |---|---|---|---|
 | 3.1 | Stack: Blender 5.2 → MJCF → MuJoCo + Python 3.12 (`uv`) | [Claude đề xuất] | Đã thay → 3.2 |
-| 3.2 | Stack: file tham số → script Python sinh MJCF → MuJoCo, Python 3.12 (`uv`). Blender chỉ xuất mesh hiển thị cho từng link | [Claude đề xuất] | Chờ chốt |
+| 3.2 | Stack: file tham số → script Python sinh MJCF → MuJoCo, Python 3.12 (`uv`). Blender chỉ xuất mesh hiển thị cho từng link | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |

@@ -35,6 +35,7 @@ Mọi quyết định đều sửa được về sau.
 | 10 | [10-harness-agent.md](10-harness-agent.md) | Harness cho agent: CLAUDE.md, AGENTS.md, hooks kiểm tra khả thi |
 | 11 | [11-record-bug-trace.md](11-record-bug-trace.md) | Module record: ghi lần chạy, replay, ghi bug, trace |
 | 12 | [12-controller-web.md](12-controller-web.md) | Trang web controller qua internet, xem robot trên web, danh mục servo |
+| 13 | [13-duyet-va-vat-ly.md](13-duyet-va-vat-ly.md) | Duyệt toàn bộ; không tự tính lại cái MuJoCo đã tính; vật lý do MuJoCo lo |
 
 `brainstorm-log.md` là bản nháp đầu tiên viết gộp một file. Đã được thay bằng các file 01–10, chỉ giữ để tham khảo.
 
@@ -49,27 +50,14 @@ Mọi quyết định đều sửa được về sau.
 - Trang web điều khiển ở mức nào? → Một controller, điều khiển qua internet (12.1).
 - Xem robot ở đâu? → Cách đơn giản, dễ nhìn nhất (12.2), đề xuất ở 12.5.
 - Servo nào? → Phải thay được (12.3), đề xuất danh mục servo ở 12.7.
+- Thiết kế record và mọi đề xuất khác? → Đã duyệt toàn bộ (13.1).
 - Ai được điều khiển qua internet? → Ai có token (khoá riêng, server chỉ lưu hash). Máy này luôn điều khiển được (12.10, 12.11).
 
 ## Câu hỏi còn mở
 
-1. Thiết kế module record (11.5–11.16) đã duyệt chưa? → Bước 11
-2. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
-3. Có đẩy repo lên remote (GitHub…) không? → Bước 11
+1. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
+2. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
-| Mã | Nội dung ngắn | File |
-|---|---|---|
-| 3.2 | Stack: tham số → Python sinh MJCF → MuJoCo; Blender chỉ làm mesh | Bước 3 |
-| 4.7 | RL lo đi, LLM ở tầng trên | Bước 4 |
-| 6.2 | Nội dung dựng môi trường mô phỏng | Bước 6 |
-| 7.2 | Trình tự Giai đoạn 0 → 8 (phụ thuộc 4.7) | Bước 7 |
-| 7.3 | Khối hình trước, Blender sau | Bước 7 |
-| 8.3 | Phase 1 đi bằng dáng đi lập trình sẵn, không RL | Bước 8 |
-| 8.4 | Phase 1 = Giai đoạn 0 + 1 | Bước 8 |
-| 9.1–9.6 | Ghi chú kỹ thuật: servo, bộ giải, va chạm, ngưỡng kiểm tra, mô-men, kiến trúc web | Bước 9 |
-| 11.5–11.12 | Record: thư mục mỗi lần chạy, lệnh theo số bước, replay, file bug, test hồi quy, nút báo bug, luật sửa bug, định dạng | Bước 11 |
-| 11.15–11.16 | Hook cho Claude Code và Codex; nội dung `.gitignore` | Bước 11 |
-| 12.4–12.9 | Lệnh controller, xem robot qua khung hình gửi về web, danh mục servo, truy cập qua Tailscale | Bước 12 |
-| 12.12–12.17 | Khoá: lưu hash, token không nằm trong URL, cổng riêng cho máy này, một người lái mỗi lúc, ghi log người lái | Bước 12 |
+Không còn mục nào. Toàn bộ đã duyệt ở 13.1.

@@ -41,12 +41,12 @@ Nguồn: https://mujoco.readthedocs.io/en/3.7.0/changelog.html
 
 | # | Ghi chú | Người chốt | Trạng thái |
 |---|---|---|---|
-| 9.1 | Servo: mô hình hoá đủ mô-men cực đại, tốc độ không tải, armature (quán tính rotor quy đổi), damping, frictionloss, độ trễ lệnh. Tất cả nằm trong file tham số T1.1. Mặc định dùng actuator `position` với `forcerange`, và tự giới hạn tốc độ lệnh trong bộ điều khiển. Độ trễ lệnh dùng tính năng delay (≥ 3.5.0). Có thể nâng lên `dcmotor` (≥ 3.7.0) nếu cần đường cong mô-men theo tốc độ | [Claude đề xuất] | Chờ chốt |
-| 9.2 | Bộ giải: `integrator="implicitfast"`, timestep 1–2 ms, timeconst của `solref` ≥ 2 × timestep. Điều khiển chạy khoảng 50 Hz | [Claude đề xuất] | Chờ chốt |
-| 9.3 | Va chạm: chỉ bàn chân và thân chạm sàn. Bàn chân là hình cầu, ma sát khoảng 0.8–1.0, `condim` 3 (lên 4 nếu chân bị xoay). Thêm `<exclude>` cho các cặp quanh hông để tránh rung | [Claude đề xuất] | Chờ chốt |
-| 9.4 | Ngưỡng kiểm tra 8.5: xuyên sàn < 1 mm. Khớp không vượt giới hạn. Rung đo bằng RMS vận tốc khớp khi đứng yên (ngưỡng đặt sau khi đo lần đầu). Thêm kiểm tra: tỉ lệ thời gian actuator bị bão hoà, trượt chân, mô-men khi đứng thấp hơn mức an toàn (khoảng 50% mô-men cực đại) | [Claude đề xuất] | Chờ chốt |
-| 9.5 | Kiểm tra mô-men tĩnh trong T1.4. Với servo cỡ MG90S và robot 250–350 g, mô-men ở hông/gối khi đứng 3 chân khoảng 0.08–0.1 N·m, gần 50% mô-men cực đại, sát giới hạn. Kích thước chân phải chọn theo kiểm tra này | [Claude đề xuất] | Chờ chốt |
-| 9.6 | Kiến trúc web: chỉ một luồng mô phỏng sở hữu `MjData`. Web handler đẩy lệnh vào hàng đợi. Mô phỏng tự canh theo thời gian thật (bước tới khi `data.time` bắt kịp đồng hồ) và báo hệ số thời gian thực. Cổng mạng: xem 12.14. Kiểm tra tự động chạy không màn hình và không phụ thuộc đồng hồ thật | [Claude đề xuất] | Chờ chốt |
+| 9.1 | Servo: mô hình hoá đủ mô-men cực đại, tốc độ không tải, armature (quán tính rotor quy đổi), damping, frictionloss, độ trễ lệnh. Tất cả nằm trong file tham số T1.1. Mặc định dùng actuator `position` với `forcerange`, và tự giới hạn tốc độ lệnh trong bộ điều khiển. Độ trễ lệnh dùng tính năng delay (≥ 3.5.0). Có thể nâng lên `dcmotor` (≥ 3.7.0) nếu cần đường cong mô-men theo tốc độ | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 9.2 | Bộ giải: `integrator="implicitfast"`, timestep 1–2 ms, timeconst của `solref` ≥ 2 × timestep. Điều khiển chạy khoảng 50 Hz | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 9.3 | Va chạm: chỉ bàn chân và thân chạm sàn. Bàn chân là hình cầu, ma sát khoảng 0.8–1.0, `condim` 3 (lên 4 nếu chân bị xoay). Thêm `<exclude>` cho các cặp quanh hông để tránh rung | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 9.4 | Ngưỡng kiểm tra 8.5: xuyên sàn < 1 mm. Khớp không vượt giới hạn. Rung đo bằng RMS vận tốc khớp khi đứng yên (ngưỡng đặt sau khi đo lần đầu). Thêm kiểm tra: tỉ lệ thời gian actuator bị bão hoà, trượt chân, mô-men khi đứng thấp hơn mức an toàn (khoảng 50% mô-men cực đại) | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 9.5 | Kiểm tra mô-men tĩnh trong T1.4. Với servo cỡ MG90S và robot 250–350 g, mô-men ở hông/gối khi đứng 3 chân khoảng 0.08–0.1 N·m, gần 50% mô-men cực đại, sát giới hạn. Kích thước chân phải chọn theo kiểm tra này | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 9.6 | Kiến trúc web: chỉ một luồng mô phỏng sở hữu `MjData`. Web handler đẩy lệnh vào hàng đợi. Mô phỏng tự canh theo thời gian thật (bước tới khi `data.time` bắt kịp đồng hồ) và báo hệ số thời gian thực. Cổng mạng: xem 12.14. Kiểm tra tự động chạy không màn hình và không phụ thuộc đồng hồ thật | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 
 ## Câu hỏi chỉ người dùng trả lời được
 

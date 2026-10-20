@@ -12,7 +12,7 @@ Ngày: 2026-10-20.
 | 4.4 | Mục tiêu 2: gắn cảm biến dựng bản đồ để đi trên đa tạp bất kỳ, kể cả mặt gấp khúc và có vật cản | [Người dùng] | Đang áp dụng |
 | 4.5 | Dùng LLM hoặc RL để học di chuyển | [Người dùng] | Đang áp dụng (làm sau, xem quyết định 5.1) |
 | 4.6 | Về sau thêm camera và loa để nói chuyện | [Người dùng] | Đang áp dụng (làm sau) |
-| 4.7 | Học đi dùng RL. LLM ở tầng trên: nghe lệnh, chọn đích đến | [Claude đề xuất] | Chờ chốt |
+| 4.7 | Học đi dùng RL. LLM ở tầng trên: nghe lệnh, chọn đích đến | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 
 ## Câu hỏi mở
 

@@ -26,14 +26,14 @@ Hệ quả: chỉ cần ghi lại model, state ban đầu và chuỗi lệnh đi
 
 | # | Đề xuất | Người chốt | Trạng thái |
 |---|---|---|---|
-| 11.5 | Mỗi lần chạy mô phỏng tự tạo một thư mục `runs/<thời gian>-<mã>/` gồm 5 file (xem dưới) | [Claude đề xuất] | Chờ chốt |
-| 11.6 | Lệnh từ trang web ghi theo **số bước mô phỏng**, không theo giờ thật. Lệnh chỉ áp dụng ở ranh giới bước | [Claude đề xuất] | Chờ chốt |
-| 11.7 | Lệnh `replay` chạy lại một lần chạy từ thư mục của nó, so khớp với các checkpoint. Có thể dừng ở bước N để xem | [Claude đề xuất] | Chờ chốt |
-| 11.8 | Mỗi bug có một file `docs/bugs/BUG-NNN.md` và giữ lại thư mục lần chạy gây bug | [Claude đề xuất] | Chờ chốt |
-| 11.9 | Sửa bug xong thì lần chạy đó thành **test hồi quy**: replay và khẳng định lỗi không còn. Hook `pre-commit` chạy các test này | [Claude đề xuất] | Chờ chốt |
-| 11.10 | Trang web có nút "Báo bug": đánh dấu bước hiện tại và tạo khung `BUG-NNN.md` | [Claude đề xuất] | Chờ chốt |
-| 11.11 | Thêm luật vào `AGENTS.md`: sửa bug phải theo thứ tự tái hiện → test hồi quy → sửa → test qua | [Claude đề xuất] | Chờ chốt |
-| 11.12 | Định dạng: JSON/JSONL cho manifest, lệnh, sự kiện; `.npz` (numpy) cho dữ liệu số. Công cụ xem như Rerun hay MCAP để sau, chỉ thêm khi cần | [Claude đề xuất] | Chờ chốt |
+| 11.5 | Mỗi lần chạy mô phỏng tự tạo một thư mục `runs/<thời gian>-<mã>/` gồm 5 file (xem dưới) | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.6 | Lệnh từ trang web ghi theo **số bước mô phỏng**, không theo giờ thật. Lệnh chỉ áp dụng ở ranh giới bước | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.7 | Lệnh `replay` chạy lại một lần chạy từ thư mục của nó, so khớp với các checkpoint. Có thể dừng ở bước N để xem | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.8 | Mỗi bug có một file `docs/bugs/BUG-NNN.md` và giữ lại thư mục lần chạy gây bug | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.9 | Sửa bug xong thì lần chạy đó thành **test hồi quy**: replay và khẳng định lỗi không còn. Hook `pre-commit` chạy các test này | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.10 | Trang web có nút "Báo bug": đánh dấu bước hiện tại và tạo khung `BUG-NNN.md` | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.11 | Thêm luật vào `AGENTS.md`: sửa bug phải theo thứ tự tái hiện → test hồi quy → sửa → test qua | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.12 | Định dạng: JSON/JSONL cho manifest, lệnh, sự kiện; `.npz` (numpy) cho dữ liệu số. Công cụ xem như Rerun hay MCAP để sau, chỉ thêm khi cần | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 
 ### Thư mục một lần chạy (11.5)
 
@@ -95,8 +95,8 @@ Agent đọc trace qua một script tóm tắt, không đọc nguyên file số.
 |---|---|---|---|
 | 11.13 | Repo lưu trên git | [Người dùng] | Đang áp dụng |
 | 11.14 | Có thể dùng thêm agent khác ngoài Claude Code | [Người dùng] | Đang áp dụng |
-| 11.15 | Vì 11.14: `AGENTS.md` là nguồn quy ước chung. Giữ hook cho cả Claude Code (`.claude/settings.json`) và Codex (`.codex/hooks.json`). Hai lớp không phụ thuộc agent là git `pre-commit` và cổng trong code, áp dụng cho mọi agent | [Claude đề xuất] | Chờ chốt |
-| 11.16 | `.gitignore` bỏ qua `runs/`, `.venv/`, `__pycache__/`. Thư mục lần chạy gây bug nằm trong `docs/bugs/` và được commit | [Claude đề xuất] | Chờ chốt |
+| 11.15 | Vì 11.14: `AGENTS.md` là nguồn quy ước chung. Giữ hook cho cả Claude Code (`.claude/settings.json`) và Codex (`.codex/hooks.json`). Hai lớp không phụ thuộc agent là git `pre-commit` và cổng trong code, áp dụng cho mọi agent | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 11.16 | `.gitignore` bỏ qua `runs/`, `.venv/`, `__pycache__/`. Thư mục lần chạy gây bug nằm trong `docs/bugs/` và được commit | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 
 ## Câu hỏi mở
 
