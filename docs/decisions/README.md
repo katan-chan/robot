@@ -49,13 +49,13 @@ Mọi quyết định đều sửa được về sau.
 - Trang web điều khiển ở mức nào? → Một controller, điều khiển qua internet (12.1).
 - Xem robot ở đâu? → Cách đơn giản, dễ nhìn nhất (12.2), đề xuất ở 12.5.
 - Servo nào? → Phải thay được (12.3), đề xuất danh mục servo ở 12.7.
+- Ai được điều khiển qua internet? → Ai có token (khoá riêng, server chỉ lưu hash). Máy này luôn điều khiển được (12.10, 12.11).
 
 ## Câu hỏi còn mở
 
-1. Ai được điều khiển qua internet: chỉ bạn, hay cả người khác? → Bước 12
-2. Thiết kế module record (11.5–11.16) đã duyệt chưa? → Bước 11
-3. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
-4. Có đẩy repo lên remote (GitHub…) không? → Bước 11
+1. Thiết kế module record (11.5–11.16) đã duyệt chưa? → Bước 11
+2. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
+3. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
@@ -73,3 +73,4 @@ Mọi quyết định đều sửa được về sau.
 | 11.5–11.12 | Record: thư mục mỗi lần chạy, lệnh theo số bước, replay, file bug, test hồi quy, nút báo bug, luật sửa bug, định dạng | Bước 11 |
 | 11.15–11.16 | Hook cho Claude Code và Codex; nội dung `.gitignore` | Bước 11 |
 | 12.4–12.9 | Lệnh controller, xem robot qua khung hình gửi về web, danh mục servo, truy cập qua Tailscale | Bước 12 |
+| 12.12–12.17 | Khoá: lưu hash, token không nằm trong URL, cổng riêng cho máy này, một người lái mỗi lúc, ghi log người lái | Bước 12 |

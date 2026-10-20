@@ -29,7 +29,23 @@ Trang web điều khiển chạy trên máy Mac. Nếu mở thẳng ra internet 
 - Lệnh từ controller vẫn ghi theo số bước mô phỏng (11.6). Độ trễ mạng không làm hỏng việc replay.
 - Đường truyền qua internet có trễ. Controller gửi lệnh "giữ" kèm thời hạn: mất kết nối quá khoảng 0.5 giây thì robot tự dừng.
 
+## Khoá điều khiển (trả lời câu hỏi "ai được điều khiển")
+
+| # | Quyết định | Người chốt | Trạng thái |
+|---|---|---|---|
+| 12.10 | Điều khiển từ xa cần token (khoá riêng). Server chỉ lưu mã hash của token | [Người dùng] | Đang áp dụng |
+| 12.11 | Máy Mac này mặc định luôn điều khiển được, không cần token | [Người dùng] | Đang áp dụng |
+| 12.12 | Mỗi khoá có tên (ví dụ `iphone-minh`). Lệnh tạo khoá in token **một lần duy nhất**. Server lưu `tên + sha256(token) + ngày tạo` trong một file ngoài git (`~/.config/spider-robot/keys.json`, quyền 600). Thu hồi được từng khoá. Token dài 32 byte ngẫu nhiên (`secrets.token_urlsafe`), nên dùng sha256 là đủ. So sánh bằng `hmac.compare_digest` | [Claude đề xuất] | Chờ chốt |
+| 12.13 | Token không bao giờ nằm trong URL gửi lên server, vì URL dễ lọt vào log. Trang web nhận token qua ô nhập, hoặc qua phần `#` của link (trình duyệt không gửi phần này lên server), lưu trong trình duyệt rồi gửi qua header hoặc tin nhắn đầu tiên của WebSocket | [Claude đề xuất] | Chờ chốt |
+| 12.14 | "Máy này" được nhận diện bằng **một cổng riêng chỉ nghe ở `127.0.0.1`**, không phải bằng địa chỉ IP của request. Cổng cho truy cập từ xa (trên Tailscale) luôn đòi token. Không trỏ tunnel hay proxy nào vào cổng `127.0.0.1` | [Claude đề xuất] | Chờ chốt |
+| 12.15 | Mỗi lúc chỉ một controller được lái. Máy này luôn giành quyền lái được. Mọi controller đều có nút dừng khẩn cấp | [Claude đề xuất] | Chờ chốt |
+| 12.16 | `events.jsonl` ghi tên khoá đang lái (không ghi token) mỗi lần đổi người lái | [Claude đề xuất] | Chờ chốt |
+| 12.17 | Đường truyền vẫn đi qua Tailscale (đã mã hoá). Muốn cho người khác lái thì chia sẻ máy Mac qua Tailscale và cấp cho họ một khoá. Cloudflare để sau | [Claude đề xuất] | Chờ chốt |
+
+### Vì sao 12.14 quan trọng
+
+Nếu server cho qua mọi request đến từ địa chỉ `127.0.0.1`, thì mọi tunnel hoặc proxy chạy trên máy (Tailscale Serve, Cloudflare Tunnel, ngrok…) đều biến người ngoài thành "máy này". Khi đó token bị bỏ qua. Tách hẳn hai cổng thì tránh được lỗi này.
+
 ## Câu hỏi mở
 
-1. Ai được điều khiển: chỉ mình bạn trên thiết bị của bạn, hay cả người khác? Câu trả lời quyết định chọn Tailscale hay Cloudflare.
-2. Thiết kế module record (11.5–11.16) đã được duyệt chưa?
+1. Thiết kế module record (11.5–11.16) đã được duyệt chưa?
