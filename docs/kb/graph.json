@@ -1211,6 +1211,19 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "18.10",
+   "type": "Decision",
+   "label": "Agent không sửa trực tiếp file `.blend` mà người dùng đang mở. Chỉnh bằng script: mở file, sửa, lưu,",
+   "text": "Agent không sửa trực tiếp file `.blend` mà người dùng đang mở. Chỉnh bằng script: mở file, sửa, lưu, rồi chạy lại `inspect`, `export`, `render`. Mỗi lần lưu `.blend` là một commit riêng",
+   "decided_by": "claude-proposed",
+   "status": "pending",
+   "status_raw": "Chờ chốt",
+   "step": 18,
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L18",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "18.2",
    "type": "Decision",
    "label": "Vật lý vẫn do MuJoCo lo (8.5, 13.3). Blender không dùng để mô phỏng vật lý",
@@ -1259,6 +1272,58 @@
    "status_raw": "Chờ chốt",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "18.6",
+   "type": "Decision",
+   "label": "File `.blend` (nguồn) và file xuất đều nằm trong repo. `models/spider.blend` là nguồn, được commit. ",
+   "text": "File `.blend` (nguồn) và file xuất đều nằm trong repo. `models/spider.blend` là nguồn, được commit. Kết quả xuất (mô tả robot + mesh từng link) là file sinh ra, ghi vào `build/model/`, không commit, chạy lại lệnh xuất là có. Giống quan hệ giữa docs và `graph.json`",
+   "decided_by": "claude-proposed",
+   "status": "pending",
+   "status_raw": "Chờ chốt",
+   "step": 18,
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L14",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "18.7",
+   "type": "Decision",
+   "label": "Agent giao tiếp với Blender qua **Blender CLI** chạy không giao diện (`blender -b models/spider.blen",
+   "text": "Agent giao tiếp với Blender qua **Blender CLI** chạy không giao diện (`blender -b models/spider.blend --python <script> -- <args>`). Agent nào cũng dùng được qua Bash, không cần Blender đang mở. MCP chỉ là tuỳ chọn để xem hoặc chỉnh trên Blender đang mở",
+   "decided_by": "user",
+   "status": "pending",
+   "status_raw": "Chờ chốt",
+   "step": 18,
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L15",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "18.8",
+   "type": "Decision",
+   "label": "Một lệnh bọc duy nhất `tools/blender` tìm Blender theo thứ tự `$BLENDER_BIN` → `blender` trên PATH →",
+   "text": "Một lệnh bọc duy nhất `tools/blender` tìm Blender theo thứ tự `$BLENDER_BIN` → `blender` trên PATH → bản Steam → `/Applications/Blender.app`. Các lệnh con: `inspect` (in JSON: link, khớp, trục, giới hạn, servo), `export` (ghi `build/model/`), `render` (chụp ảnh nhiều góc ra PNG). Lỗi trả về dạng có cấu trúc để agent tự sửa (10.7)",
+   "decided_by": "claude-proposed",
+   "status": "pending",
+   "status_raw": "Chờ chốt",
+   "step": 18,
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L16",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "18.9",
+   "type": "Decision",
+   "label": "Script chạy trong Python của Blender (3.13.13, bản đi kèm Blender 5.2.2) chỉ dùng `bpy` và thư viện ",
+   "text": "Script chạy trong Python của Blender (3.13.13, bản đi kèm Blender 5.2.2) chỉ dùng `bpy` và thư viện chuẩn, không import `mujoco`. Phần MuJoCo chạy trong môi trường `uv` (Python 3.12) và chỉ đọc file đã xuất",
+   "decided_by": "claude-proposed",
+   "status": "pending",
+   "status_raw": "Chờ chốt",
+   "step": 18,
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L17",
    "since": "2026-10-20",
    "by": "rule:decision-table"
   },
@@ -4156,6 +4221,14 @@
    "rel": "SUPERSEDES",
    "src": "docs/decisions/16-gate-dau-tien.md#L12",
    "to": "16.4"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "18.8",
+   "rel": "CITES",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L16",
+   "to": "10.7"
   },
   {
    "by": "curated",

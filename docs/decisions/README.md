@@ -73,4 +73,4 @@ Mọi quyết định đều sửa được về sau.
 
 | Mã | Nội dung ngắn | File |
 |---|---|---|
-| 18.2–18.5 | Vật lý ở MuJoCo, G1 xem trong Blender, TOML giữ phần vật lý, cách xuất | Bước 18 |
+| 18.2–18.10 | Vật lý ở MuJoCo, G1 trong Blender, TOML giữ vật lý, cách xuất, .blend trong repo, Blender CLI cho agent | Bước 18 |
