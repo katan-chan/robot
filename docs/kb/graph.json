@@ -1094,6 +1094,19 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "16.7",
+   "type": "Decision",
+   "label": "Các cổng mốc sau G1 (G2, G3…) chốt sau khi G1 xong. Các cổng cố định vẫn áp dụng: việc khó đảo ngược",
+   "text": "Các cổng mốc sau G1 (G2, G3…) chốt sau khi G1 xong. Các cổng cố định vẫn áp dụng: việc khó đảo ngược (task-graph.md mục 5) và tiêu chí xong Phase 1 (14.8)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 16,
+   "src": "docs/decisions/16-gate-dau-tien.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "3.1",
    "type": "Decision",
    "label": "Stack: Blender 5.2 → MJCF → MuJoCo + Python 3.12 (`uv`)",
@@ -3756,6 +3769,14 @@
    "rel": "CONSTRAINS",
    "src": "docs/decisions/16-gate-dau-tien.md#L12",
    "to": "comp:viewer-tool"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "16.7",
+   "rel": "CITES",
+   "src": "docs/decisions/16-gate-dau-tien.md#L13",
+   "to": "14.8"
   },
   {
    "by": "curated",
