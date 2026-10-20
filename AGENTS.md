@@ -14,7 +14,7 @@ Robot nhện 4 chân, mỗi chân 3 servo (12 servo), mô phỏng bằng MuJoCo 
 - Agent điều khiển được qua cùng API, bằng CLI.
 - Tiêu chí xong: quyết định 14.8.
 
-Stack: file tham số → Python sinh model bằng `mujoco.MjSpec` → MuJoCo. Python 3.12 qua `uv`, phiên bản `mujoco` được ghim. Blender chỉ dùng để làm mesh hiển thị, từ Giai đoạn 2.
+Stack: model 3D nguồn trong Blender (`models/spider.blend`) → `tools/blender export` → `build/model/` → Python dựng `mujoco.MjSpec` cùng file TOML vật lý → MuJoCo (18.1, 18.4–18.6). Python 3.12 qua `uv`, phiên bản `mujoco` được ghim.
 
 ## Nguồn sự thật
 

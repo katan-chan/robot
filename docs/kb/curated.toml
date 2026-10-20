@@ -307,7 +307,7 @@ REVIEWS = "docs/harness/task-graph.md"
 # Một người ghi mỗi file/thư mục (task-graph.md, luật 2).
 [edges.WRITES]
 "role:coordinator"   = ["AGENTS.md", "CLAUDE.md", "harness.toml", "docs/decisions/", "docs/kb/", "docs/harness/", "docs/reference/", "docs/superpowers/", ".claude/settings.json", ".claude/agents/", ".claude/hooks/", ".codex/hooks.json", ".githooks/"]
-"role:implementer"   = ["pyproject.toml", "uv.lock", "spider/__init__.py", "spider/model/", "spider/sim/", "tools/", "blender/", "models/", "tests/test_env.py", "tests/test_scene.py", "tests/test_model.py", "tests/test_view.py"]
+"role:implementer"   = ["pyproject.toml", "uv.lock", "spider/__init__.py", "spider/model/", "spider/sim/", "tools/", "blender/", "models/", ".gitignore", "tests/test_env.py", "tests/test_scene.py", "tests/test_config.py", "tests/test_blender.py", "tests/test_build.py", "tests/test_model.py", "tests/test_view.py"]
 "role:gait-worker"   = ["spider/gait/", "tests/test_gait.py"]
 "role:checks-worker" = ["spider/checks/", "tests/test_checks.py"]
 "role:record-worker" = ["spider/record/", "docs/bugs/", "tests/test_record.py"]

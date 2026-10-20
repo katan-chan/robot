@@ -2498,6 +2498,13 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:.gitignore",
+   "type": "File",
+   "label": ".gitignore",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:AGENTS.md",
    "type": "File",
    "label": "AGENTS.md",
@@ -2659,9 +2666,30 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:tests/test_blender.py",
+   "type": "File",
+   "label": "tests/test_blender.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_build.py",
+   "type": "File",
+   "label": "tests/test_build.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:tests/test_checks.py",
    "type": "File",
    "label": "tests/test_checks.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_config.py",
+   "type": "File",
+   "label": "tests/test_config.py",
    "src": "docs/harness/task-graph.md",
    "by": "rule:file-ref"
   },
@@ -6669,6 +6697,14 @@
    "from": "role:implementer",
    "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
+   "to": "file:.gitignore"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
    "to": "file:blender/"
   },
   {
@@ -6710,6 +6746,30 @@
    "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
    "to": "file:spider/sim/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_blender.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_build.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_config.py"
   },
   {
    "by": "curated",
