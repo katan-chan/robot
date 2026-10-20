@@ -29,9 +29,9 @@ Ngày: 2026-10-20.
 **Xong khi:** viewer chạy và script kiểm tra qua.
 
 ### Giai đoạn 1. Robot nhện bằng khối hình đơn giản
-- T1.1 Một file tham số duy nhất (theo 5.3): kích thước thân, chiều dài các đoạn chân, giới hạn góc, lực servo, khối lượng.
-- T1.2 Script sinh MJCF từ file tham số: thân hộp, chân trụ, 4 × 3 khớp.
-- T1.3 Gắn actuator điều khiển theo vị trí cho 12 khớp. Cử động bằng thanh trượt trong viewer.
+- T1.1 File tham số vật lý (theo 5.3, 18.4): danh mục servo, khối lượng pin và mạch, vật liệu, ma sát, bộ giải, tư thế đứng. Hình học nằm trong Blender.
+- T1.2 Model 3D trong Blender `models/spider.blend` (theo 18.1), dựng ban đầu bằng script `bpy`. Có `tools/blender inspect` và `render` (theo 18.7, 18.8).
+- T1.3 `tools/blender export` → `build/model/`, rồi `MjSpec` dựng model MuJoCo có 12 servo điều khiển theo vị trí (theo 18.5, 18.9). Kiểm Blender và MuJoCo khớp nhau.
 - T1.4 Tư thế đứng mặc định. Kiểm tra: robot đứng vững vài giây và không có khớp nào vượt giới hạn.
 - T1.5 ~~Chốt câu hỏi mở: chỉ đứng yên, hay bước đi bằng dáng đi lập trình sẵn?~~ Đã chốt: phải di chuyển được → xem Bước 8.
 - T1.6 IK cho từng chân và dáng đi bò (creep) hoặc trot. Bắt buộc, theo 8.2.

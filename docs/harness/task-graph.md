@@ -52,7 +52,7 @@ Worker chỉ được dựa vào hợp đồng. Muốn đổi hợp đồng thì
 | Vai trò | Làm | Được ghi vào (một người ghi mỗi file) |
 |---|---|---|
 | coordinator (phiên chính) | **Chỉ điều phối** (17.2): giao task, gọi verifier, gộp nhánh, viết hợp đồng (tài liệu), ghi quyết định, giữ KB và cấu hình harness. Không viết code | `AGENTS.md`, `CLAUDE.md`, `harness.toml`, `docs/decisions/`, `docs/kb/`, `docs/harness/`, `docs/reference/`, `docs/superpowers/`, `.claude/`, `.codex/`, `.githooks/` |
-| implementer | T0.1–T1.4 lần lượt, sửa `tools/` khi được giao | `pyproject.toml`, `uv.lock`, `spider/__init__.py`, `spider/model/`, `spider/sim/`, `tools/`, `tests/test_env.py`, `tests/test_scene.py`, `tests/test_model.py`, `tests/test_view.py` |
+| implementer | T0.1–T1.4 lần lượt, sửa `tools/` khi được giao | `pyproject.toml`, `uv.lock`, `spider/__init__.py`, `spider/model/`, `spider/sim/`, `tools/`, `blender/`, `models/`, `tests/test_env.py`, `tests/test_scene.py`, `tests/test_model.py`, `tests/test_view.py` |
 | gait-worker | T1.6 | `spider/gait/`, `tests/test_gait.py` |
 | checks-worker | T1.8, T1.12 (viết script hook; coordinator nối vào config) | `spider/checks/`, `tests/test_checks.py` |
 | record-worker | T1.9 | `spider/record/`, `docs/bugs/`, `tests/test_record.py` |

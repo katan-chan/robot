@@ -60,17 +60,14 @@ Mọi quyết định đều sửa được về sau.
 - Lái từ thiết bị nào? → Điện thoại và laptop, không có tay cầm (14.6).
 - Tiêu chí xong Phase 1? → Test tự động + thử tay từ điện thoại + agent lái được qua API (14.8). Có cổng cho agent (14.9), thiết kế 14.10–14.14 đã duyệt.
 - Thiết kế record và mọi đề xuất khác? → Đã duyệt toàn bộ (13.1).
+- Blender hay MuJoCo? → Blender là nơi chỉnh model, MuJoCo chạy vật lý, agent dùng Blender CLI, ưu tiên CLI hơn MCP (Bước 18, đã duyệt).
 - Ai được điều khiển qua internet? → Ai có token (khoá riêng, server chỉ lưu hash). Máy này luôn điều khiển được (12.10, 12.11).
 
 ## Câu hỏi còn mở
 
-- Xuất Blender → MuJoCo bằng LinkForge (URDF) hay script `bpy` riêng? → Bước 18
-- Cài lại Blender MCP thế nào? → Bước 18
 1. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
 2. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
-| Mã | Nội dung ngắn | File |
-|---|---|---|
-| 18.2–18.10 | Vật lý ở MuJoCo, G1 trong Blender, TOML giữ vật lý, cách xuất, .blend trong repo, Blender CLI cho agent | Bước 18 |
+Không còn mục nào.

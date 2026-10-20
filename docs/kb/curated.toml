@@ -24,6 +24,7 @@ REVIEWS = "docs/harness/task-graph.md"
 
 # Gộp tên trùng (fusion): bí danh → id chuẩn.
 [aliases]
+"comp:blend-file" = "comp:blend-model"
 "comp:frame-streamer" = "comp:web-server"
 "comp:ik" = "comp:gait"
 "comp:keys" = "comp:key-store"
@@ -53,9 +54,12 @@ REVIEWS = "docs/harness/task-graph.md"
 
 [nodes.Component]
 "comp:project-env"     = { label = "Môi trường uv + Python 3.12, ghim phiên bản mujoco", src = "6.2", stored_in = "pyproject.toml" }
-"comp:params"          = { label = "File tham số duy nhất: kích thước, giới hạn, khối lượng, tư thế đứng", src = "5.3", stored_in = "spider/model/" }
+"comp:params"          = { label = "File tham số vật lý: khối lượng pin/mạch, vật liệu, ma sát, bộ giải, tư thế đứng", src = "18.4", stored_in = "spider/model/" }
 "comp:servo-catalog"   = { label = "Danh mục servo (MG90S, SG90, MG996R…)", src = "12.7", stored_in = "spider/model/" }
-"comp:mjcf-builder"    = { label = "Dựng model MuJoCo từ tham số bằng MjSpec", src = "3.2", stored_in = "spider/model/" }
+"comp:mjcf-builder"    = { label = "Dựng model MuJoCo bằng MjSpec từ file xuất của Blender + TOML vật lý", src = "18.5", stored_in = "spider/model/" }
+"comp:blend-model"     = { label = "Model 3D nguồn trong Blender: link, origin tại khớp, trục, giới hạn, servo từng khớp", src = "18.1", stored_in = "models/spider.blend" }
+"comp:blender-cli"     = { label = "tools/blender: inspect, export, render, chạy Blender không giao diện", src = "18.8", stored_in = "tools/blender" }
+"comp:blender-scripts" = { label = "Script bpy chạy trong Blender: dựng, kiểm, xuất, chụp", src = "18.9", stored_in = "blender/" }
 "comp:sim-loop"        = { label = "Vòng mô phỏng: một luồng sở hữu MjData, hàng đợi lệnh, canh thời gian thật", src = "9.6", stored_in = "spider/sim/" }
 "comp:gait"            = { label = "IK 3 khớp và bộ tạo dáng đi", src = "8.3", stored_in = "spider/gait/" }
 "comp:feasibility-gate" = { label = "Cổng khả thi trong code: chạy kiểm tra mức 1/2 trước khi mô phỏng", src = "10.5", stored_in = "spider/checks/" }
@@ -179,6 +183,17 @@ REVIEWS = "docs/harness/task-graph.md"
 "15.11"  = ["harness:memory", "harness:guardrails"]
 "16.2"   = ["role:human"]
 "16.4"   = ["comp:viewer-tool", "comp:mjcf-builder"]
+"18.1"   = ["comp:blend-model", "comp:mjcf-builder"]
+"18.2"   = ["comp:sim-loop"]
+"18.3"   = ["comp:blend-model", "comp:blender-cli", "role:human"]
+"18.4"   = ["comp:params", "comp:blend-model"]
+"18.5"   = ["comp:blender-scripts", "comp:mjcf-builder"]
+"18.6"   = ["comp:blend-model", "comp:blender-cli"]
+"18.7"   = ["comp:blender-cli", "harness:tool_guidance"]
+"18.8"   = ["comp:blender-cli"]
+"18.9"   = ["comp:blender-scripts", "comp:mjcf-builder"]
+"18.10"  = ["comp:blend-model", "harness:guardrails"]
+"18.11"  = ["harness:guardrails", "comp:cli"]
 "17.1"   = ["harness:subagents"]
 "17.2"   = ["role:coordinator", "harness:guardrails"]
 "17.3"   = ["role:implementer"]
@@ -228,8 +243,8 @@ REVIEWS = "docs/harness/task-graph.md"
 "T0.2"  = ["comp:viewer-tool"]
 "T0.3"  = ["check:box-fall"]
 "T1.1"  = ["comp:params", "comp:servo-catalog"]
-"T1.2"  = ["comp:mjcf-builder"]
-"T1.3"  = ["comp:mjcf-builder"]
+"T1.2"  = ["comp:blend-model", "comp:blender-cli", "comp:blender-scripts"]
+"T1.3"  = ["comp:blender-scripts", "comp:mjcf-builder"]
 "T1.4"  = ["comp:sim-loop", "check:static-torque"]
 "T1.6"  = ["comp:gait", "check:ik-reach"]
 "T1.7"  = ["comp:web-server", "comp:controller-ui"]
@@ -292,7 +307,7 @@ REVIEWS = "docs/harness/task-graph.md"
 # Một người ghi mỗi file/thư mục (task-graph.md, luật 2).
 [edges.WRITES]
 "role:coordinator"   = ["AGENTS.md", "CLAUDE.md", "harness.toml", "docs/decisions/", "docs/kb/", "docs/harness/", "docs/reference/", "docs/superpowers/", ".claude/settings.json", ".claude/agents/", ".claude/hooks/", ".codex/hooks.json", ".githooks/"]
-"role:implementer"   = ["pyproject.toml", "uv.lock", "spider/__init__.py", "spider/model/", "spider/sim/", "tools/", "tests/test_env.py", "tests/test_scene.py", "tests/test_model.py", "tests/test_view.py"]
+"role:implementer"   = ["pyproject.toml", "uv.lock", "spider/__init__.py", "spider/model/", "spider/sim/", "tools/", "blender/", "models/", "tests/test_env.py", "tests/test_scene.py", "tests/test_model.py", "tests/test_view.py"]
 "role:gait-worker"   = ["spider/gait/", "tests/test_gait.py"]
 "role:checks-worker" = ["spider/checks/", "tests/test_checks.py"]
 "role:record-worker" = ["spider/record/", "docs/bugs/", "tests/test_record.py"]

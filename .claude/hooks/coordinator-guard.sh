@@ -7,7 +7,7 @@ root="${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel 2>/dev/null)}"
 rel=${f#"$root"/}
 [ "$rel" = "$f" ] && exit 0   # ngoài repo: không quản
 case "$rel" in
-  spider/*|tests/*|tools/*|web/*|pyproject.toml|uv.lock)
+  spider/*|tests/*|tools/*|web/*|blender/*|models/*|pyproject.toml|uv.lock)
     echo "Chặn: phiên chính chỉ điều phối (AGENTS.md luật 7, quyết định 17.2). Giao '$rel' cho subagent implementer/worker chạy với isolation: \"worktree\"." >&2
     exit 2;;
 esac

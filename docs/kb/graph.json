@@ -1162,7 +1162,7 @@
    "id": "17.5",
    "type": "Decision",
    "label": "Hook `PreToolUse` `.claude/hooks/coordinator-guard.sh` chặn phiên chính sửa `spider/`, `tests/`, `to",
-   "text": "Hook `PreToolUse` `.claude/hooks/coordinator-guard.sh` chặn phiên chính sửa `spider/`, `tests/`, `tools/`, `web/`, `pyproject.toml`, `uv.lock` trong checkout chính. Sửa trong worktree thì không bị chặn",
+   "text": "Hook `PreToolUse` `.claude/hooks/coordinator-guard.sh` chặn phiên chính sửa `spider/`, `tests/`, `tools/`, `web/`, `blender/`, `models/`, `pyproject.toml`, `uv.lock` trong checkout chính. Sửa trong worktree thì không bị chặn",
    "decided_by": "claude-decided",
    "status": "active",
    "status_raw": "Đang áp dụng",
@@ -1215,9 +1215,9 @@
    "type": "Decision",
    "label": "Agent không sửa trực tiếp file `.blend` mà người dùng đang mở. Chỉnh bằng script: mở file, sửa, lưu,",
    "text": "Agent không sửa trực tiếp file `.blend` mà người dùng đang mở. Chỉnh bằng script: mở file, sửa, lưu, rồi chạy lại `inspect`, `export`, `render`. Mỗi lần lưu `.blend` là một commit riêng",
-   "decided_by": "claude-proposed",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L18",
    "since": "2026-10-20",
@@ -1241,9 +1241,9 @@
    "type": "Decision",
    "label": "Vật lý vẫn do MuJoCo lo (8.5, 13.3). Blender không dùng để mô phỏng vật lý",
    "text": "Vật lý vẫn do MuJoCo lo (8.5, 13.3). Blender không dùng để mô phỏng vật lý",
-   "decided_by": "claude-proposed",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L10",
    "since": "2026-10-20",
@@ -1254,9 +1254,9 @@
    "type": "Decision",
    "label": "Cổng G1 xem model và các thành phần **trong Blender**. Thêm: model đã xuất mở được trong MuJoCo, và ",
    "text": "Cổng G1 xem model và các thành phần **trong Blender**. Thêm: model đã xuất mở được trong MuJoCo, và bảng thành phần đọc từ MuJoCo khớp với Blender",
-   "decided_by": "claude-proposed",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L11",
    "since": "2026-10-20",
@@ -1267,9 +1267,9 @@
    "type": "Decision",
    "label": "Phần vật lý không nằm trong hình học (danh mục servo, khối lượng servo và pin, ma sát, bộ giải) vẫn ",
    "text": "Phần vật lý không nằm trong hình học (danh mục servo, khối lượng servo và pin, ma sát, bộ giải) vẫn ở file TOML trong repo. Blender giữ hình dáng, vị trí khớp, trục khớp, giới hạn khớp, và servo nào gắn ở khớp nào",
-   "decided_by": "claude-proposed",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L12",
    "since": "2026-10-20",
@@ -1278,11 +1278,11 @@
   {
    "id": "18.5",
    "type": "Decision",
-   "label": "Cách xuất từ Blender sang MuJoCo: chưa chốt (xem câu hỏi mở)",
-   "text": "Cách xuất từ Blender sang MuJoCo: chưa chốt (xem câu hỏi mở)",
-   "decided_by": "unknown",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "label": "Xuất bằng script `bpy` riêng của dự án (phương án b), không dùng LinkForge",
+   "text": "Xuất bằng script `bpy` riêng của dự án (phương án b), không dùng LinkForge",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L13",
    "since": "2026-10-20",
@@ -1293,9 +1293,9 @@
    "type": "Decision",
    "label": "File `.blend` (nguồn) và file xuất đều nằm trong repo. `models/spider.blend` là nguồn, được commit. ",
    "text": "File `.blend` (nguồn) và file xuất đều nằm trong repo. `models/spider.blend` là nguồn, được commit. Kết quả xuất (mô tả robot + mesh từng link) là file sinh ra, ghi vào `build/model/`, không commit, chạy lại lệnh xuất là có. Giống quan hệ giữa docs và `graph.json`",
-   "decided_by": "claude-proposed",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L14",
    "since": "2026-10-20",
@@ -1319,9 +1319,9 @@
    "type": "Decision",
    "label": "Một lệnh bọc duy nhất `tools/blender` tìm Blender theo thứ tự `$BLENDER_BIN` → `blender` trên PATH →",
    "text": "Một lệnh bọc duy nhất `tools/blender` tìm Blender theo thứ tự `$BLENDER_BIN` → `blender` trên PATH → bản Steam → `/Applications/Blender.app`. Các lệnh con: `inspect` (in JSON: link, khớp, trục, giới hạn, servo), `export` (ghi `build/model/`), `render` (chụp ảnh nhiều góc ra PNG). Lỗi trả về dạng có cấu trúc để agent tự sửa (10.7)",
-   "decided_by": "claude-proposed",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L16",
    "since": "2026-10-20",
@@ -1332,9 +1332,9 @@
    "type": "Decision",
    "label": "Script chạy trong Python của Blender (3.13.13, bản đi kèm Blender 5.2.2) chỉ dùng `bpy` và thư viện ",
    "text": "Script chạy trong Python của Blender (3.13.13, bản đi kèm Blender 5.2.2) chỉ dùng `bpy` và thư viện chuẩn, không import `mujoco`. Phần MuJoCo chạy trong môi trường `uv` (Python 3.12) và chỉ đọc file đã xuất",
-   "decided_by": "claude-proposed",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L17",
    "since": "2026-10-20",
@@ -1854,8 +1854,8 @@
   {
    "id": "T1.1",
    "type": "Task",
-   "label": "Một file tham số duy nhất (theo 5.3): kích thước thân, chiều dài các đoạn chân, giới hạn góc, lực se",
-   "text": "Một file tham số duy nhất (theo 5.3): kích thước thân, chiều dài các đoạn chân, giới hạn góc, lực servo, khối lượng.",
+   "label": "File tham số vật lý (theo 5.3, 18.4): danh mục servo, khối lượng pin và mạch, vật liệu, ma sát, bộ g",
+   "text": "File tham số vật lý (theo 5.3, 18.4): danh mục servo, khối lượng pin và mạch, vật liệu, ma sát, bộ giải, tư thế đứng. Hình học nằm trong Blender.",
    "phase": "GD1",
    "src": "docs/decisions/07-trinh-tu-task.md#L32",
    "by": "rule:task-list"
@@ -1890,8 +1890,8 @@
   {
    "id": "T1.2",
    "type": "Task",
-   "label": "Script sinh MJCF từ file tham số: thân hộp, chân trụ, 4 × 3 khớp.",
-   "text": "Script sinh MJCF từ file tham số: thân hộp, chân trụ, 4 × 3 khớp.",
+   "label": "Model 3D trong Blender `models/spider.blend` (theo 18.1), dựng ban đầu bằng script `bpy`. Có `tools/",
+   "text": "Model 3D trong Blender `models/spider.blend` (theo 18.1), dựng ban đầu bằng script `bpy`. Có `tools/blender inspect` và `render` (theo 18.7, 18.8).",
    "phase": "GD1",
    "src": "docs/decisions/07-trinh-tu-task.md#L33",
    "by": "rule:task-list"
@@ -1899,8 +1899,8 @@
   {
    "id": "T1.3",
    "type": "Task",
-   "label": "Gắn actuator điều khiển theo vị trí cho 12 khớp. Cử động bằng thanh trượt trong viewer.",
-   "text": "Gắn actuator điều khiển theo vị trí cho 12 khớp. Cử động bằng thanh trượt trong viewer.",
+   "label": "`tools/blender export` → `build/model/`, rồi `MjSpec` dựng model MuJoCo có 12 servo điều khiển theo ",
+   "text": "`tools/blender export` → `build/model/`, rồi `MjSpec` dựng model MuJoCo có 12 servo điều khiển theo vị trí (theo 18.5, 18.9). Kiểm Blender và MuJoCo khớp nhau.",
    "phase": "GD1",
    "src": "docs/decisions/07-trinh-tu-task.md#L34",
    "by": "rule:task-list"
@@ -2283,6 +2283,30 @@
    "by": "curated"
   },
   {
+   "id": "comp:blend-model",
+   "type": "Component",
+   "label": "Model 3D nguồn trong Blender: link, origin tại khớp, trục, giới hạn, servo từng khớp",
+   "src": "18.1",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:blender-cli",
+   "type": "Component",
+   "label": "tools/blender: inspect, export, render, chạy Blender không giao diện",
+   "src": "18.8",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:blender-scripts",
+   "type": "Component",
+   "label": "Script bpy chạy trong Blender: dựng, kiểm, xuất, chụp",
+   "src": "18.9",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
    "id": "comp:bug-tracker",
    "type": "Component",
    "label": "File bug BUG-NNN.md kèm thư mục lần chạy và test hồi quy",
@@ -2341,16 +2365,16 @@
   {
    "id": "comp:mjcf-builder",
    "type": "Component",
-   "label": "Dựng model MuJoCo từ tham số bằng MjSpec",
-   "src": "3.2",
+   "label": "Dựng model MuJoCo bằng MjSpec từ file xuất của Blender + TOML vật lý",
+   "src": "18.5",
    "since": "2026-10-20",
    "by": "curated"
   },
   {
    "id": "comp:params",
    "type": "Component",
-   "label": "File tham số duy nhất: kích thước, giới hạn, khối lượng, tư thế đứng",
-   "src": "5.3",
+   "label": "File tham số vật lý: khối lượng pin/mạch, vật liệu, ma sát, bộ giải, tư thế đứng",
+   "src": "18.4",
    "since": "2026-10-20",
    "by": "curated"
   },
@@ -2488,6 +2512,13 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:blender/",
+   "type": "File",
+   "label": "blender/",
+   "src": "18.9",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:docs/bugs/",
    "type": "File",
    "label": "docs/bugs/",
@@ -2551,6 +2582,20 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:models/",
+   "type": "File",
+   "label": "models/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:models/spider.blend",
+   "type": "File",
+   "label": "models/spider.blend",
+   "src": "18.1",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:pyproject.toml",
    "type": "File",
    "label": "pyproject.toml",
@@ -2589,7 +2634,7 @@
    "id": "file:spider/model/",
    "type": "File",
    "label": "spider/model/",
-   "src": "5.3",
+   "src": "18.4",
    "by": "rule:file-ref"
   },
   {
@@ -2674,6 +2719,13 @@
    "type": "File",
    "label": "tools/",
    "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tools/blender",
+   "type": "File",
+   "label": "tools/blender",
+   "src": "18.8",
    "by": "rule:file-ref"
   },
   {
@@ -4204,6 +4256,22 @@
    "to": "harness:memory"
   },
   {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L9",
+   "to": "comp:blend-model"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L9",
+   "to": "comp:mjcf-builder"
+  },
+  {
    "by": "rule:supersedes",
    "conf": 1.0,
    "from": "18.1",
@@ -4220,12 +4288,76 @@
    "to": "7.3"
   },
   {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L18",
+   "to": "comp:blend-model"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L18",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L19",
+   "to": "comp:cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L19",
+   "to": "harness:guardrails"
+  },
+  {
    "by": "rule:cites",
    "conf": 1.0,
    "from": "18.2",
    "rel": "CITES",
    "src": "docs/decisions/18-blender-nguon-chinh.md#L10",
    "to": "13.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L10",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L11",
+   "to": "comp:blend-model"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L11",
+   "to": "comp:blender-cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L11",
+   "to": "role:human"
   },
   {
    "by": "rule:supersedes",
@@ -4236,12 +4368,100 @@
    "to": "16.4"
   },
   {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L12",
+   "to": "comp:blend-model"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L12",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L13",
+   "to": "comp:blender-scripts"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L13",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L14",
+   "to": "comp:blend-model"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L14",
+   "to": "comp:blender-cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L15",
+   "to": "comp:blender-cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L15",
+   "to": "harness:tool_guidance"
+  },
+  {
    "by": "rule:cites",
    "conf": 1.0,
    "from": "18.8",
    "rel": "CITES",
    "src": "docs/decisions/18-blender-nguon-chinh.md#L16",
    "to": "10.7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L16",
+   "to": "comp:blender-cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L17",
+   "to": "comp:blender-scripts"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "18.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L17",
+   "to": "comp:mjcf-builder"
   },
   {
    "by": "curated",
@@ -4521,6 +4741,14 @@
    "from": "T1.1",
    "rel": "CITES",
    "src": "docs/decisions/07-trinh-tu-task.md#L32",
+   "to": "18.4"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.1",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L32",
    "to": "5.3"
   },
   {
@@ -4692,6 +4920,30 @@
    "to": "GD1"
   },
   {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.2",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L33",
+   "to": "18.1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.2",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L33",
+   "to": "18.7"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.2",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L33",
+   "to": "18.8"
+  },
+  {
    "by": "curated",
    "conf": 0.9,
    "from": "T1.2",
@@ -4705,7 +4957,23 @@
    "from": "T1.2",
    "rel": "IMPLEMENTS",
    "src": "docs/decisions/07-trinh-tu-task.md",
-   "to": "comp:mjcf-builder"
+   "to": "comp:blend-model"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.2",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:blender-cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.2",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:blender-scripts"
   },
   {
    "by": "rule:task-list",
@@ -4716,12 +4984,36 @@
    "to": "GD1"
   },
   {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.3",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L34",
+   "to": "18.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.3",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L34",
+   "to": "18.9"
+  },
+  {
    "by": "curated",
    "conf": 0.9,
    "from": "T1.3",
    "rel": "DEPENDS_ON",
    "src": "docs/harness/task-graph.md",
    "to": "T1.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.3",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:blender-scripts"
   },
   {
    "by": "curated",
@@ -5822,6 +6114,30 @@
   {
    "by": "curated",
    "conf": 0.9,
+   "from": "comp:blend-model",
+   "rel": "STORED_IN",
+   "src": "18.1",
+   "to": "file:models/spider.blend"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:blender-cli",
+   "rel": "STORED_IN",
+   "src": "18.8",
+   "to": "file:tools/blender"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:blender-scripts",
+   "rel": "STORED_IN",
+   "src": "18.9",
+   "to": "file:blender/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
    "from": "comp:bug-tracker",
    "rel": "STORED_IN",
    "src": "11.8",
@@ -5880,7 +6196,7 @@
    "conf": 0.9,
    "from": "comp:mjcf-builder",
    "rel": "STORED_IN",
-   "src": "3.2",
+   "src": "18.5",
    "to": "file:spider/model/"
   },
   {
@@ -5888,7 +6204,7 @@
    "conf": 0.9,
    "from": "comp:params",
    "rel": "STORED_IN",
-   "src": "5.3",
+   "src": "18.4",
    "to": "file:spider/model/"
   },
   {
@@ -6346,6 +6662,22 @@
    "rel": "PERFORMS",
    "src": "docs/harness/task-graph.md",
    "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:blender/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:models/"
   },
   {
    "by": "curated",
