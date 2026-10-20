@@ -42,6 +42,7 @@ Mọi quyết định đều sửa được về sau.
 | 15 | [15-kb-harness-agents.md](15-kb-harness-agents.md) | Knowledge base, harness (Harness²), chia agent |
 | 16 | [16-gate-dau-tien.md](16-gate-dau-tien.md) | Cổng G1: xem model 3D và các thành phần |
 | 17 | [17-dieu-phoi-subagent.md](17-dieu-phoi-subagent.md) | Phiên chính chỉ điều phối, việc giao cho subagent |
+| 18 | [18-blender-nguon-chinh.md](18-blender-nguon-chinh.md) | Blender là nơi chỉnh model chính, xuất sang MuJoCo |
 
 `brainstorm-log.md` là bản nháp đầu tiên viết gộp một file. Đã được thay bằng các file 01–10, chỉ giữ để tham khảo.
 
@@ -63,9 +64,13 @@ Mọi quyết định đều sửa được về sau.
 
 ## Câu hỏi còn mở
 
+- Xuất Blender → MuJoCo bằng LinkForge (URDF) hay script `bpy` riêng? → Bước 18
+- Cài lại Blender MCP thế nào? → Bước 18
 1. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
 2. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
-Không còn mục nào.
+| Mã | Nội dung ngắn | File |
+|---|---|---|
+| 18.2–18.5 | Vật lý ở MuJoCo, G1 xem trong Blender, TOML giữ phần vật lý, cách xuất | Bước 18 |

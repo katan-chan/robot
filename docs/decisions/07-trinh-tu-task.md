@@ -8,7 +8,7 @@ Ngày: 2026-10-20.
 |---|---|---|---|
 | 7.1 | Sắp xếp toàn bộ task theo trình tự phù hợp | [Người dùng] | Đang áp dụng |
 | 7.2 | Trình tự dưới đây | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
-| 7.3 | Làm đúng động học và vật lý bằng khối hình đơn giản trước. Hình đẹp từ Blender làm sau và chỉ là lớp vỏ | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 7.3 | Làm đúng động học và vật lý bằng khối hình đơn giản trước. Hình đẹp từ Blender làm sau và chỉ là lớp vỏ | [Người dùng] xác nhận đề xuất của Claude | Đã thay → 18.1 |
 
 ## Lý do sắp xếp
 

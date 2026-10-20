@@ -1,5 +1,7 @@
 # Phase 1 — tới cổng G1 (xem model 3D) Implementation Plan
 
+> **Tạm dừng (2026-10-20):** Bước 18 đổi Blender thành nơi chỉnh model chính. Kế hoạch này phải viết lại trước khi thực hiện.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Dựng môi trường MuJoCo và model robot nhện 4 chân × 3 khớp bằng khối hình đơn giản, sinh từ file tham số, để người dùng xem được model 3D và bảng thành phần của nó (cổng G1).
