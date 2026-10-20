@@ -35,7 +35,7 @@ Ngày: 2026-10-20.
 - T1.4 Tư thế đứng mặc định. Kiểm tra: robot đứng vững vài giây và không có khớp nào vượt giới hạn.
 - T1.5 ~~Chốt câu hỏi mở: chỉ đứng yên, hay bước đi bằng dáng đi lập trình sẵn?~~ Đã chốt: phải di chuyển được → xem Bước 8.
 - T1.6 IK cho từng chân và dáng đi bò (creep) hoặc trot. Bắt buộc, theo 8.2.
-- T1.7 Trang web điều khiển và server (theo 8.6). Chỉ một luồng mô phỏng được ghi vào `MjData`. Trang web chỉ gửi lệnh vào hàng đợi. Kiến trúc chờ chốt ở Bước 9.
+- T1.7 Trang web điều khiển và server (theo 8.6). Chỉ một luồng mô phỏng được ghi vào `MjData`. Trang web chỉ gửi lệnh vào hàng đợi. Kiến trúc: xem 9.6 và Bước 12.
 - T1.8 Bộ kiểm tra tự động "mô phỏng chính xác" (theo 8.5), có ngưỡng số. Chạy không cần màn hình và không phụ thuộc đồng hồ thật.
 
 **Xong khi:** robot di chuyển được trên sàn phẳng khi điều khiển từ trang web, và bộ kiểm tra T1.8 chạy qua.
@@ -88,6 +88,6 @@ Ngày: 2026-10-20.
 ## Ghi chú
 
 - Mã task có tiền tố T (T1.6) để không trùng với mã quyết định (5.1, 8.2).
-- Phase 1 = Giai đoạn 0 + Giai đoạn 1 (quyết định 8.4, chờ chốt).
-- Thứ tự Giai đoạn 4 → 6 giả định quyết định 4.7 (RL đi, LLM ở tầng trên), hiện chờ chốt.
+- Phase 1 = Giai đoạn 0 + Giai đoạn 1 (quyết định 8.4, đã duyệt ở 13.1).
+- Thứ tự Giai đoạn 4 → 6 giả định quyết định 4.7 (RL đi, LLM ở tầng trên), đã duyệt ở 13.1.
 - Giai đoạn 6 có thể đưa lên ngay sau Giai đoạn 4 nếu muốn điều khiển bằng lời sớm. Khi đó LLM chỉ điều khiển được trên sàn phẳng.

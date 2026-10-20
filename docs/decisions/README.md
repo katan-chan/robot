@@ -9,6 +9,7 @@ Mọi quyết định đều sửa được về sau.
   - **[Người dùng]**: người dùng tự chốt.
   - **[Claude đề xuất]**: người dùng còn sửa được.
   - **[Người dùng] xác nhận đề xuất của Claude**: Claude đề xuất, người dùng đã đồng ý.
+  - **[Claude tự quyết]**: điểm nhỏ do người thi công tự quyết, không đổi thứ được làm ra. Người dùng vẫn sửa được.
 - Trạng thái: **Đang áp dụng**, **Chờ chốt**, hoặc **Đã thay** (ghi kèm "→ xem Bước N").
 - Khi đổi một quyết định: không xoá dòng cũ. Đổi trạng thái thành **Đã thay** và ghi quyết định mới.
 - Mã quyết định dạng `8.2` (Bước 8, quyết định 2). Mã task dạng `T1.6` (Giai đoạn 1, task 6, trong Bước 7).
@@ -36,6 +37,7 @@ Mọi quyết định đều sửa được về sau.
 | 11 | [11-record-bug-trace.md](11-record-bug-trace.md) | Module record: ghi lần chạy, replay, ghi bug, trace |
 | 12 | [12-controller-web.md](12-controller-web.md) | Trang web controller qua internet, xem robot trên web, danh mục servo |
 | 13 | [13-duyet-va-vat-ly.md](13-duyet-va-vat-ly.md) | Duyệt toàn bộ; không tự tính lại cái MuJoCo đã tính; vật lý do MuJoCo lo |
+| 14 | [14-builder-check.md](14-builder-check.md) | Kiểm tra cuối: viewer riêng, 2 chế độ replay, kích thước theo ảnh |
 
 `brainstorm-log.md` là bản nháp đầu tiên viết gộp một file. Đã được thay bằng các file 01–10, chỉ giữ để tham khảo.
 
@@ -55,8 +57,10 @@ Mọi quyết định đều sửa được về sau.
 
 ## Câu hỏi còn mở
 
-1. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
-2. Có đẩy repo lên remote (GitHub…) không? → Bước 11
+1. Lái robot từ thiết bị nào: điện thoại, laptop hay tay cầm? → Bước 14
+2. Phase 1 có cần thử lái thật từ thiết bị thứ hai qua Tailscale không? → Bước 14
+3. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
+4. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
