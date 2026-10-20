@@ -1,0 +1,17 @@
+{
+  "description": "Hooks của repo robot nhện. Xem harness.toml và AGENTS.md.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(git rev-parse --show-toplevel)/tools/hooks/kb-sync.sh\"",
+            "statusMessage": "Đồng bộ knowledge graph"
+          }
+        ]
+      }
+    ]
+  }
+}

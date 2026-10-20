@@ -1,0 +1,288 @@
+# Dữ liệu knowledge graph do người/agent biên soạn tay (phần trích xuất bằng LLM).
+# Phần trích xuất bằng luật (quyết định, task, SUPERSEDES, CITES) do tools/kb.py tự đọc từ docs/decisions/.
+# Sửa file này xong: chạy `uv run tools/kb.py build`. Hook sẽ tự chạy `check`.
+#
+# Định dạng:
+#   [nodes.<Type>]  "<id>" = { label = "...", src = "<quyết định hoặc file>", stored_in = "<đường dẫn>" (tuỳ chọn) }
+#   [edges.<REL>]   "<từ>" = ["<tới>", ...]   — nguồn của cạnh: xem [edge_src]
+
+[meta]
+since = "2026-10-20"
+confidence = 0.9
+
+# Nguồn mặc định của từng loại cạnh. "from" = chính nút nguồn (thường là một quyết định).
+[edge_src]
+CONSTRAINS = "from"
+VERIFIES = "docs/decisions/10-harness-agent.md"
+CHECKS = "docs/decisions/10-harness-agent.md"
+IMPLEMENTS = "docs/decisions/07-trinh-tu-task.md"
+DEPENDS_ON = "docs/harness/task-graph.md"
+BLOCKS = "docs/decisions/README.md"
+WRITES = "docs/harness/task-graph.md"
+PERFORMS = "docs/harness/task-graph.md"
+REVIEWS = "docs/harness/task-graph.md"
+
+# Gộp tên trùng (fusion): bí danh → id chuẩn.
+[aliases]
+"comp:frame-streamer" = "comp:web-server"
+"comp:ik" = "comp:gait"
+"comp:keys" = "comp:key-store"
+
+[decision_tags]
+"12.9" = ["security"]
+"12.10" = ["security"]
+"12.11" = ["security"]
+"12.12" = ["security"]
+"12.13" = ["security"]
+"12.14" = ["security"]
+"12.15" = ["security", "safety"]
+"12.17" = ["security"]
+"14.12" = ["security"]
+"14.12a" = ["security"]
+"14.13" = ["safety"]
+"8.5" = ["accuracy"]
+"9.1" = ["accuracy"]
+"9.2" = ["accuracy"]
+"9.3" = ["accuracy"]
+"9.4" = ["accuracy"]
+"9.5" = ["accuracy"]
+"13.3" = ["accuracy"]
+"13.4" = ["accuracy"]
+
+# ---------------------------------------------------------------- nút
+
+[nodes.Component]
+"comp:project-env"     = { label = "Môi trường uv + Python 3.12, ghim phiên bản mujoco", src = "6.2", stored_in = "pyproject.toml" }
+"comp:params"          = { label = "File tham số duy nhất: kích thước, giới hạn, khối lượng, tư thế đứng", src = "5.3", stored_in = "spider/model/" }
+"comp:servo-catalog"   = { label = "Danh mục servo (MG90S, SG90, MG996R…)", src = "12.7", stored_in = "spider/model/" }
+"comp:mjcf-builder"    = { label = "Dựng model MuJoCo từ tham số bằng MjSpec", src = "3.2", stored_in = "spider/model/" }
+"comp:sim-loop"        = { label = "Vòng mô phỏng: một luồng sở hữu MjData, hàng đợi lệnh, canh thời gian thật", src = "9.6", stored_in = "spider/sim/" }
+"comp:gait"            = { label = "IK 3 khớp và bộ tạo dáng đi", src = "8.3", stored_in = "spider/gait/" }
+"comp:feasibility-gate" = { label = "Cổng khả thi trong code: chạy kiểm tra mức 1/2 trước khi mô phỏng", src = "10.5", stored_in = "spider/checks/" }
+"comp:recorder"        = { label = "Ghi lần chạy: manifest, inputs, checkpoints, trace, events", src = "11.5", stored_in = "spider/record/" }
+"comp:replay"          = { label = "Replay 2 chế độ: chính xác và mô phỏng lại", src = "14.2", stored_in = "spider/record/" }
+"comp:bug-tracker"     = { label = "File bug BUG-NNN.md kèm thư mục lần chạy và test hồi quy", src = "11.8", stored_in = "docs/bugs/" }
+"comp:web-server"      = { label = "Server: 2 cổng (127.0.0.1 và Tailscale), gửi khung hình JPEG, quyền lái", src = "12.5", stored_in = "spider/server/" }
+"comp:controller-ui"   = { label = "Trang controller: joystick cảm ứng và phím WASD, nút dừng, nút Báo bug", src = "14.7", stored_in = "web/" }
+"comp:key-store"       = { label = "Khoá điều khiển: lưu sha256, ngoài git, thu hồi được", src = "12.12", stored_in = "spider/server/" }
+"comp:agent-api"       = { label = "API chung cho controller và agent: lệnh, trạng thái, ảnh chụp", src = "14.10", stored_in = "spider/server/" }
+"comp:cli"             = { label = "CLI drive cho agent: --host, --key", src = "14.12a", stored_in = "spider/cli.py" }
+"comp:viewer-tool"     = { label = "Viewer MuJoCo dùng riêng: mở model hoặc xem lại lần chạy", src = "14.1", stored_in = "spider/sim/" }
+"comp:kb"              = { label = "Knowledge graph của dự án", src = "10.8", stored_in = "docs/kb/" }
+
+[nodes.Check]
+"check:box-fall"           = { label = "Khối hộp rơi và nằm yên trên sàn (Giai đoạn 0)", src = "6.2", level = 0 }
+"check:params-valid"       = { label = "Tham số hợp lệ: kích thước dương, góc trong hành trình servo", src = "10-harness-agent.md", level = 1 }
+"check:mjcf-compiles"      = { label = "Model biên dịch được, MuJoCo tự kiểm khối lượng và quán tính", src = "10-harness-agent.md", level = 1 }
+"check:mass-budget"        = { label = "Tổng khối lượng trong ngân sách, không body nào thiếu khối lượng", src = "10-harness-agent.md", level = 1 }
+"check:static-torque"      = { label = "Mô-men tĩnh từng khớp ≤ 50% mô-men cực đại (mj_inverse)", src = "9.5", level = 1 }
+"check:self-collision"     = { label = "Tư thế mặc định chỉ có chân chạm sàn", src = "9.3", level = 1 }
+"check:solver-settings"    = { label = "Timestep, integrator, solref đúng 9.2", src = "9.2", level = 1 }
+"check:ik-reach"           = { label = "Điểm đặt chân của dáng đi nằm trong tầm với IK", src = "10-harness-agent.md", level = 1 }
+"check:penetration"        = { label = "Xuyên sàn < 1 mm khi đứng yên", src = "9.4", level = 2 }
+"check:joint-limits"       = { label = "Không khớp nào vượt giới hạn", src = "9.4", level = 2 }
+"check:jitter"             = { label = "RMS vận tốc khớp khi đứng yên dưới ngưỡng", src = "9.4", level = 2 }
+"check:actuator-saturation" = { label = "Tỉ lệ thời gian servo bão hoà dưới ngưỡng", src = "9.4", level = 2 }
+"check:foot-slip"          = { label = "Chân không trượt khi đứng", src = "9.4", level = 2 }
+"check:replay-determinism" = { label = "Replay chính xác khớp checkpoint từng bit", src = "11.7", level = 2 }
+"check:key-auth"           = { label = "Cổng từ xa từ chối khi thiếu hoặc sai token; token không lọt vào URL/log", src = "12.14", level = 2 }
+"check:kb-valid"           = { label = "Knowledge graph đúng schema, không cạnh treo, graph.json không cũ", src = "10.8", level = 1, stored_in = "tools/kb.py" }
+
+[nodes.Question]
+"q:wall-climb"  = { label = "Robot có cần bò trên tường và trần không?", src = "04-muc-tieu.md" }
+"q:git-remote"  = { label = "Có đẩy repo lên remote (GitHub…) không?", src = "11-record-bug-trace.md" }
+
+[nodes.AgentRole]
+"role:coordinator"          = { label = "Điều phối: làm phần tuần tự, giữ hợp đồng, gộp kết quả, ghi quyết định", src = "docs/harness/task-graph.md" }
+"role:gait-worker"          = { label = "Làm IK và dáng đi", src = "docs/harness/task-graph.md" }
+"role:checks-worker"        = { label = "Làm bộ kiểm tra khả thi và script hook", src = "docs/harness/task-graph.md" }
+"role:record-worker"        = { label = "Làm record, replay, bug", src = "docs/harness/task-graph.md" }
+"role:server-worker"        = { label = "Làm server, controller, khoá, API agent, CLI", src = "docs/harness/task-graph.md" }
+"role:physics-verifier"     = { label = "Kiểm vật lý ở context riêng: số liệu có hợp lý không?", src = "docs/harness/task-graph.md", stored_in = ".claude/agents/physics-verifier.md" }
+"role:determinism-verifier" = { label = "Kiểm tái hiện ở context riêng: chạy lại có giống hệt không?", src = "docs/harness/task-graph.md", stored_in = ".claude/agents/determinism-verifier.md" }
+"role:security-verifier"    = { label = "Kiểm bảo mật ở context riêng: có lách được khoá không?", src = "docs/harness/task-graph.md", stored_in = ".claude/agents/security-verifier.md" }
+"role:human"                = { label = "Người dùng: cổng duyệt cho việc khó đảo ngược", src = "docs/harness/task-graph.md" }
+
+# ---------------------------------------------------------------- cạnh
+
+[edges.CONSTRAINS]
+"3.2"    = ["comp:mjcf-builder", "comp:params"]
+"5.3"    = ["comp:params"]
+"6.2"    = ["comp:project-env", "check:box-fall"]
+"7.3"    = ["comp:mjcf-builder"]
+"8.3"    = ["comp:gait"]
+"8.5"    = ["comp:feasibility-gate"]
+"8.6"    = ["comp:controller-ui"]
+"9.1"    = ["comp:servo-catalog", "comp:mjcf-builder"]
+"9.2"    = ["comp:sim-loop", "comp:mjcf-builder", "check:solver-settings"]
+"9.3"    = ["comp:mjcf-builder", "check:self-collision"]
+"9.4"    = ["comp:feasibility-gate"]
+"9.5"    = ["comp:params", "check:static-torque"]
+"9.6"    = ["comp:sim-loop", "comp:web-server"]
+"10.4"   = ["harness:system_prompt"]
+"10.5"   = ["comp:feasibility-gate", "comp:sim-loop"]
+"10.6"   = ["harness:plugins"]
+"10.7"   = ["comp:feasibility-gate"]
+"10.8"   = ["harness:memory", "comp:kb"]
+"10.9"   = ["harness:subagents", "harness:skills"]
+"10.10"  = ["harness:guardrails"]
+"10.11"  = ["role:coordinator"]
+"11.5"   = ["comp:recorder"]
+"11.6"   = ["comp:sim-loop", "comp:recorder", "comp:web-server"]
+"11.7"   = ["comp:replay"]
+"11.8"   = ["comp:bug-tracker"]
+"11.9"   = ["comp:bug-tracker", "comp:replay", "harness:plugins"]
+"11.10"  = ["comp:controller-ui", "comp:bug-tracker"]
+"11.11"  = ["harness:guardrails"]
+"11.12"  = ["comp:recorder"]
+"11.15"  = ["harness:system_prompt", "harness:plugins"]
+"11.16"  = ["comp:recorder", "comp:bug-tracker"]
+"12.4"   = ["comp:controller-ui", "comp:agent-api"]
+"12.5"   = ["comp:web-server"]
+"12.7"   = ["comp:servo-catalog"]
+"12.8"   = ["comp:feasibility-gate", "comp:recorder"]
+"12.9"   = ["comp:web-server"]
+"12.10"  = ["comp:key-store"]
+"12.11"  = ["comp:web-server"]
+"12.12"  = ["comp:key-store"]
+"12.13"  = ["comp:controller-ui", "comp:key-store"]
+"12.14"  = ["comp:web-server", "check:key-auth"]
+"12.15"  = ["comp:web-server", "comp:controller-ui"]
+"12.16"  = ["comp:recorder"]
+"12.17"  = ["comp:web-server"]
+"13.2"   = ["comp:mjcf-builder", "comp:feasibility-gate", "harness:guardrails"]
+"13.3"   = ["comp:sim-loop"]
+"13.4"   = ["comp:params"]
+"14.1"   = ["comp:viewer-tool"]
+"14.2"   = ["comp:replay"]
+"14.3"   = ["comp:replay", "comp:feasibility-gate"]
+"14.5"   = ["comp:params", "check:static-torque"]
+"14.6"   = ["comp:controller-ui"]
+"14.7"   = ["comp:controller-ui"]
+"14.10"  = ["comp:agent-api", "comp:cli"]
+"14.11"  = ["comp:agent-api"]
+"14.12"  = ["comp:agent-api"]
+"14.12a" = ["comp:cli"]
+"14.12b" = ["comp:agent-api"]
+"14.13"  = ["comp:agent-api", "comp:web-server"]
+"14.14"  = ["comp:agent-api"]
+"15.2"   = ["comp:kb"]
+"15.3"   = ["comp:kb"]
+"15.4"   = ["comp:kb"]
+"15.5"   = ["harness:system_prompt", "harness:guardrails", "harness:memory", "harness:tool_guidance", "harness:subagents", "harness:skills", "harness:scripts", "harness:plugins"]
+"15.6"   = ["harness:system_prompt", "harness:guardrails"]
+"15.7"   = ["harness:plugins", "comp:kb"]
+"15.8"   = ["harness:plugins", "comp:feasibility-gate"]
+"15.9"   = ["harness:subagents", "role:coordinator", "role:gait-worker", "role:checks-worker", "role:record-worker", "role:server-worker", "role:physics-verifier", "role:determinism-verifier", "role:security-verifier", "role:human"]
+"15.10"  = ["harness:subagents", "role:coordinator"]
+"15.11"  = ["harness:memory", "harness:guardrails"]
+
+[edges.VERIFIES]
+"check:box-fall"           = ["6.2"]
+"check:params-valid"       = ["5.3"]
+"check:mjcf-compiles"      = ["3.2", "13.2"]
+"check:mass-budget"        = ["8.5"]
+"check:static-torque"      = ["8.5", "9.5", "14.5"]
+"check:self-collision"     = ["9.3"]
+"check:solver-settings"    = ["9.2"]
+"check:ik-reach"           = ["8.3"]
+"check:penetration"        = ["8.5", "9.4"]
+"check:joint-limits"       = ["8.5", "9.4"]
+"check:jitter"             = ["8.5", "9.4"]
+"check:actuator-saturation" = ["9.4"]
+"check:foot-slip"          = ["9.4"]
+"check:replay-determinism" = ["11.4", "11.7"]
+"check:key-auth"           = ["12.10", "12.12", "12.13", "12.14"]
+"check:kb-valid"           = ["10.8", "15.2", "15.3"]
+
+[edges.CHECKS]
+"check:box-fall"           = ["comp:project-env"]
+"check:params-valid"       = ["comp:params"]
+"check:mjcf-compiles"      = ["comp:mjcf-builder"]
+"check:mass-budget"        = ["comp:params", "comp:mjcf-builder"]
+"check:static-torque"      = ["comp:params", "comp:servo-catalog"]
+"check:self-collision"     = ["comp:mjcf-builder"]
+"check:solver-settings"    = ["comp:mjcf-builder"]
+"check:ik-reach"           = ["comp:gait", "comp:params"]
+"check:penetration"        = ["comp:mjcf-builder"]
+"check:joint-limits"       = ["comp:gait"]
+"check:jitter"             = ["comp:servo-catalog", "comp:mjcf-builder"]
+"check:actuator-saturation" = ["comp:servo-catalog", "comp:gait"]
+"check:foot-slip"          = ["comp:mjcf-builder"]
+"check:replay-determinism" = ["comp:recorder", "comp:replay", "comp:sim-loop"]
+"check:key-auth"           = ["comp:web-server", "comp:key-store"]
+"check:kb-valid"           = ["comp:kb"]
+
+[edges.IMPLEMENTS]
+"T0.1"  = ["comp:project-env"]
+"T0.2"  = ["comp:viewer-tool"]
+"T0.3"  = ["check:box-fall"]
+"T1.1"  = ["comp:params", "comp:servo-catalog"]
+"T1.2"  = ["comp:mjcf-builder"]
+"T1.3"  = ["comp:mjcf-builder"]
+"T1.4"  = ["comp:sim-loop", "check:static-torque"]
+"T1.6"  = ["comp:gait", "check:ik-reach"]
+"T1.7"  = ["comp:web-server", "comp:controller-ui"]
+"T1.8"  = ["comp:feasibility-gate", "check:params-valid", "check:mjcf-compiles", "check:mass-budget", "check:self-collision", "check:solver-settings", "check:penetration", "check:joint-limits", "check:jitter", "check:actuator-saturation", "check:foot-slip"]
+"T1.9"  = ["comp:recorder", "comp:replay", "comp:bug-tracker", "check:replay-determinism"]
+"T1.10" = ["comp:key-store", "check:key-auth"]
+"T1.11" = ["comp:agent-api", "comp:cli"]
+"T1.12" = ["harness:plugins"]
+
+# Chỉ cạnh thật: task cần KẾT QUẢ của task kia (task-graph.md, mục "cạnh giả").
+[edges.DEPENDS_ON]
+"T0.2"  = ["T0.1"]
+"T0.3"  = ["T0.2"]
+"T1.1"  = ["T0.3"]
+"T1.2"  = ["T1.1"]
+"T1.3"  = ["T1.2"]
+"T1.4"  = ["T1.3"]
+"T1.6"  = ["T1.4"]
+"T1.7"  = ["T1.4"]
+"T1.8"  = ["T1.4"]
+"T1.9"  = ["T1.4"]
+"T1.10" = ["T1.7"]
+"T1.11" = ["T1.7"]
+"T1.12" = ["T1.8"]
+"T2.1"  = ["T1.1"]
+"T2.2"  = ["T2.1"]
+"T2.3"  = ["T2.2"]
+"T3.1"  = ["T1.4"]
+"T3.2"  = ["T3.1"]
+"T4.1"  = ["T3.2"]
+"T4.2"  = ["T4.1"]
+"T4.3"  = ["T4.2", "T1.6"]
+"T5.2"  = ["T5.1", "T4.2"]
+"T5.3"  = ["T3.2"]
+"T5.4"  = ["T5.2", "T5.3"]
+"T6.1"  = ["T1.11"]
+"T6.2"  = ["T6.1", "T4.2"]
+"T7.1"  = ["T6.2"]
+"T7.2"  = ["T6.2"]
+"T8.1"  = ["T1.8"]
+"T8.2"  = ["T8.1", "T2.3"]
+"T8.3"  = ["T8.2", "T4.2"]
+
+[edges.BLOCKS]
+"q:wall-climb" = ["T5.2"]
+
+[edges.PERFORMS]
+"role:coordinator"   = ["T0.1", "T0.2", "T0.3", "T1.1", "T1.2", "T1.3", "T1.4"]
+"role:gait-worker"   = ["T1.6"]
+"role:checks-worker" = ["T1.8", "T1.12"]
+"role:record-worker" = ["T1.9"]
+"role:server-worker" = ["T1.7", "T1.10", "T1.11"]
+
+[edges.REVIEWS]
+"role:physics-verifier"     = ["T1.4", "T1.6", "T1.8"]
+"role:determinism-verifier" = ["T1.4", "T1.9"]
+"role:security-verifier"    = ["T1.7", "T1.10", "T1.11"]
+"role:human"                = ["T1.10", "T1.12"]
+
+# Một người ghi mỗi file/thư mục (task-graph.md, luật 2).
+[edges.WRITES]
+"role:coordinator"   = ["AGENTS.md", "CLAUDE.md", "harness.toml", "docs/decisions/", "docs/kb/", "docs/harness/", "tools/kb.py", "pyproject.toml", "spider/model/", "spider/sim/", ".claude/settings.json", ".claude/agents/", ".codex/hooks.json", ".githooks/"]
+"role:gait-worker"   = ["spider/gait/", "tests/test_gait.py"]
+"role:checks-worker" = ["spider/checks/", "tests/test_checks.py"]
+"role:record-worker" = ["spider/record/", "docs/bugs/", "tests/test_record.py"]
+"role:server-worker" = ["spider/server/", "spider/cli.py", "web/", "tests/test_server.py"]

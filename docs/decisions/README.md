@@ -12,6 +12,7 @@ Mọi quyết định đều sửa được về sau.
   - **[Claude tự quyết]**: điểm nhỏ do người thi công tự quyết, không đổi thứ được làm ra. Người dùng vẫn sửa được.
 - Trạng thái: **Đang áp dụng**, **Chờ chốt**, hoặc **Đã thay** (ghi kèm "→ xem Bước N").
 - Khi đổi một quyết định: không xoá dòng cũ. Đổi trạng thái thành **Đã thay** và ghi quyết định mới.
+- Knowledge graph sinh từ các file này: [../kb/README.md](../kb/README.md).
 - Mã quyết định dạng `8.2` (Bước 8, quyết định 2). Mã task dạng `T1.6` (Giai đoạn 1, task 6, trong Bước 7).
 
 ## Thuật ngữ
@@ -38,6 +39,7 @@ Mọi quyết định đều sửa được về sau.
 | 12 | [12-controller-web.md](12-controller-web.md) | Trang web controller qua internet, xem robot trên web, danh mục servo |
 | 13 | [13-duyet-va-vat-ly.md](13-duyet-va-vat-ly.md) | Duyệt toàn bộ; không tự tính lại cái MuJoCo đã tính; vật lý do MuJoCo lo |
 | 14 | [14-builder-check.md](14-builder-check.md) | Kiểm tra cuối: viewer riêng, 2 chế độ replay, kích thước theo ảnh |
+| 15 | [15-kb-harness-agents.md](15-kb-harness-agents.md) | Knowledge base, harness (Harness²), chia agent |
 
 `brainstorm-log.md` là bản nháp đầu tiên viết gộp một file. Đã được thay bằng các file 01–10, chỉ giữ để tham khảo.
 

@@ -1,0 +1,96 @@
+# Ontology của knowledge base dự án robot nhện.
+# Nguồn sự thật duy nhất cho schema. tools/kb.py đọc file này để kiểm tra graph.
+# Sửa schema: thêm câu hỏi năng lực (competency question) trước, rồi mới thêm loại.
+
+[meta]
+version = 1
+representation = "typed edges in JSON (graph.json), sinh từ docs/decisions + curated.toml + harness.toml"
+canonical_ids = """
+Decision: '<bước>.<số>[chữ]' như trong docs/decisions (vd 12.12a).
+Task: 'T<giai đoạn>.<số>' (vd T1.6). Phase: 'GD<số>' (vd GD1).
+Các loại khác: kebab-case tiếng Anh, có tiền tố loại (vd comp:gait, check:static-torque)."""
+
+# Câu hỏi graph phải trả lời được. Đây vừa là spec, vừa là bộ test (tools/kb.py selftest).
+competency_questions = [
+  "CQ1  Quyết định X đang áp dụng không, ai chốt, ghi ở file nào?",
+  "CQ2  X đã bị quyết định nào thay? (lần theo chuỗi SUPERSEDES)",
+  "CQ3  Đổi một quyết định (vd danh mục servo 12.7) thì ảnh hưởng tới thành phần, task, kiểm tra nào?",
+  "CQ4  Task T phải tuân theo những quyết định nào?",
+  "CQ5  Task nào phải xong trước task T?",
+  "CQ6  Kiểm tra nào bảo đảm yêu cầu 'mô phỏng chính xác' (8.5)?",
+  "CQ7  Thành phần nào chịu ràng buộc bảo mật?",
+  "CQ8  Câu hỏi mở nào đang chặn task nào?",
+  "CQ9  Vai trò agent nào được ghi vào file/thư mục nào? (một người ghi mỗi file)",
+  "CQ10 Thành phần harness (8 loại của Harness²) nằm ở file nào, cố định hay sửa được?",
+  "CQ11 Bug nào ảnh hưởng thành phần nào, đã có test hồi quy chưa?",
+  "CQ12 Luật (guardrail) nào sinh ra từ bài học nào, bằng chứng là gì?",
+]
+
+[entities.Decision]
+desc = "Một quyết định trong docs/decisions, có người chốt và trạng thái"
+attrs = ["text", "decided_by", "status", "step", "tags"]
+ex = ["12.7", "14.12a"]
+
+[entities.Task]
+desc = "Một việc thi công trong Bước 7"
+attrs = ["text", "phase"]
+ex = ["T1.6", "T1.11"]
+
+[entities.Phase]
+desc = "Giai đoạn thi công 0–8 (Bước 7). Phase 1 = GD0 + GD1"
+ex = ["GD0", "GD1"]
+
+[entities.Component]
+desc = "Một khối phần mềm hoặc dữ liệu của sản phẩm"
+ex = ["comp:gait", "comp:web-server", "comp:servo-catalog"]
+
+[entities.Check]
+desc = "Một kiểm tra tự động (khả thi mức 1/2, độ chính xác 8.5, bảo mật)"
+attrs = ["level"]
+ex = ["check:static-torque", "check:penetration"]
+
+[entities.Question]
+desc = "Câu hỏi còn mở"
+ex = ["q:wall-climb"]
+
+[entities.HarnessComponent]
+desc = "Một trong 8 thành phần harness của Harness²"
+attrs = ["mutability"]
+ex = ["harness:guardrails", "harness:plugins"]
+
+[entities.AgentRole]
+desc = "Vai trò agent trong task graph"
+ex = ["role:coordinator", "role:physics-verifier"]
+
+[entities.File]
+desc = "Đường dẫn file hoặc thư mục trong repo"
+ex = ["file:AGENTS.md", "file:docs/decisions/"]
+
+[entities.Bug]
+desc = "Một bug trong docs/bugs/BUG-NNN.md"
+ex = ["bug:001"]
+
+[entities.Lesson]
+desc = "Một bài học có bằng chứng, trong docs/harness/lessons.md"
+ex = ["lesson:001"]
+
+# Quan hệ: tên động từ chính xác, có domain → range.
+[relations]
+SUPERSEDES   = { domain = ["Decision"], range = ["Decision"], desc = "quyết định mới thay quyết định cũ" }
+CITES        = { domain = ["Decision", "Task"], range = ["Decision"], desc = "văn bản nhắc tới quyết định khác (theo/xem/vì …)" }
+ANSWERS      = { domain = ["Decision"], range = ["Question"], desc = "quyết định trả lời câu hỏi" }
+BLOCKS       = { domain = ["Question"], range = ["Task"], desc = "câu hỏi phải chốt trước khi làm task" }
+PART_OF      = { domain = ["Task"], range = ["Phase"] }
+DEPENDS_ON   = { domain = ["Task"], range = ["Task"], desc = "task cần kết quả của task kia mới bắt đầu được" }
+IMPLEMENTS   = { domain = ["Task"], range = ["Component", "Check", "HarnessComponent"] }
+CONSTRAINS   = { domain = ["Decision"], range = ["Component", "Check", "AgentRole", "HarnessComponent"], desc = "quyết định đặt ràng buộc lên" }
+VERIFIES     = { domain = ["Check"], range = ["Decision"], desc = "kiểm tra này bảo đảm quyết định được tôn trọng" }
+CHECKS       = { domain = ["Check"], range = ["Component"] }
+STORED_IN    = { domain = ["Component", "HarnessComponent", "Check", "AgentRole", "Bug", "Lesson"], range = ["File"] }
+WRITES       = { domain = ["AgentRole"], range = ["File"], desc = "vai trò duy nhất được ghi vào file/thư mục" }
+PERFORMS     = { domain = ["AgentRole"], range = ["Task"] }
+REVIEWS      = { domain = ["AgentRole"], range = ["Task"], desc = "kiểm tra kết quả của task ở context riêng" }
+AFFECTS      = { domain = ["Bug"], range = ["Component"] }
+REGRESSION_TEST_IN = { domain = ["Bug"], range = ["File"] }
+DERIVED_FROM = { domain = ["Lesson"], range = ["Bug", "Decision"] }
+ADDS_RULE_TO = { domain = ["Lesson"], range = ["HarnessComponent"] }

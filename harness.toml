@@ -1,0 +1,51 @@
+# Manifest harness của repo, theo mô hình 8 thành phần của Harness²
+# (https://github.com/google-research/harness2).
+# - evolvable: sửa được, chỉ sửa khi có bằng chứng (docs/harness/lessons.md).
+# - frozen: hạ tầng, không sửa trong repo này.
+# tools/kb.py đọc file này để đưa các thành phần vào knowledge graph.
+
+[components.system_prompt]
+paths = ["AGENTS.md", "CLAUDE.md"]
+mutability = "evolvable"
+desc = "Dự án là gì, stack, quy trình làm việc. CLAUDE.md chỉ import AGENTS.md"
+
+[components.guardrails]
+paths = ["AGENTS.md"]
+section = "Luật luôn bật"
+mutability = "evolvable"
+desc = "Luật bắt buộc. Bắt đầu ngắn; mỗi luật mới phải kèm bằng chứng (10.10)"
+
+[components.memory]
+paths = ["docs/decisions/", "docs/kb/", "docs/harness/lessons.md", "docs/bugs/"]
+mutability = "evolvable"
+desc = "Quyết định, knowledge graph, bài học, bug. Bài học bắt đầu rỗng"
+
+[components.tool_guidance]
+paths = ["AGENTS.md"]
+section = "Lệnh"
+mutability = "evolvable"
+desc = "Cách dùng các lệnh của repo"
+
+[components.subagents]
+paths = [".claude/agents/", "docs/harness/task-graph.md"]
+mutability = "evolvable"
+desc = "Vai trò agent và cách chia việc"
+
+[components.skills]
+paths = [".claude/skills/"]
+mutability = "evolvable"
+status = "empty"
+desc = "Quy trình dùng lại được. Chưa có; thêm khi một quy trình lặp lại từ 3 lần"
+
+[components.scripts]
+paths = ["tools/"]
+mutability = "evolvable"
+desc = "Script tất định: kb.py, sau này là bộ kiểm tra khả thi, replay"
+
+[components.plugins]
+paths = [".claude/settings.json", ".codex/hooks.json", ".githooks/"]
+mutability = "evolvable"
+desc = "Hooks: Claude Code, Codex, git pre-commit"
+
+[frozen]
+items = ["Claude Code CLI", "Codex CLI", "model AI", "MuJoCo (phiên bản ghim)", "uv", "Python 3.12"]

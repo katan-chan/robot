@@ -1,0 +1,5925 @@
+{
+ "nodes": [
+  {
+   "id": "10.1",
+   "type": "Decision",
+   "label": "Có `CLAUDE.md` và `AGENTS.md` để mọi agent làm việc trong repo theo cùng một quy ước",
+   "text": "Có `CLAUDE.md` và `AGENTS.md` để mọi agent làm việc trong repo theo cùng một quy ước",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.10",
+   "type": "Decision",
+   "label": "Guardrails trong `AGENTS.md` bắt đầu ngắn. Mỗi luật mới phải kèm lý do: lỗi gì đã xảy ra, ở đâu",
+   "text": "Guardrails trong `AGENTS.md` bắt đầu ngắn. Mỗi luật mới phải kèm lý do: lỗi gì đã xảy ra, ở đâu",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L83",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.11",
+   "type": "Decision",
+   "label": "Khi chỉnh model, agent có thể làm theo kiểu Propose–Probe–Compose: thử 2–3 bộ tham số, chạy bộ kiểm ",
+   "text": "Khi chỉnh model, agent có thể làm theo kiểu Propose–Probe–Compose: thử 2–3 bộ tham số, chạy bộ kiểm tra khả thi cho từng bộ, so sánh, chọn bộ tốt nhất, rồi ghi lý do vào `docs/decisions/`",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L84",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.2",
+   "type": "Decision",
+   "label": "Có hooks dùng code để kiểm tra tính khả thi của model **trước khi** chạy mô phỏng",
+   "text": "Có hooks dùng code để kiểm tra tính khả thi của model **trước khi** chạy mô phỏng",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.3",
+   "type": "Decision",
+   "label": "Người dùng chưa có kinh nghiệm, Claude chọn cách làm và giải thích",
+   "text": "Người dùng chưa có kinh nghiệm, Claude chọn cách làm và giải thích",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.4",
+   "type": "Decision",
+   "label": "`AGENTS.md` là nguồn quy ước duy nhất. `CLAUDE.md` chỉ gồm `@AGENTS.md` và vài dòng riêng cho Claude",
+   "text": "`AGENTS.md` là nguồn quy ước duy nhất. `CLAUDE.md` chỉ gồm `@AGENTS.md` và vài dòng riêng cho Claude",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L29",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.5",
+   "type": "Decision",
+   "label": "Cổng khả thi nằm **trong code**: script chạy mô phỏng tự gọi bộ kiểm tra trước, và từ chối chạy nếu ",
+   "text": "Cổng khả thi nằm **trong code**: script chạy mô phỏng tự gọi bộ kiểm tra trước, và từ chối chạy nếu kiểm tra lỗi. Như vậy agent nào, hay người nào, cũng không bỏ qua được. Hooks chỉ thêm phản hồi sớm",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L30",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.6",
+   "type": "Decision",
+   "label": "Ba lớp hook (xem dưới), cùng gọi một lệnh kiểm tra",
+   "text": "Ba lớp hook (xem dưới), cùng gọi một lệnh kiểm tra",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L31",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.7",
+   "type": "Decision",
+   "label": "Thông báo lỗi có cấu trúc: tên kiểm tra, giá trị đo, ngưỡng, gợi ý sửa. Agent đọc rồi tự sửa (bài họ",
+   "text": "Thông báo lỗi có cấu trúc: tên kiểm tra, giá trị đo, ngưỡng, gợi ý sửa. Agent đọc rồi tự sửa (bài học từ AID-SR)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L32",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.8",
+   "type": "Decision",
+   "label": "`AGENTS.md` có quy tắc: mọi quyết định thiết kế ghi vào `docs/decisions/`, theo đúng cách đánh dấu t",
+   "text": "`AGENTS.md` có quy tắc: mọi quyết định thiết kế ghi vào `docs/decisions/`, theo đúng cách đánh dấu trong README",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L33",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "10.9",
+   "type": "Decision",
+   "label": "Sắp harness của repo theo 8 thành phần của Harness². Map: `AGENTS.md` = system prompt + guardrails; ",
+   "text": "Sắp harness của repo theo 8 thành phần của Harness². Map: `AGENTS.md` = system prompt + guardrails; `docs/decisions/` = memory quyết định; bộ kiểm tra khả thi = scripts; hooks = plugins. Skills và subagents (ví dụ reviewer vật lý) chỉ thêm khi thật sự cần",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 10,
+   "src": "docs/decisions/10-harness-agent.md#L82",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.1",
+   "type": "Decision",
+   "label": "Duyệt harness ở Bước 10. Người dùng sẽ tự điều chỉnh cách làm việc cho hợp",
+   "text": "Duyệt harness ở Bước 10. Người dùng sẽ tự điều chỉnh cách làm việc cho hợp",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.10",
+   "type": "Decision",
+   "label": "Trang web có nút \"Báo bug\": đánh dấu bước hiện tại và tạo khung `BUG-NNN.md`",
+   "text": "Trang web có nút \"Báo bug\": đánh dấu bước hiện tại và tạo khung `BUG-NNN.md`",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L34",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.11",
+   "type": "Decision",
+   "label": "Thêm luật vào `AGENTS.md`: sửa bug phải theo thứ tự tái hiện → test hồi quy → sửa → test qua",
+   "text": "Thêm luật vào `AGENTS.md`: sửa bug phải theo thứ tự tái hiện → test hồi quy → sửa → test qua",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L35",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.12",
+   "type": "Decision",
+   "label": "Định dạng: JSON/JSONL cho manifest, lệnh, sự kiện; `.npz` (numpy) cho dữ liệu số. Công cụ xem như Re",
+   "text": "Định dạng: JSON/JSONL cho manifest, lệnh, sự kiện; `.npz` (numpy) cho dữ liệu số. Công cụ xem như Rerun hay MCAP để sau, chỉ thêm khi cần",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L36",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.13",
+   "type": "Decision",
+   "label": "Repo lưu trên git",
+   "text": "Repo lưu trên git",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L96",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.14",
+   "type": "Decision",
+   "label": "Có thể dùng thêm agent khác ngoài Claude Code",
+   "text": "Có thể dùng thêm agent khác ngoài Claude Code",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L97",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.15",
+   "type": "Decision",
+   "label": "Vì 11.14: `AGENTS.md` là nguồn quy ước chung. Giữ hook cho cả Claude Code (`.claude/settings.json`) ",
+   "text": "Vì 11.14: `AGENTS.md` là nguồn quy ước chung. Giữ hook cho cả Claude Code (`.claude/settings.json`) và Codex (`.codex/hooks.json`). Hai lớp không phụ thuộc agent là git `pre-commit` và cổng trong code, áp dụng cho mọi agent",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L98",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.16",
+   "type": "Decision",
+   "label": "`.gitignore` bỏ qua `runs/`, `.venv/`, `__pycache__/`. Thư mục lần chạy gây bug nằm trong `docs/bugs",
+   "text": "`.gitignore` bỏ qua `runs/`, `.venv/`, `__pycache__/`. Thư mục lần chạy gây bug nằm trong `docs/bugs/` và được commit",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L99",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.2",
+   "type": "Decision",
+   "label": "Cần module record",
+   "text": "Cần module record",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.3",
+   "type": "Decision",
+   "label": "Trước đó cần phần ghi bug và trace bug",
+   "text": "Trước đó cần phần ghi bug và trace bug",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.4",
+   "type": "Decision",
+   "label": "Log trong mô phỏng phải đủ để tái hiện chính xác hành vi và bug",
+   "text": "Log trong mô phỏng phải đủ để tái hiện chính xác hành vi và bug",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.5",
+   "type": "Decision",
+   "label": "Mỗi lần chạy mô phỏng tự tạo một thư mục `runs/<thời gian>-<mã>/` gồm 5 file (xem dưới)",
+   "text": "Mỗi lần chạy mô phỏng tự tạo một thư mục `runs/<thời gian>-<mã>/` gồm 5 file (xem dưới)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L29",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.6",
+   "type": "Decision",
+   "label": "Lệnh từ trang web ghi theo **số bước mô phỏng**, không theo giờ thật. Lệnh chỉ áp dụng ở ranh giới b",
+   "text": "Lệnh từ trang web ghi theo **số bước mô phỏng**, không theo giờ thật. Lệnh chỉ áp dụng ở ranh giới bước",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L30",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.7",
+   "type": "Decision",
+   "label": "Lệnh `replay` chạy lại một lần chạy từ thư mục của nó, so khớp với các checkpoint. Có thể dừng ở bướ",
+   "text": "Lệnh `replay` chạy lại một lần chạy từ thư mục của nó, so khớp với các checkpoint. Có thể dừng ở bước N để xem",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L31",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.8",
+   "type": "Decision",
+   "label": "Mỗi bug có một file `docs/bugs/BUG-NNN.md` và giữ lại thư mục lần chạy gây bug",
+   "text": "Mỗi bug có một file `docs/bugs/BUG-NNN.md` và giữ lại thư mục lần chạy gây bug",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L32",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "11.9",
+   "type": "Decision",
+   "label": "Sửa bug xong thì lần chạy đó thành **test hồi quy**: replay và khẳng định lỗi không còn. Hook `pre-c",
+   "text": "Sửa bug xong thì lần chạy đó thành **test hồi quy**: replay và khẳng định lỗi không còn. Hook `pre-commit` chạy các test này",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 11,
+   "src": "docs/decisions/11-record-bug-trace.md#L33",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.1",
+   "type": "Decision",
+   "label": "Trang web là một **controller**, như tay cầm chơi game, điều khiển **qua internet**",
+   "text": "Trang web là một **controller**, như tay cầm chơi game, điều khiển **qua internet**",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.10",
+   "type": "Decision",
+   "label": "Điều khiển từ xa cần token (khoá riêng). Server chỉ lưu mã hash của token",
+   "text": "Điều khiển từ xa cần token (khoá riêng). Server chỉ lưu mã hash của token",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L36",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "12.11",
+   "type": "Decision",
+   "label": "Máy Mac này mặc định luôn điều khiển được, không cần token",
+   "text": "Máy Mac này mặc định luôn điều khiển được, không cần token",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L37",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "12.12",
+   "type": "Decision",
+   "label": "Mỗi khoá có tên (ví dụ `iphone-minh`). Lệnh tạo khoá in token **một lần duy nhất**. Server lưu `tên ",
+   "text": "Mỗi khoá có tên (ví dụ `iphone-minh`). Lệnh tạo khoá in token **một lần duy nhất**. Server lưu `tên + sha256(token) + ngày tạo` trong một file ngoài git (`~/.config/spider-robot/keys.json`, quyền 600). Thu hồi được từng khoá. Token dài 32 byte ngẫu nhiên (`secrets.token_urlsafe`), nên dùng sha256 là đủ. So sánh bằng `hmac.compare_digest`",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L38",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "12.13",
+   "type": "Decision",
+   "label": "Token không bao giờ nằm trong URL gửi lên server, vì URL dễ lọt vào log. Trang web nhận token qua ô ",
+   "text": "Token không bao giờ nằm trong URL gửi lên server, vì URL dễ lọt vào log. Trang web nhận token qua ô nhập, hoặc qua phần `#` của link (trình duyệt không gửi phần này lên server), lưu trong trình duyệt rồi gửi qua header hoặc tin nhắn đầu tiên của WebSocket",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L39",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "12.14",
+   "type": "Decision",
+   "label": "\"Máy này\" được nhận diện bằng **một cổng riêng chỉ nghe ở `127.0.0.1`**, không phải bằng địa chỉ IP ",
+   "text": "\"Máy này\" được nhận diện bằng **một cổng riêng chỉ nghe ở `127.0.0.1`**, không phải bằng địa chỉ IP của request. Cổng cho truy cập từ xa (trên Tailscale) luôn đòi token. Không trỏ tunnel hay proxy nào vào cổng `127.0.0.1`",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L40",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "12.15",
+   "type": "Decision",
+   "label": "Mỗi lúc chỉ một controller được lái. Máy này luôn giành quyền lái được. Mọi controller đều có nút dừ",
+   "text": "Mỗi lúc chỉ một controller được lái. Máy này luôn giành quyền lái được. Mọi controller đều có nút dừng khẩn cấp",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L41",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security",
+    "safety"
+   ]
+  },
+  {
+   "id": "12.16",
+   "type": "Decision",
+   "label": "`events.jsonl` ghi tên khoá đang lái (không ghi token) mỗi lần đổi người lái",
+   "text": "`events.jsonl` ghi tên khoá đang lái (không ghi token) mỗi lần đổi người lái",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L42",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.17",
+   "type": "Decision",
+   "label": "Đường truyền vẫn đi qua Tailscale (đã mã hoá). Muốn cho người khác lái thì chia sẻ máy Mac qua Tails",
+   "text": "Đường truyền vẫn đi qua Tailscale (đã mã hoá). Muốn cho người khác lái thì chia sẻ máy Mac qua Tailscale và cấp cho họ một khoá. Cloudflare để sau",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L43",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "12.2",
+   "type": "Decision",
+   "label": "Cách xem robot: ưu tiên cách đơn giản và dễ nhìn",
+   "text": "Cách xem robot: ưu tiên cách đơn giản và dễ nhìn",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.3",
+   "type": "Decision",
+   "label": "Servo phải thay được",
+   "text": "Servo phải thay được",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.4",
+   "type": "Decision",
+   "label": "Controller ra lệnh mức cao: tiến/lùi, đi ngang, xoay tại chỗ, tốc độ, dừng. Dáng đi tự lo phần chân.",
+   "text": "Controller ra lệnh mức cao: tiến/lùi, đi ngang, xoay tại chỗ, tốc độ, dừng. Dáng đi tự lo phần chân. Không có thanh trượt từng khớp trên trang web (bỏ, thêm khi cần gỡ lỗi)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.5",
+   "type": "Decision",
+   "label": "Xem robot ngay trên trang web. Server tự vẽ hình bằng MuJoCo (vẽ ngầm, không mở cửa sổ) rồi gửi khun",
+   "text": "Xem robot ngay trên trang web. Server tự vẽ hình bằng MuJoCo (vẽ ngầm, không mở cửa sổ) rồi gửi khung hình JPEG về trình duyệt, khoảng 20–30 hình/giây, 640×480. Hình giống hệt viewer của MuJoCo, không phải viết phần vẽ 3D riêng. Viewer MuJoCo trên Mac vẫn dùng được khi ngồi tại máy",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.6",
+   "type": "Decision",
+   "label": "Lý do chọn 12.5: điều khiển qua internet thì người điều khiển không nhìn thấy cửa sổ viewer trên Mac",
+   "text": "Lý do chọn 12.5: điều khiển qua internet thì người điều khiển không nhìn thấy cửa sổ viewer trên Mac. Vẽ 3D trong trình duyệt (three.js hoặc MuJoCo WASM) đẹp hơn nhưng nhiều việc hơn",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L14",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.7",
+   "type": "Decision",
+   "label": "Servo: một **danh mục servo** (MG90S, SG90, MG996R…) trong file tham số. Mỗi loại ghi mô-men cực đại",
+   "text": "Servo: một **danh mục servo** (MG90S, SG90, MG996R…) trong file tham số. Mỗi loại ghi mô-men cực đại, tốc độ, khối lượng, kích thước, hành trình góc. Chọn servo theo tên: một loại chung cho cả robot, có thể ghi đè riêng cho từng vị trí khớp (hông xoay, hông nhấc, gối). Mặc định MG90S",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L15",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.8",
+   "type": "Decision",
+   "label": "Đổi servo thì bộ kiểm tra khả thi tự chạy lại (hook PostToolUse). Manifest của mỗi lần chạy ghi rõ s",
+   "text": "Đổi servo thì bộ kiểm tra khả thi tự chạy lại (hook PostToolUse). Manifest của mỗi lần chạy ghi rõ servo đã dùng",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L16",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "12.9",
+   "type": "Decision",
+   "label": "Truy cập qua internet: **không mở cổng công khai**. Mặc định dùng Tailscale (mạng riêng giữa các thi",
+   "text": "Truy cập qua internet: **không mở cổng công khai**. Mặc định dùng Tailscale (mạng riêng giữa các thiết bị của bạn). Xác thực bằng khoá theo 12.10–12.14",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 12,
+   "src": "docs/decisions/12-controller-web.md#L17",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "13.1",
+   "type": "Decision",
+   "label": "Duyệt toàn bộ các đề xuất đang chờ, batch B1–B7: 3.2, 4.7, 6.2, 7.2, 7.3, 8.3, 8.4, 9.1–9.6, 11.5–11",
+   "text": "Duyệt toàn bộ các đề xuất đang chờ, batch B1–B7: 3.2, 4.7, 6.2, 7.2, 7.3, 8.3, 8.4, 9.1–9.6, 11.5–11.12, 11.15, 11.16, 12.4–12.9, 12.12–12.17",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 13,
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "13.2",
+   "type": "Decision",
+   "label": "Cái gì MuJoCo đã tính thì đọc ra, không tự tính lại: khối lượng, quán tính, mô-men cần thiết (`mj_in",
+   "text": "Cái gì MuJoCo đã tính thì đọc ra, không tự tính lại: khối lượng, quán tính, mô-men cần thiết (`mj_inverse`), lực actuator, tiếp xúc, Jacobian, state. Model dựng bằng `mujoco.MjSpec`. Ghi thành luật trong `AGENTS.md`",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 13,
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "13.3",
+   "type": "Decision",
+   "label": "Không viết code vật lý. Toàn bộ vật lý do `mj_step` lo. Độ chính xác nằm ở **số liệu đầu vào**: hình",
+   "text": "Không viết code vật lý. Toàn bộ vật lý do `mj_step` lo. Độ chính xác nằm ở **số liệu đầu vào**: hình học, khối lượng, ma sát, độ mềm tiếp xúc, bộ giải, thông số servo",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 13,
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "13.4",
+   "type": "Decision",
+   "label": "Phase 1 bỏ qua các hiện tượng MuJoCo không có sẵn: rơ bánh răng, vùng chết PWM, sụt áp pin, nhựa in ",
+   "text": "Phase 1 bỏ qua các hiện tượng MuJoCo không có sẵn: rơ bánh răng, vùng chết PWM, sụt áp pin, nhựa in bị cong. Bù bằng biên an toàn 50% mô-men. Xem xét lại ở Giai đoạn 8, khi có số đo từ con thật",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 13,
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "14.1",
+   "type": "Decision",
+   "label": "Viewer MuJoCo chỉ là **công cụ riêng**: mở model hoặc xem lại một lần chạy. Viewer không hiển thị ph",
+   "text": "Viewer MuJoCo chỉ là **công cụ riêng**: mở model hoặc xem lại một lần chạy. Viewer không hiển thị phiên đang lái từ web. Nhờ vậy không cần `mjpython`/`launch_passive`, và luồng mô phỏng giữ `MjData` một mình (9.6). Xem trực tiếp phiên đang lái thì dùng chính trang web, kể cả khi ngồi tại máy",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.10",
+   "type": "Decision",
+   "label": "Agent dùng **chung API** với trang controller: cùng loại lệnh (tiến/lùi, đi ngang, xoay, tốc độ, dừn",
+   "text": "Agent dùng **chung API** với trang controller: cùng loại lệnh (tiến/lùi, đi ngang, xoay, tốc độ, dừng), dạng JSON qua HTTP/WebSocket. Không làm API riêng. Kèm một lệnh dòng lệnh mỏng để agent gọi qua Bash (`... drive --vx 0.1 --for 2s`)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L31",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.11",
+   "type": "Decision",
+   "label": "Agent **đọc** được trạng thái: vị trí và hướng thân, vận tốc, tải servo, kết quả kiểm tra khả thi, s",
+   "text": "Agent **đọc** được trạng thái: vị trí và hướng thân, vận tốc, tải servo, kết quả kiểm tra khả thi, sự kiện gần nhất, và một ảnh chụp khung hình hiện tại. Nhờ vậy agent \"thấy\" được robot",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L32",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.12",
+   "type": "Decision",
+   "label": "Quyền truy cập: agent chạy trên máy này dùng cổng `127.0.0.1` (12.11) và phải tự khai tên, ví dụ `ag",
+   "text": "Quyền truy cập: agent chạy trên máy này dùng cổng `127.0.0.1` (12.11) và phải tự khai tên, ví dụ `agent:claude`. Agent ở máy khác cần khoá như người (12.12). Tên agent được ghi vào log người lái (12.16)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L33",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "14.12a",
+   "type": "Decision",
+   "label": "Lệnh CLI có `--host` và `--key`. Mặc định nối `127.0.0.1`. Agent ở máy khác chỉ cần máy đó đã vào Ta",
+   "text": "Lệnh CLI có `--host` và `--key`. Mặc định nối `127.0.0.1`. Agent ở máy khác chỉ cần máy đó đã vào Tailscale, rồi chạy cùng CLI với `--host macbook-pro --key <token>`. Agent chạy trên cloud phải có auth key của Tailscale mới vào được mạng. Việc này để sau và cần xem xét bảo mật riêng",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L34",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "security"
+   ]
+  },
+  {
+   "id": "14.12b",
+   "type": "Decision",
+   "label": "Robot thật sau này (Giai đoạn 8) dùng **cùng API và cùng CLI**. Agent không cần biết đang lái bản mô",
+   "text": "Robot thật sau này (Giai đoạn 8) dùng **cùng API và cùng CLI**. Agent không cần biết đang lái bản mô phỏng hay con thật",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L35",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.13",
+   "type": "Decision",
+   "label": "Người luôn được ưu tiên: người giành quyền lái từ agent bất cứ lúc nào. Nút dừng khẩn cấp thắng mọi ",
+   "text": "Người luôn được ưu tiên: người giành quyền lái từ agent bất cứ lúc nào. Nút dừng khẩn cấp thắng mọi lệnh của agent",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L36",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "safety"
+   ]
+  },
+  {
+   "id": "14.14",
+   "type": "Decision",
+   "label": "MCP server (T6.1) để sau. Khi làm, MCP chỉ là lớp bọc mỏng quanh chính API này",
+   "text": "MCP server (T6.1) để sau. Khi làm, MCP chỉ là lớp bọc mỏng quanh chính API này",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L37",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.2",
+   "type": "Decision",
+   "label": "Replay có 2 chế độ. **Chính xác**: phát lại `ctrl` đã ghi, so khớp checkpoint, dùng để chẩn đoán. **",
+   "text": "Replay có 2 chế độ. **Chính xác**: phát lại `ctrl` đã ghi, so khớp checkpoint, dùng để chẩn đoán. **Mô phỏng lại**: đưa các lệnh controller đã ghi qua code hiện tại, kèm một điều kiện kiểm tra riêng cho từng bug, dùng làm test hồi quy (11.9). Lý do: phát lại `ctrl` cũ không thể cho thấy một bản sửa IK hay dáng đi",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.3",
+   "type": "Decision",
+   "label": "Khi replay một lần chạy đã lưu, cổng khả thi chỉ kiểm tra model biên dịch được và phiên bản `mujoco`",
+   "text": "Khi replay một lần chạy đã lưu, cổng khả thi chỉ kiểm tra model biên dịch được và phiên bản `mujoco` khớp. Không chặn vì tham số xấu, vì chính tham số xấu có thể là nguyên nhân của bug đang điều tra",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.4",
+   "type": "Decision",
+   "label": "Ảnh tham khảo lưu tại [`docs/reference/spider-reference.png`](../reference/spider-reference.png). Kí",
+   "text": "Ảnh tham khảo lưu tại [`docs/reference/spider-reference.png`](../reference/spider-reference.png). Kích thước khởi điểm lấy theo tỉ lệ trong ảnh: hông xếp hình chữ X, thân khoảng 10 cm, chân duỗi khoảng 15 cm",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L14",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.5",
+   "type": "Decision",
+   "label": "Kích thước mặc định phải qua cổng khả thi ngay từ ngày đầu. Nếu không qua kiểm tra mô-men: **đổi kíc",
+   "text": "Kích thước mặc định phải qua cổng khả thi ngay từ ngày đầu. Nếu không qua kiểm tra mô-men: **đổi kích thước chân trước**, rồi mới đổi servo khoẻ hơn. Không nới biên an toàn 50%",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L15",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.6",
+   "type": "Decision",
+   "label": "Lái được từ cả điện thoại (nút cảm ứng) và laptop (bàn phím). **Không** hỗ trợ tay cầm chơi game",
+   "text": "Lái được từ cả điện thoại (nút cảm ứng) và laptop (bàn phím). **Không** hỗ trợ tay cầm chơi game",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L27",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.7",
+   "type": "Decision",
+   "label": "Trang controller tự đổi giao diện theo thiết bị: màn hình cảm ứng hiện joystick ảo và nút dừng lớn, ",
+   "text": "Trang controller tự đổi giao diện theo thiết bị: màn hình cảm ứng hiện joystick ảo và nút dừng lớn, laptop dùng phím (WASD, Q/E để xoay, Space để dừng). Cả hai cùng gửi một loại lệnh lên server",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L28",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.8",
+   "type": "Decision",
+   "label": "Phase 1 xong khi: (a) test tự động qua, gồm cả token và cổng từ xa; (b) **một lần thử tay** lái từ đ",
+   "text": "Phase 1 xong khi: (a) test tự động qua, gồm cả token và cổng từ xa; (b) **một lần thử tay** lái từ điện thoại qua Tailscale theo checklist; (c) một agent lái được robot qua API (14.9)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L29",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "14.9",
+   "type": "Decision",
+   "label": "Có một **cổng cho agent** điều khiển robot",
+   "text": "Có một **cổng cho agent** điều khiển robot",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 14,
+   "src": "docs/decisions/14-builder-check.md#L30",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.1",
+   "type": "Decision",
+   "label": "Dùng skill graph-engineering để làm knowledge base, harness và cách chia agent. Lấy Harness² làm cơ ",
+   "text": "Dùng skill graph-engineering để làm knowledge base, harness và cách chia agent. Lấy Harness² làm cơ sở",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.10",
+   "type": "Decision",
+   "label": "Giới hạn: tối đa 3 vòng sửa ↔ kiểm, một người ghi mỗi file (kb.py kiểm tự động), tối đa 4 worker",
+   "text": "Giới hạn: tối đa 3 vòng sửa ↔ kiểm, một người ghi mỗi file (kb.py kiểm tự động), tối đa 4 worker",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L18",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.11",
+   "type": "Decision",
+   "label": "Bài học (`docs/harness/lessons.md`) bắt đầu rỗng. Một bài học lặp lại từ 2 lần mới được đề xuất thàn",
+   "text": "Bài học (`docs/harness/lessons.md`) bắt đầu rỗng. Một bài học lặp lại từ 2 lần mới được đề xuất thành luật, và người dùng duyệt",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L19",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.12",
+   "type": "Decision",
+   "label": "Thêm T1.9–T1.12 vào Bước 7 cho record, khoá, API agent và hook, vì các phần này đã duyệt nhưng chưa ",
+   "text": "Thêm T1.9–T1.12 vào Bước 7 cho record, khoá, API agent và hook, vì các phần này đã duyệt nhưng chưa có task",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L20",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.13",
+   "type": "Decision",
+   "label": "Mã nguồn đặt trong package `spider/`, mỗi thư mục con thuộc một vai trò",
+   "text": "Mã nguồn đặt trong package `spider/`, mỗi thư mục con thuộc một vai trò",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L21",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.2",
+   "type": "Decision",
+   "label": "Knowledge base là graph lưu dạng cạnh có kiểu trong JSON. Quy mô nhỏ nên không dùng Neo4j. Schema ở ",
+   "text": "Knowledge base là graph lưu dạng cạnh có kiểu trong JSON. Quy mô nhỏ nên không dùng Neo4j. Schema ở `docs/kb/ontology.toml` với 11 loại nút, 18 quan hệ và 12 câu hỏi năng lực",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.3",
+   "type": "Decision",
+   "label": "Quyết định, task, SUPERSEDES, CITES được trích tự động bằng luật từ `docs/decisions/`, nên không bao",
+   "text": "Quyết định, task, SUPERSEDES, CITES được trích tự động bằng luật từ `docs/decisions/`, nên không bao giờ lệch với tài liệu. Phần ngữ nghĩa (thành phần, kiểm tra, vai trò, ràng buộc) biên soạn tay trong `docs/kb/curated.toml`. Mọi cạnh đều có nguồn",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.4",
+   "type": "Decision",
+   "label": "`tools/kb.py` chỉ dùng thư viện chuẩn, chạy bằng `uv run`. Lệnh: `build`, `check`, `selftest`, `show",
+   "text": "`tools/kb.py` chỉ dùng thư viện chuẩn, chạy bằng `uv run`. Lệnh: `build`, `check`, `selftest`, `show`, `impact`, `deps`, `path`, `find`",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.5",
+   "type": "Decision",
+   "label": "Harness ghi trong `harness.toml` theo đúng 8 thành phần của Harness². Hạ tầng cố định (CLI, model, M",
+   "text": "Harness ghi trong `harness.toml` theo đúng 8 thành phần của Harness². Hạ tầng cố định (CLI, model, MuJoCo, uv) không sửa trong repo",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.6",
+   "type": "Decision",
+   "label": "`AGENTS.md` là hướng dẫn chung, `CLAUDE.md` chỉ import nó. Luật luôn bật bắt đầu với 6 luật, mỗi luậ",
+   "text": "`AGENTS.md` là hướng dẫn chung, `CLAUDE.md` chỉ import nó. Luật luôn bật bắt đầu với 6 luật, mỗi luật trỏ về quyết định làm nguồn",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L14",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.7",
+   "type": "Decision",
+   "label": "Hook dùng chung `tools/hooks/kb-sync.sh` cho Claude Code và Codex (PostToolUse): dựng lại KB, nếu lỗ",
+   "text": "Hook dùng chung `tools/hooks/kb-sync.sh` cho Claude Code và Codex (PostToolUse): dựng lại KB, nếu lỗi thì trả về agent. Git `pre-commit` chạy `kb check` và `selftest`",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L15",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.8",
+   "type": "Decision",
+   "label": "Hook kiểm tra khả thi (PreToolUse trước lệnh mô phỏng) làm ở T1.12, khi đã có bộ kiểm tra. Không làm",
+   "text": "Hook kiểm tra khả thi (PreToolUse trước lệnh mô phỏng) làm ở T1.12, khi đã có bộ kiểm tra. Không làm hook trước khi có thứ để kiểm",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L16",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "15.9",
+   "type": "Decision",
+   "label": "Chia agent theo hình kim cương (`docs/harness/task-graph.md`). Một coordinator làm phần tuần tự T0.1",
+   "text": "Chia agent theo hình kim cương (`docs/harness/task-graph.md`). Một coordinator làm phần tuần tự T0.1–T1.4 và viết hợp đồng. 4 worker song song: dáng đi, kiểm tra, record, server. 3 verifier ở context riêng: vật lý, tái hiện, bảo mật. Sau cùng là cổng người dùng",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 15,
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "3.1",
+   "type": "Decision",
+   "label": "Stack: Blender 5.2 → MJCF → MuJoCo + Python 3.12 (`uv`)",
+   "text": "Stack: Blender 5.2 → MJCF → MuJoCo + Python 3.12 (`uv`)",
+   "decided_by": "claude-proposed",
+   "status": "superseded",
+   "status_raw": "Đã thay → 3.2",
+   "step": 3,
+   "src": "docs/decisions/03-phan-cung-may.md#L30",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "3.2",
+   "type": "Decision",
+   "label": "Stack: file tham số → script Python sinh MJCF → MuJoCo, Python 3.12 (`uv`). Blender chỉ xuất mesh hi",
+   "text": "Stack: file tham số → script Python sinh MJCF → MuJoCo, Python 3.12 (`uv`). Blender chỉ xuất mesh hiển thị cho từng link",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 3,
+   "src": "docs/decisions/03-phan-cung-may.md#L31",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "4.1",
+   "type": "Decision",
+   "label": "Robot nhện 4 chân giống ảnh tham khảo: mỗi chân 3 servo, tổng 12",
+   "text": "Robot nhện 4 chân giống ảnh tham khảo: mỗi chân 3 servo, tổng 12",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 4,
+   "src": "docs/decisions/04-muc-tieu.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "4.2",
+   "type": "Decision",
+   "label": "Bắt đầu từ con số 0: chưa có robot thật, chưa có file 3D",
+   "text": "Bắt đầu từ con số 0: chưa có robot thật, chưa có file 3D",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 4,
+   "src": "docs/decisions/04-muc-tieu.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "4.3",
+   "type": "Decision",
+   "label": "Mục tiêu 1: chạy được trong mô phỏng",
+   "text": "Mục tiêu 1: chạy được trong mô phỏng",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 4,
+   "src": "docs/decisions/04-muc-tieu.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "4.4",
+   "type": "Decision",
+   "label": "Mục tiêu 2: gắn cảm biến dựng bản đồ để đi trên đa tạp bất kỳ, kể cả mặt gấp khúc và có vật cản",
+   "text": "Mục tiêu 2: gắn cảm biến dựng bản đồ để đi trên đa tạp bất kỳ, kể cả mặt gấp khúc và có vật cản",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 4,
+   "src": "docs/decisions/04-muc-tieu.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "4.5",
+   "type": "Decision",
+   "label": "Dùng LLM hoặc RL để học di chuyển",
+   "text": "Dùng LLM hoặc RL để học di chuyển",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng (làm sau, xem quyết định 5.1)",
+   "step": 4,
+   "src": "docs/decisions/04-muc-tieu.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "4.6",
+   "type": "Decision",
+   "label": "Về sau thêm camera và loa để nói chuyện",
+   "text": "Về sau thêm camera và loa để nói chuyện",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng (làm sau)",
+   "step": 4,
+   "src": "docs/decisions/04-muc-tieu.md#L14",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "4.7",
+   "type": "Decision",
+   "label": "Học đi dùng RL. LLM ở tầng trên: nghe lệnh, chọn đích đến",
+   "text": "Học đi dùng RL. LLM ở tầng trên: nghe lệnh, chọn đích đến",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 4,
+   "src": "docs/decisions/04-muc-tieu.md#L15",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "5.1",
+   "type": "Decision",
+   "label": "Tạm bỏ qua phần học. Trước tiên làm ra được con robot",
+   "text": "Tạm bỏ qua phần học. Trước tiên làm ra được con robot",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 5,
+   "src": "docs/decisions/05-pham-vi-minimal.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "5.2",
+   "type": "Decision",
+   "label": "Phần cứng thật quyết định sau. Trước tiên chốt bản minimal",
+   "text": "Phần cứng thật quyết định sau. Trước tiên chốt bản minimal",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 5,
+   "src": "docs/decisions/05-pham-vi-minimal.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "5.3",
+   "type": "Decision",
+   "label": "Model phải chỉnh được về sau: kích thước, số khớp, giới hạn servo nằm ở một chỗ, đổi xong là sinh lạ",
+   "text": "Model phải chỉnh được về sau: kích thước, số khớp, giới hạn servo nằm ở một chỗ, đổi xong là sinh lại model",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 5,
+   "src": "docs/decisions/05-pham-vi-minimal.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "5.4",
+   "type": "Decision",
+   "label": "Nội dung bản minimal (xem dưới)",
+   "text": "Nội dung bản minimal (xem dưới)",
+   "decided_by": "claude-proposed",
+   "status": "superseded",
+   "status_raw": "Đã thay → xem Bước 7, 8 (hình dáng làm sau, điều khiển qua web, phải di chuyển được)",
+   "step": 5,
+   "src": "docs/decisions/05-pham-vi-minimal.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "5.5",
+   "type": "Decision",
+   "label": "Kích cỡ việc: nhỏ, mô tả trong chat và trong file này là đủ",
+   "text": "Kích cỡ việc: nhỏ, mô tả trong chat và trong file này là đủ",
+   "decided_by": "claude-proposed",
+   "status": "superseded",
+   "status_raw": "Đã thay → dự án lớn hơn dự kiến, tài liệu thiết kế chính là thư mục `docs/decisions/`",
+   "step": 5,
+   "src": "docs/decisions/05-pham-vi-minimal.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "6.1",
+   "type": "Decision",
+   "label": "Việc đầu tiên: dựng thành công môi trường mô phỏng, trước khi làm robot",
+   "text": "Việc đầu tiên: dựng thành công môi trường mô phỏng, trước khi làm robot",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 6,
+   "src": "docs/decisions/06-moi-truong-mo-phong.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "6.2",
+   "type": "Decision",
+   "label": "Nội dung bước này (xem dưới)",
+   "text": "Nội dung bước này (xem dưới)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 6,
+   "src": "docs/decisions/06-moi-truong-mo-phong.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "7.1",
+   "type": "Decision",
+   "label": "Sắp xếp toàn bộ task theo trình tự phù hợp",
+   "text": "Sắp xếp toàn bộ task theo trình tự phù hợp",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 7,
+   "src": "docs/decisions/07-trinh-tu-task.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "7.2",
+   "type": "Decision",
+   "label": "Trình tự dưới đây",
+   "text": "Trình tự dưới đây",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 7,
+   "src": "docs/decisions/07-trinh-tu-task.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "7.3",
+   "type": "Decision",
+   "label": "Làm đúng động học và vật lý bằng khối hình đơn giản trước. Hình đẹp từ Blender làm sau và chỉ là lớp",
+   "text": "Làm đúng động học và vật lý bằng khối hình đơn giản trước. Hình đẹp từ Blender làm sau và chỉ là lớp vỏ",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 7,
+   "src": "docs/decisions/07-trinh-tu-task.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "8.1",
+   "type": "Decision",
+   "label": "Đầu ra cuối cùng của Phase 1: robot nhện di chuyển được, trong một trình mô phỏng chính xác. Chỉ vậy",
+   "text": "Đầu ra cuối cùng của Phase 1: robot nhện di chuyển được, trong một trình mô phỏng chính xác. Chỉ vậy thôi",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 8,
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "8.2",
+   "type": "Decision",
+   "label": "Chốt câu hỏi mở ở Bước 5 / task T1.5: robot phải di chuyển được, không chỉ đứng yên",
+   "text": "Chốt câu hỏi mở ở Bước 5 / task T1.5: robot phải di chuyển được, không chỉ đứng yên",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 8,
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "8.3",
+   "type": "Decision",
+   "label": "Vì đã bỏ phần học (5.1), Phase 1 di chuyển bằng dáng đi lập trình sẵn (IK + gait), không dùng RL",
+   "text": "Vì đã bỏ phần học (5.1), Phase 1 di chuyển bằng dáng đi lập trình sẵn (IK + gait), không dùng RL",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 8,
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "8.4",
+   "type": "Decision",
+   "label": "Phase 1 = Giai đoạn 0 + Giai đoạn 1 (kể cả T1.6) trong Bước 7. Blender, cảm biến và các phần khác nằ",
+   "text": "Phase 1 = Giai đoạn 0 + Giai đoạn 1 (kể cả T1.6) trong Bước 7. Blender, cảm biến và các phần khác nằm ngoài Phase 1",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 8,
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "8.5",
+   "type": "Decision",
+   "label": "\"Chính xác\" nghĩa là vật lý sát thực tế: khối lượng, lực và tốc độ servo, ma sát, bước thời gian hợp",
+   "text": "\"Chính xác\" nghĩa là vật lý sát thực tế: khối lượng, lực và tốc độ servo, ma sát, bước thời gian hợp lý. Kèm kiểm tra tự động: không xuyên sàn, không vượt giới hạn khớp, không rung giật",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 8,
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "8.6",
+   "type": "Decision",
+   "label": "Phase 1 điều khiển bằng tay, qua một trang web",
+   "text": "Phase 1 điều khiển bằng tay, qua một trang web",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 8,
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L14",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "9.1",
+   "type": "Decision",
+   "label": "Servo: mô hình hoá đủ mô-men cực đại, tốc độ không tải, armature (quán tính rotor quy đổi), damping,",
+   "text": "Servo: mô hình hoá đủ mô-men cực đại, tốc độ không tải, armature (quán tính rotor quy đổi), damping, frictionloss, độ trễ lệnh. Tất cả nằm trong file tham số T1.1. Mặc định dùng actuator `position` với `forcerange`, và tự giới hạn tốc độ lệnh trong bộ điều khiển. Độ trễ lệnh dùng tính năng delay (≥ 3.5.0). Có thể nâng lên `dcmotor` (≥ 3.7.0) nếu cần đường cong mô-men theo tốc độ",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 9,
+   "src": "docs/decisions/09-review.md#L44",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "9.2",
+   "type": "Decision",
+   "label": "Bộ giải: `integrator=\"implicitfast\"`, timestep 1–2 ms, timeconst của `solref` ≥ 2 × timestep. Điều k",
+   "text": "Bộ giải: `integrator=\"implicitfast\"`, timestep 1–2 ms, timeconst của `solref` ≥ 2 × timestep. Điều khiển chạy khoảng 50 Hz",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 9,
+   "src": "docs/decisions/09-review.md#L45",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "9.3",
+   "type": "Decision",
+   "label": "Va chạm: chỉ bàn chân và thân chạm sàn. Bàn chân là hình cầu, ma sát khoảng 0.8–1.0, `condim` 3 (lên",
+   "text": "Va chạm: chỉ bàn chân và thân chạm sàn. Bàn chân là hình cầu, ma sát khoảng 0.8–1.0, `condim` 3 (lên 4 nếu chân bị xoay). Thêm `<exclude>` cho các cặp quanh hông để tránh rung",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 9,
+   "src": "docs/decisions/09-review.md#L46",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "9.4",
+   "type": "Decision",
+   "label": "Ngưỡng kiểm tra 8.5: xuyên sàn < 1 mm. Khớp không vượt giới hạn. Rung đo bằng RMS vận tốc khớp khi đ",
+   "text": "Ngưỡng kiểm tra 8.5: xuyên sàn < 1 mm. Khớp không vượt giới hạn. Rung đo bằng RMS vận tốc khớp khi đứng yên (ngưỡng đặt sau khi đo lần đầu). Thêm kiểm tra: tỉ lệ thời gian actuator bị bão hoà, trượt chân, mô-men khi đứng thấp hơn mức an toàn (khoảng 50% mô-men cực đại)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 9,
+   "src": "docs/decisions/09-review.md#L47",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "9.5",
+   "type": "Decision",
+   "label": "Kiểm tra mô-men tĩnh trong T1.4. Với servo cỡ MG90S và robot 250–350 g, mô-men ở hông/gối khi đứng 3",
+   "text": "Kiểm tra mô-men tĩnh trong T1.4. Với servo cỡ MG90S và robot 250–350 g, mô-men ở hông/gối khi đứng 3 chân khoảng 0.08–0.1 N·m, gần 50% mô-men cực đại, sát giới hạn. Kích thước chân phải chọn theo kiểm tra này",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 9,
+   "src": "docs/decisions/09-review.md#L48",
+   "since": "2026-10-20",
+   "by": "rule:decision-table",
+   "tags": [
+    "accuracy"
+   ]
+  },
+  {
+   "id": "9.6",
+   "type": "Decision",
+   "label": "Kiến trúc web: chỉ một luồng mô phỏng sở hữu `MjData`. Web handler đẩy lệnh vào hàng đợi. Mô phỏng t",
+   "text": "Kiến trúc web: chỉ một luồng mô phỏng sở hữu `MjData`. Web handler đẩy lệnh vào hàng đợi. Mô phỏng tự canh theo thời gian thật (bước tới khi `data.time` bắt kịp đồng hồ) và báo hệ số thời gian thực. Cổng mạng: xem 12.14. Kiểm tra tự động chạy không màn hình và không phụ thuộc đồng hồ thật",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 9,
+   "src": "docs/decisions/09-review.md#L49",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "GD0",
+   "type": "Phase",
+   "label": "Giai đoạn 0. Môi trường mô phỏng (Bước 6)",
+   "src": "docs/decisions/07-trinh-tu-task.md#L24",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD1",
+   "type": "Phase",
+   "label": "Giai đoạn 1. Robot nhện bằng khối hình đơn giản",
+   "src": "docs/decisions/07-trinh-tu-task.md#L31",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD2",
+   "type": "Phase",
+   "label": "Giai đoạn 2. Hình dáng từ Blender",
+   "src": "docs/decisions/07-trinh-tu-task.md#L47",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD3",
+   "type": "Phase",
+   "label": "Giai đoạn 3. Cảm biến cơ bản",
+   "src": "docs/decisions/07-trinh-tu-task.md#L54",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD4",
+   "type": "Phase",
+   "label": "Giai đoạn 4. Học đi (RL) trên sàn phẳng",
+   "src": "docs/decisions/07-trinh-tu-task.md#L60",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD5",
+   "type": "Phase",
+   "label": "Giai đoạn 5. Địa hình và bản đồ",
+   "src": "docs/decisions/07-trinh-tu-task.md#L67",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD6",
+   "type": "Phase",
+   "label": "Giai đoạn 6. Tầng LLM",
+   "src": "docs/decisions/07-trinh-tu-task.md#L75",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD7",
+   "type": "Phase",
+   "label": "Giai đoạn 7. Camera và loa",
+   "src": "docs/decisions/07-trinh-tu-task.md#L81",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "GD8",
+   "type": "Phase",
+   "label": "Giai đoạn 8. Robot thật",
+   "src": "docs/decisions/07-trinh-tu-task.md#L87",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T0.1",
+   "type": "Task",
+   "label": "Tạo project Python 3.12 bằng `uv`, cài `mujoco`.",
+   "text": "Tạo project Python 3.12 bằng `uv`, cài `mujoco`.",
+   "phase": "GD0",
+   "src": "docs/decisions/07-trinh-tu-task.md#L25",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T0.2",
+   "type": "Task",
+   "label": "Cảnh MJCF: sàn, ánh sáng, trọng lực, một khối hộp rơi. Mở bằng `python -m mujoco.viewer` (viewer là ",
+   "text": "Cảnh MJCF: sàn, ánh sáng, trọng lực, một khối hộp rơi. Mở bằng `python -m mujoco.viewer` (viewer là điều kiện phụ, xem Bước 6).",
+   "phase": "GD0",
+   "src": "docs/decisions/07-trinh-tu-task.md#L26",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T0.3",
+   "type": "Task",
+   "label": "Script kiểm tra không cần màn hình: khối hộp rơi và nằm yên trên sàn.",
+   "text": "Script kiểm tra không cần màn hình: khối hộp rơi và nằm yên trên sàn.",
+   "phase": "GD0",
+   "src": "docs/decisions/07-trinh-tu-task.md#L27",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.1",
+   "type": "Task",
+   "label": "Một file tham số duy nhất (theo 5.3): kích thước thân, chiều dài các đoạn chân, giới hạn góc, lực se",
+   "text": "Một file tham số duy nhất (theo 5.3): kích thước thân, chiều dài các đoạn chân, giới hạn góc, lực servo, khối lượng.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L32",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.10",
+   "type": "Task",
+   "label": "Khoá điều khiển và cổng từ xa qua Tailscale (theo 12.12, 12.14). Thêm sau Bước 12.",
+   "text": "Khoá điều khiển và cổng từ xa qua Tailscale (theo 12.12, 12.14). Thêm sau Bước 12.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L41",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.11",
+   "type": "Task",
+   "label": "API chung cho controller và agent, kèm CLI `drive` (theo 14.10, 14.12a). Thêm sau Bước 14.",
+   "text": "API chung cho controller và agent, kèm CLI `drive` (theo 14.10, 14.12a). Thêm sau Bước 14.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L42",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.12",
+   "type": "Task",
+   "label": "Hook kiểm tra khả thi cho Claude Code, Codex và git `pre-commit` (theo 10.6, 11.15). Thêm sau Bước 1",
+   "text": "Hook kiểm tra khả thi cho Claude Code, Codex và git `pre-commit` (theo 10.6, 11.15). Thêm sau Bước 10.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L43",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.2",
+   "type": "Task",
+   "label": "Script sinh MJCF từ file tham số: thân hộp, chân trụ, 4 × 3 khớp.",
+   "text": "Script sinh MJCF từ file tham số: thân hộp, chân trụ, 4 × 3 khớp.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L33",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.3",
+   "type": "Task",
+   "label": "Gắn actuator điều khiển theo vị trí cho 12 khớp. Cử động bằng thanh trượt trong viewer.",
+   "text": "Gắn actuator điều khiển theo vị trí cho 12 khớp. Cử động bằng thanh trượt trong viewer.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L34",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.4",
+   "type": "Task",
+   "label": "Tư thế đứng mặc định. Kiểm tra: robot đứng vững vài giây và không có khớp nào vượt giới hạn.",
+   "text": "Tư thế đứng mặc định. Kiểm tra: robot đứng vững vài giây và không có khớp nào vượt giới hạn.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L35",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.5",
+   "type": "Task",
+   "label": "Chốt câu hỏi mở: chỉ đứng yên, hay bước đi bằng dáng đi lập trình sẵn? Đã chốt: phải di chuyển được ",
+   "text": "~~Chốt câu hỏi mở: chỉ đứng yên, hay bước đi bằng dáng đi lập trình sẵn?~~ Đã chốt: phải di chuyển được → xem Bước 8.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L36",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.6",
+   "type": "Task",
+   "label": "IK cho từng chân và dáng đi bò (creep) hoặc trot. Bắt buộc, theo 8.2.",
+   "text": "IK cho từng chân và dáng đi bò (creep) hoặc trot. Bắt buộc, theo 8.2.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L37",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.7",
+   "type": "Task",
+   "label": "Trang web điều khiển và server (theo 8.6). Chỉ một luồng mô phỏng được ghi vào `MjData`. Trang web c",
+   "text": "Trang web điều khiển và server (theo 8.6). Chỉ một luồng mô phỏng được ghi vào `MjData`. Trang web chỉ gửi lệnh vào hàng đợi. Kiến trúc: xem 9.6 và Bước 12.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L38",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.8",
+   "type": "Task",
+   "label": "Bộ kiểm tra tự động \"mô phỏng chính xác\" (theo 8.5), có ngưỡng số. Chạy không cần màn hình và không ",
+   "text": "Bộ kiểm tra tự động \"mô phỏng chính xác\" (theo 8.5), có ngưỡng số. Chạy không cần màn hình và không phụ thuộc đồng hồ thật.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L39",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T1.9",
+   "type": "Task",
+   "label": "Module record: thư mục lần chạy, replay 2 chế độ, file bug, test hồi quy (theo 11.5, 14.2). Thêm sau",
+   "text": "Module record: thư mục lần chạy, replay 2 chế độ, file bug, test hồi quy (theo 11.5, 14.2). Thêm sau Bước 11.",
+   "phase": "GD1",
+   "src": "docs/decisions/07-trinh-tu-task.md#L40",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T2.1",
+   "type": "Task",
+   "label": "Dựng thân và các đoạn chân trong Blender theo đúng tham số ở T1.1, origin đặt tại trục khớp.",
+   "text": "Dựng thân và các đoạn chân trong Blender theo đúng tham số ở T1.1, origin đặt tại trục khớp.",
+   "phase": "GD2",
+   "src": "docs/decisions/07-trinh-tu-task.md#L48",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T2.2",
+   "type": "Task",
+   "label": "Export mesh từng link, gắn làm visual. Collision giữ khối đơn giản.",
+   "text": "Export mesh từng link, gắn làm visual. Collision giữ khối đơn giản.",
+   "phase": "GD2",
+   "src": "docs/decisions/07-trinh-tu-task.md#L49",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T2.3",
+   "type": "Task",
+   "label": "Kiểm tra mesh khớp đúng vị trí với khung động học, và tổng khối lượng robot không đổi so với Giai đo",
+   "text": "Kiểm tra mesh khớp đúng vị trí với khung động học, và tổng khối lượng robot không đổi so với Giai đoạn 1.",
+   "phase": "GD2",
+   "src": "docs/decisions/07-trinh-tu-task.md#L50",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T3.1",
+   "type": "Task",
+   "label": "Encoder khớp (góc, vận tốc), IMU trên thân, cảm biến chạm ở bàn chân.",
+   "text": "Encoder khớp (góc, vận tốc), IMU trên thân, cảm biến chạm ở bàn chân.",
+   "phase": "GD3",
+   "src": "docs/decisions/07-trinh-tu-task.md#L55",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T3.2",
+   "type": "Task",
+   "label": "Hàm đọc toàn bộ cảm biến thành một vector quan sát.",
+   "text": "Hàm đọc toàn bộ cảm biến thành một vector quan sát.",
+   "phase": "GD3",
+   "src": "docs/decisions/07-trinh-tu-task.md#L56",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T4.1",
+   "type": "Task",
+   "label": "Bọc mô phỏng thành môi trường Gymnasium (`reset`, `step`, reward).",
+   "text": "Bọc mô phỏng thành môi trường Gymnasium (`reset`, `step`, reward).",
+   "phase": "GD4",
+   "src": "docs/decisions/07-trinh-tu-task.md#L61",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T4.2",
+   "type": "Task",
+   "label": "Train PPO trên CPU.",
+   "text": "Train PPO trên CPU.",
+   "phase": "GD4",
+   "src": "docs/decisions/07-trinh-tu-task.md#L62",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T4.3",
+   "type": "Task",
+   "label": "So sánh với dáng đi lập trình sẵn từ T1.6.",
+   "text": "So sánh với dáng đi lập trình sẵn từ T1.6.",
+   "phase": "GD4",
+   "src": "docs/decisions/07-trinh-tu-task.md#L63",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T5.1",
+   "type": "Task",
+   "label": "Chốt câu hỏi mở: có bò tường và trần không?",
+   "text": "Chốt câu hỏi mở: có bò tường và trần không?",
+   "phase": "GD5",
+   "src": "docs/decisions/07-trinh-tu-task.md#L68",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T5.2",
+   "type": "Task",
+   "label": "Địa hình: dốc, bậc, mặt cong, mặt gấp khúc, vật cản (heightfield và mesh).",
+   "text": "Địa hình: dốc, bậc, mặt cong, mặt gấp khúc, vật cản (heightfield và mesh).",
+   "phase": "GD5",
+   "src": "docs/decisions/07-trinh-tu-task.md#L69",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T5.3",
+   "type": "Task",
+   "label": "Cảm biến bản đồ: camera độ sâu hoặc dãy tia đo khoảng cách (kiểu lidar).",
+   "text": "Cảm biến bản đồ: camera độ sâu hoặc dãy tia đo khoảng cách (kiểu lidar).",
+   "phase": "GD5",
+   "src": "docs/decisions/07-trinh-tu-task.md#L70",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T5.4",
+   "type": "Task",
+   "label": "Dựng bản đồ cục bộ, đưa vào quan sát của policy, train lại trên địa hình.",
+   "text": "Dựng bản đồ cục bộ, đưa vào quan sát của policy, train lại trên địa hình.",
+   "phase": "GD5",
+   "src": "docs/decisions/07-trinh-tu-task.md#L71",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T6.1",
+   "type": "Task",
+   "label": "MCP server mỏng: đọc trạng thái, ra lệnh \"đi tới\", \"quay\", \"dừng\".",
+   "text": "MCP server mỏng: đọc trạng thái, ra lệnh \"đi tới\", \"quay\", \"dừng\".",
+   "phase": "GD6",
+   "src": "docs/decisions/07-trinh-tu-task.md#L76",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T6.2",
+   "type": "Task",
+   "label": "LLM nhận lệnh bằng lời, gọi tool, policy RL thực thi.",
+   "text": "LLM nhận lệnh bằng lời, gọi tool, policy RL thực thi.",
+   "phase": "GD6",
+   "src": "docs/decisions/07-trinh-tu-task.md#L77",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T7.1",
+   "type": "Task",
+   "label": "Camera RGB trong sim, đưa ảnh cho LLM có thị giác.",
+   "text": "Camera RGB trong sim, đưa ảnh cho LLM có thị giác.",
+   "phase": "GD7",
+   "src": "docs/decisions/07-trinh-tu-task.md#L82",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T7.2",
+   "type": "Task",
+   "label": "Nhận giọng nói và phát giọng nói (STT/TTS) chạy trên máy Mac.",
+   "text": "Nhận giọng nói và phát giọng nói (STT/TTS) chạy trên máy Mac.",
+   "phase": "GD7",
+   "src": "docs/decisions/07-trinh-tu-task.md#L83",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T8.1",
+   "type": "Task",
+   "label": "Chọn servo, vi điều khiển, pin, cảm biến theo thông số đã dùng trong sim.",
+   "text": "Chọn servo, vi điều khiển, pin, cảm biến theo thông số đã dùng trong sim.",
+   "phase": "GD8",
+   "src": "docs/decisions/07-trinh-tu-task.md#L88",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T8.2",
+   "type": "Task",
+   "label": "In 3D, lắp ráp, hiệu chỉnh (calibration) cho khớp với sim.",
+   "text": "In 3D, lắp ráp, hiệu chỉnh (calibration) cho khớp với sim.",
+   "phase": "GD8",
+   "src": "docs/decisions/07-trinh-tu-task.md#L89",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "T8.3",
+   "type": "Task",
+   "label": "Chuyển policy từ sim sang robot thật (sim2real).",
+   "text": "Chuyển policy từ sim sang robot thật (sim2real).",
+   "phase": "GD8",
+   "src": "docs/decisions/07-trinh-tu-task.md#L90",
+   "by": "rule:task-list"
+  },
+  {
+   "id": "check:actuator-saturation",
+   "type": "Check",
+   "label": "Tỉ lệ thời gian servo bão hoà dưới ngưỡng",
+   "src": "9.4",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 2
+  },
+  {
+   "id": "check:box-fall",
+   "type": "Check",
+   "label": "Khối hộp rơi và nằm yên trên sàn (Giai đoạn 0)",
+   "src": "6.2",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 0
+  },
+  {
+   "id": "check:foot-slip",
+   "type": "Check",
+   "label": "Chân không trượt khi đứng",
+   "src": "9.4",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 2
+  },
+  {
+   "id": "check:ik-reach",
+   "type": "Check",
+   "label": "Điểm đặt chân của dáng đi nằm trong tầm với IK",
+   "src": "10-harness-agent.md",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "check:jitter",
+   "type": "Check",
+   "label": "RMS vận tốc khớp khi đứng yên dưới ngưỡng",
+   "src": "9.4",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 2
+  },
+  {
+   "id": "check:joint-limits",
+   "type": "Check",
+   "label": "Không khớp nào vượt giới hạn",
+   "src": "9.4",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 2
+  },
+  {
+   "id": "check:kb-valid",
+   "type": "Check",
+   "label": "Knowledge graph đúng schema, không cạnh treo, graph.json không cũ",
+   "src": "10.8",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "check:key-auth",
+   "type": "Check",
+   "label": "Cổng từ xa từ chối khi thiếu hoặc sai token; token không lọt vào URL/log",
+   "src": "12.14",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 2
+  },
+  {
+   "id": "check:mass-budget",
+   "type": "Check",
+   "label": "Tổng khối lượng trong ngân sách, không body nào thiếu khối lượng",
+   "src": "10-harness-agent.md",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "check:mjcf-compiles",
+   "type": "Check",
+   "label": "Model biên dịch được, MuJoCo tự kiểm khối lượng và quán tính",
+   "src": "10-harness-agent.md",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "check:params-valid",
+   "type": "Check",
+   "label": "Tham số hợp lệ: kích thước dương, góc trong hành trình servo",
+   "src": "10-harness-agent.md",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "check:penetration",
+   "type": "Check",
+   "label": "Xuyên sàn < 1 mm khi đứng yên",
+   "src": "9.4",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 2
+  },
+  {
+   "id": "check:replay-determinism",
+   "type": "Check",
+   "label": "Replay chính xác khớp checkpoint từng bit",
+   "src": "11.7",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 2
+  },
+  {
+   "id": "check:self-collision",
+   "type": "Check",
+   "label": "Tư thế mặc định chỉ có chân chạm sàn",
+   "src": "9.3",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "check:solver-settings",
+   "type": "Check",
+   "label": "Timestep, integrator, solref đúng 9.2",
+   "src": "9.2",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "check:static-torque",
+   "type": "Check",
+   "label": "Mô-men tĩnh từng khớp ≤ 50% mô-men cực đại (mj_inverse)",
+   "src": "9.5",
+   "since": "2026-10-20",
+   "by": "curated",
+   "level": 1
+  },
+  {
+   "id": "comp:agent-api",
+   "type": "Component",
+   "label": "API chung cho controller và agent: lệnh, trạng thái, ảnh chụp",
+   "src": "14.10",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:bug-tracker",
+   "type": "Component",
+   "label": "File bug BUG-NNN.md kèm thư mục lần chạy và test hồi quy",
+   "src": "11.8",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:cli",
+   "type": "Component",
+   "label": "CLI drive cho agent: --host, --key",
+   "src": "14.12a",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:controller-ui",
+   "type": "Component",
+   "label": "Trang controller: joystick cảm ứng và phím WASD, nút dừng, nút Báo bug",
+   "src": "14.7",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:feasibility-gate",
+   "type": "Component",
+   "label": "Cổng khả thi trong code: chạy kiểm tra mức 1/2 trước khi mô phỏng",
+   "src": "10.5",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:gait",
+   "type": "Component",
+   "label": "IK 3 khớp và bộ tạo dáng đi",
+   "src": "8.3",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:kb",
+   "type": "Component",
+   "label": "Knowledge graph của dự án",
+   "src": "10.8",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:key-store",
+   "type": "Component",
+   "label": "Khoá điều khiển: lưu sha256, ngoài git, thu hồi được",
+   "src": "12.12",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:mjcf-builder",
+   "type": "Component",
+   "label": "Dựng model MuJoCo từ tham số bằng MjSpec",
+   "src": "3.2",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:params",
+   "type": "Component",
+   "label": "File tham số duy nhất: kích thước, giới hạn, khối lượng, tư thế đứng",
+   "src": "5.3",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:project-env",
+   "type": "Component",
+   "label": "Môi trường uv + Python 3.12, ghim phiên bản mujoco",
+   "src": "6.2",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:recorder",
+   "type": "Component",
+   "label": "Ghi lần chạy: manifest, inputs, checkpoints, trace, events",
+   "src": "11.5",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:replay",
+   "type": "Component",
+   "label": "Replay 2 chế độ: chính xác và mô phỏng lại",
+   "src": "14.2",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:servo-catalog",
+   "type": "Component",
+   "label": "Danh mục servo (MG90S, SG90, MG996R…)",
+   "src": "12.7",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:sim-loop",
+   "type": "Component",
+   "label": "Vòng mô phỏng: một luồng sở hữu MjData, hàng đợi lệnh, canh thời gian thật",
+   "src": "9.6",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:viewer-tool",
+   "type": "Component",
+   "label": "Viewer MuJoCo dùng riêng: mở model hoặc xem lại lần chạy",
+   "src": "14.1",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "comp:web-server",
+   "type": "Component",
+   "label": "Server: 2 cổng (127.0.0.1 và Tailscale), gửi khung hình JPEG, quyền lái",
+   "src": "12.5",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "file:.claude/agents/",
+   "type": "File",
+   "label": ".claude/agents/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:.claude/agents/determinism-verifier.md",
+   "type": "File",
+   "label": ".claude/agents/determinism-verifier.md",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:.claude/agents/physics-verifier.md",
+   "type": "File",
+   "label": ".claude/agents/physics-verifier.md",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:.claude/agents/security-verifier.md",
+   "type": "File",
+   "label": ".claude/agents/security-verifier.md",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:.claude/settings.json",
+   "type": "File",
+   "label": ".claude/settings.json",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:.claude/skills/",
+   "type": "File",
+   "label": ".claude/skills/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:.codex/hooks.json",
+   "type": "File",
+   "label": ".codex/hooks.json",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:.githooks/",
+   "type": "File",
+   "label": ".githooks/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:AGENTS.md",
+   "type": "File",
+   "label": "AGENTS.md",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:CLAUDE.md",
+   "type": "File",
+   "label": "CLAUDE.md",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/bugs/",
+   "type": "File",
+   "label": "docs/bugs/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/decisions/",
+   "type": "File",
+   "label": "docs/decisions/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/harness/",
+   "type": "File",
+   "label": "docs/harness/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/harness/lessons.md",
+   "type": "File",
+   "label": "docs/harness/lessons.md",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/harness/task-graph.md",
+   "type": "File",
+   "label": "docs/harness/task-graph.md",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/kb/",
+   "type": "File",
+   "label": "docs/kb/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:harness.toml",
+   "type": "File",
+   "label": "harness.toml",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:pyproject.toml",
+   "type": "File",
+   "label": "pyproject.toml",
+   "src": "6.2",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/checks/",
+   "type": "File",
+   "label": "spider/checks/",
+   "src": "10.5",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/cli.py",
+   "type": "File",
+   "label": "spider/cli.py",
+   "src": "14.12a",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/gait/",
+   "type": "File",
+   "label": "spider/gait/",
+   "src": "8.3",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/model/",
+   "type": "File",
+   "label": "spider/model/",
+   "src": "5.3",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/record/",
+   "type": "File",
+   "label": "spider/record/",
+   "src": "11.5",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/server/",
+   "type": "File",
+   "label": "spider/server/",
+   "src": "12.5",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/sim/",
+   "type": "File",
+   "label": "spider/sim/",
+   "src": "9.6",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_checks.py",
+   "type": "File",
+   "label": "tests/test_checks.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_gait.py",
+   "type": "File",
+   "label": "tests/test_gait.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_record.py",
+   "type": "File",
+   "label": "tests/test_record.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_server.py",
+   "type": "File",
+   "label": "tests/test_server.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tools/",
+   "type": "File",
+   "label": "tools/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tools/kb.py",
+   "type": "File",
+   "label": "tools/kb.py",
+   "src": "10.8",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:web/",
+   "type": "File",
+   "label": "web/",
+   "src": "14.7",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "harness:guardrails",
+   "type": "HarnessComponent",
+   "label": "Luật bắt buộc. Bắt đầu ngắn; mỗi luật mới phải kèm bằng chứng (10.10)",
+   "mutability": "evolvable",
+   "status": "active",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "harness:memory",
+   "type": "HarnessComponent",
+   "label": "Quyết định, knowledge graph, bài học, bug. Bài học bắt đầu rỗng",
+   "mutability": "evolvable",
+   "status": "active",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "harness:plugins",
+   "type": "HarnessComponent",
+   "label": "Hooks: Claude Code, Codex, git pre-commit",
+   "mutability": "evolvable",
+   "status": "active",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "harness:scripts",
+   "type": "HarnessComponent",
+   "label": "Script tất định: kb.py, sau này là bộ kiểm tra khả thi, replay",
+   "mutability": "evolvable",
+   "status": "active",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "harness:skills",
+   "type": "HarnessComponent",
+   "label": "Quy trình dùng lại được. Chưa có; thêm khi một quy trình lặp lại từ 3 lần",
+   "mutability": "evolvable",
+   "status": "empty",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "harness:subagents",
+   "type": "HarnessComponent",
+   "label": "Vai trò agent và cách chia việc",
+   "mutability": "evolvable",
+   "status": "active",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "harness:system_prompt",
+   "type": "HarnessComponent",
+   "label": "Dự án là gì, stack, quy trình làm việc. CLAUDE.md chỉ import AGENTS.md",
+   "mutability": "evolvable",
+   "status": "active",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "harness:tool_guidance",
+   "type": "HarnessComponent",
+   "label": "Cách dùng các lệnh của repo",
+   "mutability": "evolvable",
+   "status": "active",
+   "src": "harness.toml",
+   "by": "rule:harness"
+  },
+  {
+   "id": "q:git-remote",
+   "type": "Question",
+   "label": "Có đẩy repo lên remote (GitHub…) không?",
+   "src": "11-record-bug-trace.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "q:wall-climb",
+   "type": "Question",
+   "label": "Robot có cần bò trên tường và trần không?",
+   "src": "04-muc-tieu.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:checks-worker",
+   "type": "AgentRole",
+   "label": "Làm bộ kiểm tra khả thi và script hook",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:coordinator",
+   "type": "AgentRole",
+   "label": "Điều phối: làm phần tuần tự, giữ hợp đồng, gộp kết quả, ghi quyết định",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:determinism-verifier",
+   "type": "AgentRole",
+   "label": "Kiểm tái hiện ở context riêng: chạy lại có giống hệt không?",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:gait-worker",
+   "type": "AgentRole",
+   "label": "Làm IK và dáng đi",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:human",
+   "type": "AgentRole",
+   "label": "Người dùng: cổng duyệt cho việc khó đảo ngược",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:physics-verifier",
+   "type": "AgentRole",
+   "label": "Kiểm vật lý ở context riêng: số liệu có hợp lý không?",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:record-worker",
+   "type": "AgentRole",
+   "label": "Làm record, replay, bug",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:security-verifier",
+   "type": "AgentRole",
+   "label": "Kiểm bảo mật ở context riêng: có lách được khoá không?",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:server-worker",
+   "type": "AgentRole",
+   "label": "Làm server, controller, khoá, API agent, CLI",
+   "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  }
+ ],
+ "edges": [
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L83",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L84",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L29",
+   "to": "harness:system_prompt"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L30",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L30",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L31",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L32",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L33",
+   "to": "comp:kb"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L33",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L82",
+   "to": "harness:skills"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "10.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/10-harness-agent.md#L82",
+   "to": "harness:subagents"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L34",
+   "to": "comp:bug-tracker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L34",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L35",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.12",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L36",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "11.15",
+   "rel": "CITES",
+   "src": "docs/decisions/11-record-bug-trace.md#L98",
+   "to": "11.14"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.15",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L98",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.15",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L98",
+   "to": "harness:system_prompt"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.16",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L99",
+   "to": "comp:bug-tracker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.16",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L99",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L29",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L30",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L30",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L30",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L31",
+   "to": "comp:replay"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L32",
+   "to": "comp:bug-tracker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L33",
+   "to": "comp:bug-tracker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L33",
+   "to": "comp:replay"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "11.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/11-record-bug-trace.md#L33",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L36",
+   "to": "comp:key-store"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L37",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.12",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L38",
+   "to": "comp:key-store"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.13",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L39",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.13",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L39",
+   "to": "comp:key-store"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.14",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L40",
+   "to": "check:key-auth"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.14",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L40",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.15",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L41",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.15",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L41",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.16",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L42",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.17",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L43",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L12",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L12",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L13",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "12.6",
+   "rel": "CITES",
+   "src": "docs/decisions/12-controller-web.md#L14",
+   "to": "12.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L15",
+   "to": "comp:servo-catalog"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L16",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L16",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "12.9",
+   "rel": "CITES",
+   "src": "docs/decisions/12-controller-web.md#L17",
+   "to": "12.10"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "12.9",
+   "rel": "CITES",
+   "src": "docs/decisions/12-controller-web.md#L17",
+   "to": "12.11"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "12.9",
+   "rel": "CITES",
+   "src": "docs/decisions/12-controller-web.md#L17",
+   "to": "12.12"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "12.9",
+   "rel": "CITES",
+   "src": "docs/decisions/12-controller-web.md#L17",
+   "to": "12.13"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "12.9",
+   "rel": "CITES",
+   "src": "docs/decisions/12-controller-web.md#L17",
+   "to": "12.14"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "12.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/12-controller-web.md#L17",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.10"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.11"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.12"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.15"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.16"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.6"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.7"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.8"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "11.9"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.12"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.13"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.14"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.15"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.16"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.17"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.4"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.6"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.7"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.8"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "12.9"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "3.2"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "4.7"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "6.2"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "7.2"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "7.3"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "8.3"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "8.4"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "9.1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "9.2"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "9.3"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "9.4"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "9.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "13.1",
+   "rel": "CITES",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L9",
+   "to": "9.6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "13.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L10",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "13.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L10",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "13.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L10",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "13.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L11",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "13.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/13-duyet-va-vat-ly.md#L12",
+   "to": "comp:params"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "14.1",
+   "rel": "CITES",
+   "src": "docs/decisions/14-builder-check.md#L11",
+   "to": "9.6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L11",
+   "to": "comp:viewer-tool"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L31",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L31",
+   "to": "comp:cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L32",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "14.12",
+   "rel": "CITES",
+   "src": "docs/decisions/14-builder-check.md#L33",
+   "to": "12.11"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "14.12",
+   "rel": "CITES",
+   "src": "docs/decisions/14-builder-check.md#L33",
+   "to": "12.12"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "14.12",
+   "rel": "CITES",
+   "src": "docs/decisions/14-builder-check.md#L33",
+   "to": "12.16"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.12",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L33",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.12a",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L34",
+   "to": "comp:cli"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.12b",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L35",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.13",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L36",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.13",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L36",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.14",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L37",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "14.2",
+   "rel": "CITES",
+   "src": "docs/decisions/14-builder-check.md#L12",
+   "to": "11.9"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L12",
+   "to": "comp:replay"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L13",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L13",
+   "to": "comp:replay"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L15",
+   "to": "check:static-torque"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L15",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L27",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "14.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/14-builder-check.md#L28",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "14.8",
+   "rel": "CITES",
+   "src": "docs/decisions/14-builder-check.md#L29",
+   "to": "14.9"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L18",
+   "to": "harness:subagents"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L18",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L19",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L19",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L10",
+   "to": "comp:kb"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L11",
+   "to": "comp:kb"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L12",
+   "to": "comp:kb"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:scripts"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:skills"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:subagents"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:system_prompt"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L13",
+   "to": "harness:tool_guidance"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L14",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L14",
+   "to": "harness:system_prompt"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L15",
+   "to": "comp:kb"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L15",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L16",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L16",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "harness:subagents"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:checks-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:determinism-verifier"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:gait-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:human"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:physics-verifier"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:record-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:security-verifier"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "15.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/15-kb-harness-agents.md#L17",
+   "to": "role:server-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "3.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/03-phan-cung-may.md#L31",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "3.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/03-phan-cung-may.md#L31",
+   "to": "comp:params"
+  },
+  {
+   "by": "rule:supersedes",
+   "conf": 1.0,
+   "from": "3.2",
+   "rel": "SUPERSEDES",
+   "src": "docs/decisions/03-phan-cung-may.md#L30",
+   "to": "3.1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "4.5",
+   "rel": "CITES",
+   "src": "docs/decisions/04-muc-tieu.md#L13",
+   "to": "5.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "5.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/05-pham-vi-minimal.md#L11",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "6.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/06-moi-truong-mo-phong.md#L10",
+   "to": "check:box-fall"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "6.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/06-moi-truong-mo-phong.md#L10",
+   "to": "comp:project-env"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "7.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/07-trinh-tu-task.md#L11",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "8.3",
+   "rel": "CITES",
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L11",
+   "to": "5.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "8.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L11",
+   "to": "comp:gait"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "8.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L13",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "8.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/08-dau-ra-phase-1.md#L14",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L44",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L44",
+   "to": "comp:servo-catalog"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L45",
+   "to": "check:solver-settings"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L45",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L45",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L46",
+   "to": "check:self-collision"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L46",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "9.4",
+   "rel": "CITES",
+   "src": "docs/decisions/09-review.md#L47",
+   "to": "8.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L47",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L48",
+   "to": "check:static-torque"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L48",
+   "to": "comp:params"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "9.6",
+   "rel": "CITES",
+   "src": "docs/decisions/09-review.md#L49",
+   "to": "12.14"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L49",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "9.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/09-review.md#L49",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T0.1",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:project-env"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T0.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L25",
+   "to": "GD0"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T0.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T0.2",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:viewer-tool"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T0.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L26",
+   "to": "GD0"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T0.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T0.3",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:box-fall"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T0.3",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L27",
+   "to": "GD0"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.1",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L32",
+   "to": "5.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.1",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.1",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.1",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:servo-catalog"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L32",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.10",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L41",
+   "to": "12.12"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.10",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L41",
+   "to": "12.14"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.10",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.10",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:key-auth"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.10",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:key-store"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.10",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L41",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.11",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L42",
+   "to": "14.10"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.11",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L42",
+   "to": "14.12a"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.11",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.11",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:agent-api"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.11",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:cli"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.11",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L42",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.12",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L43",
+   "to": "10.6"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.12",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L43",
+   "to": "11.15"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.12",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.12",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.12",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L43",
+   "to": "GD1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.2",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L33",
+   "to": "GD1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.3",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.3",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L34",
+   "to": "GD1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.4",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.4",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:static-torque"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.4",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.4",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L35",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.5",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L36",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.6",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L37",
+   "to": "8.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.6",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.6",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:ik-reach"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.6",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:gait"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.6",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L37",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.7",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L38",
+   "to": "8.6"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.7",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L38",
+   "to": "9.6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.7",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.7",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:controller-ui"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.7",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.7",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L38",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.8",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L39",
+   "to": "8.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:actuator-saturation"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:foot-slip"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:jitter"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:joint-limits"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:mass-budget"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:mjcf-compiles"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:params-valid"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:penetration"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:self-collision"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:solver-settings"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.8",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.8",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L39",
+   "to": "GD1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.9",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L40",
+   "to": "11.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "T1.9",
+   "rel": "CITES",
+   "src": "docs/decisions/07-trinh-tu-task.md#L40",
+   "to": "14.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.9",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.9",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "check:replay-determinism"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.9",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:bug-tracker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.9",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T1.9",
+   "rel": "IMPLEMENTS",
+   "src": "docs/decisions/07-trinh-tu-task.md",
+   "to": "comp:replay"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T1.9",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L40",
+   "to": "GD1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T2.1",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T2.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L48",
+   "to": "GD2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T2.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T2.1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T2.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L49",
+   "to": "GD2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T2.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T2.2"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T2.3",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L50",
+   "to": "GD2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T3.1",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T3.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L55",
+   "to": "GD3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T3.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T3.1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T3.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L56",
+   "to": "GD3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T4.1",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T3.2"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T4.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L61",
+   "to": "GD4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T4.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T4.1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T4.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L62",
+   "to": "GD4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T4.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T4.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T4.2"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T4.3",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L63",
+   "to": "GD4"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T5.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L68",
+   "to": "GD5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T5.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T4.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T5.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T5.1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T5.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L69",
+   "to": "GD5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T5.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T3.2"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T5.3",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L70",
+   "to": "GD5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T5.4",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T5.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T5.4",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T5.3"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T5.4",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L71",
+   "to": "GD5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T6.1",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.11"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T6.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L76",
+   "to": "GD6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T6.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T4.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T6.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T6.1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T6.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L77",
+   "to": "GD6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T7.1",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T6.2"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T7.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L82",
+   "to": "GD7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T7.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T6.2"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T7.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L83",
+   "to": "GD7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T8.1",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.8"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T8.1",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L88",
+   "to": "GD8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T8.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T2.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T8.2",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T8.1"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T8.2",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L89",
+   "to": "GD8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T8.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T4.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "T8.3",
+   "rel": "DEPENDS_ON",
+   "src": "docs/harness/task-graph.md",
+   "to": "T8.2"
+  },
+  {
+   "by": "rule:task-list",
+   "conf": 1.0,
+   "from": "T8.3",
+   "rel": "PART_OF",
+   "src": "docs/decisions/07-trinh-tu-task.md#L90",
+   "to": "GD8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:actuator-saturation",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:gait"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:actuator-saturation",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:servo-catalog"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:actuator-saturation",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:box-fall",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:project-env"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:box-fall",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "6.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:foot-slip",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:foot-slip",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:ik-reach",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:gait"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:ik-reach",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:ik-reach",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "8.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:jitter",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:jitter",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:servo-catalog"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:jitter",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "8.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:jitter",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:joint-limits",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:gait"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:joint-limits",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "8.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:joint-limits",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:kb-valid",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:kb"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:kb-valid",
+   "rel": "STORED_IN",
+   "src": "10.8",
+   "to": "file:tools/kb.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:kb-valid",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "10.8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:kb-valid",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "15.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:kb-valid",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "15.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:key-auth",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:key-store"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:key-auth",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:web-server"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:key-auth",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "12.10"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:key-auth",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "12.12"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:key-auth",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "12.13"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:key-auth",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "12.14"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:mass-budget",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:mass-budget",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:mass-budget",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "8.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:mjcf-compiles",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:mjcf-compiles",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "13.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:mjcf-compiles",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "3.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:params-valid",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:params-valid",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "5.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:penetration",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:penetration",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "8.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:penetration",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:replay-determinism",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:recorder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:replay-determinism",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:replay"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:replay-determinism",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:sim-loop"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:replay-determinism",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "11.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:replay-determinism",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "11.7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:self-collision",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:self-collision",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:solver-settings",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:solver-settings",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:static-torque",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:params"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:static-torque",
+   "rel": "CHECKS",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "comp:servo-catalog"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:static-torque",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "14.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:static-torque",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "8.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:static-torque",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "9.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:agent-api",
+   "rel": "STORED_IN",
+   "src": "14.10",
+   "to": "file:spider/server/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:bug-tracker",
+   "rel": "STORED_IN",
+   "src": "11.8",
+   "to": "file:docs/bugs/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:cli",
+   "rel": "STORED_IN",
+   "src": "14.12a",
+   "to": "file:spider/cli.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:controller-ui",
+   "rel": "STORED_IN",
+   "src": "14.7",
+   "to": "file:web/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:feasibility-gate",
+   "rel": "STORED_IN",
+   "src": "10.5",
+   "to": "file:spider/checks/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:gait",
+   "rel": "STORED_IN",
+   "src": "8.3",
+   "to": "file:spider/gait/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:kb",
+   "rel": "STORED_IN",
+   "src": "10.8",
+   "to": "file:docs/kb/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:key-store",
+   "rel": "STORED_IN",
+   "src": "12.12",
+   "to": "file:spider/server/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:mjcf-builder",
+   "rel": "STORED_IN",
+   "src": "3.2",
+   "to": "file:spider/model/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:params",
+   "rel": "STORED_IN",
+   "src": "5.3",
+   "to": "file:spider/model/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:project-env",
+   "rel": "STORED_IN",
+   "src": "6.2",
+   "to": "file:pyproject.toml"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:recorder",
+   "rel": "STORED_IN",
+   "src": "11.5",
+   "to": "file:spider/record/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:replay",
+   "rel": "STORED_IN",
+   "src": "14.2",
+   "to": "file:spider/record/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:servo-catalog",
+   "rel": "STORED_IN",
+   "src": "12.7",
+   "to": "file:spider/model/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:sim-loop",
+   "rel": "STORED_IN",
+   "src": "9.6",
+   "to": "file:spider/sim/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:viewer-tool",
+   "rel": "STORED_IN",
+   "src": "14.1",
+   "to": "file:spider/sim/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "comp:web-server",
+   "rel": "STORED_IN",
+   "src": "12.5",
+   "to": "file:spider/server/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:guardrails",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:AGENTS.md"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:memory",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:docs/bugs/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:memory",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:docs/decisions/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:memory",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:docs/harness/lessons.md"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:memory",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:docs/kb/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:plugins",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:.claude/settings.json"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:plugins",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:.codex/hooks.json"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:plugins",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:.githooks/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:scripts",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:tools/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:skills",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:.claude/skills/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:subagents",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:.claude/agents/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:subagents",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:docs/harness/task-graph.md"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:system_prompt",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:AGENTS.md"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:system_prompt",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:CLAUDE.md"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:tool_guidance",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
+   "to": "file:AGENTS.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "q:wall-climb",
+   "rel": "BLOCKS",
+   "src": "docs/decisions/README.md",
+   "to": "T5.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:checks-worker",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.12"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:checks-worker",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:checks-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/checks/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:checks-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_checks.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:.claude/agents/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:.claude/settings.json"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:.codex/hooks.json"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:.githooks/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:AGENTS.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:CLAUDE.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/decisions/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/harness/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/kb/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:harness.toml"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:pyproject.toml"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/model/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/sim/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tools/kb.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:determinism-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:determinism-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.9"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:determinism-verifier",
+   "rel": "STORED_IN",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:.claude/agents/determinism-verifier.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:gait-worker",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:gait-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/gait/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:gait-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_gait.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:human",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.10"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:human",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.12"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:physics-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:physics-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.6"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:physics-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:physics-verifier",
+   "rel": "STORED_IN",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:.claude/agents/physics-verifier.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:record-worker",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.9"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:record-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/bugs/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:record-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/record/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:record-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_record.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:security-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.10"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:security-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.11"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:security-verifier",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:security-verifier",
+   "rel": "STORED_IN",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:.claude/agents/security-verifier.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:server-worker",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.10"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:server-worker",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.11"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:server-worker",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:server-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/cli.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:server-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/server/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:server-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_server.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:server-worker",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:web/"
+  }
+ ]
+}

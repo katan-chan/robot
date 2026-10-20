@@ -37,8 +37,12 @@ Ngày: 2026-10-20.
 - T1.6 IK cho từng chân và dáng đi bò (creep) hoặc trot. Bắt buộc, theo 8.2.
 - T1.7 Trang web điều khiển và server (theo 8.6). Chỉ một luồng mô phỏng được ghi vào `MjData`. Trang web chỉ gửi lệnh vào hàng đợi. Kiến trúc: xem 9.6 và Bước 12.
 - T1.8 Bộ kiểm tra tự động "mô phỏng chính xác" (theo 8.5), có ngưỡng số. Chạy không cần màn hình và không phụ thuộc đồng hồ thật.
+- T1.9 Module record: thư mục lần chạy, replay 2 chế độ, file bug, test hồi quy (theo 11.5, 14.2). Thêm sau Bước 11.
+- T1.10 Khoá điều khiển và cổng từ xa qua Tailscale (theo 12.12, 12.14). Thêm sau Bước 12.
+- T1.11 API chung cho controller và agent, kèm CLI `drive` (theo 14.10, 14.12a). Thêm sau Bước 14.
+- T1.12 Hook kiểm tra khả thi cho Claude Code, Codex và git `pre-commit` (theo 10.6, 11.15). Thêm sau Bước 10.
 
-**Xong khi:** robot di chuyển được trên sàn phẳng khi điều khiển từ trang web, và bộ kiểm tra T1.8 chạy qua.
+**Xong khi:** đạt đủ tiêu chí 14.8: test tự động qua (gồm T1.8), thử tay lái từ điện thoại qua Tailscale, và một agent lái được robot qua API.
 
 ### Giai đoạn 2. Hình dáng từ Blender
 - T2.1 Dựng thân và các đoạn chân trong Blender theo đúng tham số ở T1.1, origin đặt tại trục khớp.
