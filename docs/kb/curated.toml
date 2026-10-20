@@ -176,6 +176,8 @@ REVIEWS = "docs/harness/task-graph.md"
 "15.9"   = ["harness:subagents", "role:coordinator", "role:gait-worker", "role:checks-worker", "role:record-worker", "role:server-worker", "role:physics-verifier", "role:determinism-verifier", "role:security-verifier", "role:human"]
 "15.10"  = ["harness:subagents", "role:coordinator"]
 "15.11"  = ["harness:memory", "harness:guardrails"]
+"16.2"   = ["role:human"]
+"16.4"   = ["comp:viewer-tool", "comp:mjcf-builder"]
 
 [edges.VERIFIES]
 "check:box-fall"           = ["6.2"]
@@ -277,7 +279,7 @@ REVIEWS = "docs/harness/task-graph.md"
 "role:physics-verifier"     = ["T1.4", "T1.6", "T1.8"]
 "role:determinism-verifier" = ["T1.4", "T1.9"]
 "role:security-verifier"    = ["T1.7", "T1.10", "T1.11"]
-"role:human"                = ["T1.10", "T1.12"]
+"role:human"                = ["T1.3", "T1.10", "T1.12"]
 
 # Một người ghi mỗi file/thư mục (task-graph.md, luật 2).
 [edges.WRITES]

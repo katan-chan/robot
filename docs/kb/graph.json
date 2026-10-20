@@ -1042,6 +1042,58 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "16.1",
+   "type": "Decision",
+   "label": "Bắt đầu viết kế hoạch chi tiết cho Phase 1",
+   "text": "Bắt đầu viết kế hoạch chi tiết cho Phase 1",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 16,
+   "src": "docs/decisions/16-gate-dau-tien.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "16.2",
+   "type": "Decision",
+   "label": "**Cổng G1**: người dùng xem được model 3D của con nhện và các thành phần của nó, trước khi làm tiếp",
+   "text": "**Cổng G1**: người dùng xem được model 3D của con nhện và các thành phần của nó, trước khi làm tiếp",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 16,
+   "src": "docs/decisions/16-gate-dau-tien.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "16.3",
+   "type": "Decision",
+   "label": "G1 đặt ngay sau T1.3 (đã có tham số, model, servo). Việc trước G1: T0.1–T0.3, T1.1–T1.3. Chưa tách w",
+   "text": "G1 đặt ngay sau T1.3 (đã có tham số, model, servo). Việc trước G1: T0.1–T0.3, T1.1–T1.3. Chưa tách worker trước G1",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 16,
+   "src": "docs/decisions/16-gate-dau-tien.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "16.4",
+   "type": "Decision",
+   "label": "Cách xem ở G1: viewer MuJoCo (công cụ riêng 14.1) mở model, các khớp có tên và quay thử được. Kèm mộ",
+   "text": "Cách xem ở G1: viewer MuJoCo (công cụ riêng 14.1) mở model, các khớp có tên và quay thử được. Kèm một bảng thành phần do script in ra: thân, từng đoạn chân, khớp, servo, khối lượng, kích thước, đọc từ model MuJoCo (13.2). Kèm ảnh chụp model từ vài góc",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 16,
+   "src": "docs/decisions/16-gate-dau-tien.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "3.1",
    "type": "Decision",
    "label": "Stack: Blender 5.2 → MJCF → MuJoCo + Python 3.12 (`uv`)",
@@ -3676,6 +3728,38 @@
   {
    "by": "curated",
    "conf": 0.9,
+   "from": "16.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/16-gate-dau-tien.md#L10",
+   "to": "role:human"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "16.4",
+   "rel": "CITES",
+   "src": "docs/decisions/16-gate-dau-tien.md#L12",
+   "to": "14.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "16.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/16-gate-dau-tien.md#L12",
+   "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "16.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/16-gate-dau-tien.md#L12",
+   "to": "comp:viewer-tool"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
    "from": "3.2",
    "rel": "CONSTRAINS",
    "src": "docs/decisions/03-phan-cung-may.md#L31",
@@ -5768,6 +5852,14 @@
    "rel": "REVIEWS",
    "src": "docs/harness/task-graph.md",
    "to": "T1.12"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:human",
+   "rel": "REVIEWS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.3"
   },
   {
    "by": "curated",
