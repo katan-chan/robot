@@ -1094,6 +1094,19 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "16.5",
+   "type": "Decision",
+   "label": "Môi trường: Python 3.12 (`.python-version`), `mujoco==3.16.0` ghim chính xác trong `pyproject.toml`,",
+   "text": "Môi trường: Python 3.12 (`.python-version`), `mujoco==3.16.0` ghim chính xác trong `pyproject.toml`, khoá bằng `uv.lock` (commit 07eb147). Đổi phiên bản = cổng người dùng",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 16,
+   "src": "docs/decisions/16-gate-dau-tien.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "16.7",
    "type": "Decision",
    "label": "Các cổng mốc sau G1 (G2, G3…) chốt sau khi G1 xong. Các cổng cố định vẫn áp dụng: việc khó đảo ngược",
@@ -1102,7 +1115,7 @@
    "status": "active",
    "status_raw": "Đang áp dụng",
    "step": 16,
-   "src": "docs/decisions/16-gate-dau-tien.md#L13",
+   "src": "docs/decisions/16-gate-dau-tien.md#L14",
    "since": "2026-10-20",
    "by": "rule:decision-table"
   },
@@ -4160,7 +4173,7 @@
    "conf": 1.0,
    "from": "16.7",
    "rel": "CITES",
-   "src": "docs/decisions/16-gate-dau-tien.md#L13",
+   "src": "docs/decisions/16-gate-dau-tien.md#L14",
    "to": "14.8"
   },
   {

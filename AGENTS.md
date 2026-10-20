@@ -49,6 +49,7 @@ uv run tools/kb.py show 12.7        # một nút và các cạnh của nó
 uv run tools/kb.py impact 12.7      # đổi 12.7 thì ảnh hưởng tới đâu
 uv run tools/kb.py deps T1.11       # task nào phải xong trước
 git config core.hooksPath .githooks # bật hook pre-commit, làm một lần sau khi clone
+uv run pytest -q                    # chạy toàn bộ test (mujoco==3.16.0, Python 3.12)
 ```
 
 Các lệnh sẽ có ở Phase 1, thêm vào đây khi task tương ứng xong:
