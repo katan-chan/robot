@@ -77,3 +77,4 @@ Mỗi luật ghi kèm nguồn. Luật mới chỉ được thêm khi có bằng 
    (12.9–12.14)
 5. **Người luôn được ưu tiên hơn agent.** Nút dừng khẩn cấp thắng mọi lệnh. (12.15, 14.13)
 6. **Việc khó đảo ngược phải hỏi người dùng trước** (task-graph.md, mục 5): push, Tailscale, khoá, nâng `mujoco`, xoá dữ liệu lần chạy hoặc bug, sửa luật này.
+7. **Agent chính chỉ điều phối; việc làm giao cho subagent.** Phiên chính không viết code sản phẩm (`spider/`, `tests/`, `tools/`, `web/`, `pyproject.toml`). Subagent làm trong worktree riêng; coordinator gộp sau khi test và verifier qua. (17.2–17.6)

@@ -43,7 +43,7 @@ mutability = "evolvable"
 desc = "Script tất định: kb.py, sau này là bộ kiểm tra khả thi, replay"
 
 [components.plugins]
-paths = [".claude/settings.json", ".codex/hooks.json", ".githooks/"]
+paths = [".claude/settings.json", ".claude/hooks/", ".codex/hooks.json", ".githooks/"]
 mutability = "evolvable"
 desc = "Hooks: Claude Code, Codex, git pre-commit"
 

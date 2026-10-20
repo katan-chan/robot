@@ -19,7 +19,7 @@
 - Bộ giải: `integrator = implicitfast`, `timestep = 0.002` (9.2).
 - Va chạm: chỉ bàn chân (cầu) và thân chạm sàn; không tự va chạm (9.3). Ma sát chân 0.9, `condim = 3`.
 - Không dùng `mjpython`/`launch_passive`; viewer là công cụ riêng `mujoco.viewer.launch` (14.1).
-- Vai trò thi công: **coordinator** (một agent, tuần tự). Chỉ ghi vào `pyproject.toml`, `uv.lock`, `.gitignore`, `spider/model/`, `spider/sim/`, `spider/__init__.py`, `tests/test_env.py`, `tests/test_scene.py`, `tests/test_model.py`, `tests/test_view.py`, `docs/`, `AGENTS.md`.
+- Vai trò (17.2–17.6): mỗi task do **một subagent `implementer`** làm trong git worktree riêng, lần lượt từng task. Implementer chỉ ghi `pyproject.toml`, `uv.lock`, `.gitignore`, `spider/`, `tests/test_env.py`, `tests/test_scene.py`, `tests/test_model.py`, `tests/test_view.py`. Các bước đánh dấu **[coordinator]** (ghi `docs/`, `AGENTS.md`) do phiên chính làm sau khi gộp nhánh. Coordinator gộp bằng `git merge --ff-only` sau khi test qua và reviewer duyệt.
 - Mỗi task kết thúc bằng commit; hook `pre-commit` (kb check + selftest) phải qua.
 
 ### Quy ước tên (các task sau dựa vào đây)
@@ -46,7 +46,7 @@
 
 **Files:**
 - Create: `pyproject.toml`, `uv.lock` (do uv sinh), `spider/__init__.py`, `tests/test_env.py`
-- Modify: `.gitignore` (thêm `build/`, `.pytest_cache/`), `AGENTS.md` (mục Lệnh), `docs/decisions/16-gate-dau-tien.md` (thêm dòng 16.5 ghi phiên bản đã ghim)
+- Modify: `.gitignore` (thêm `build/`, `.pytest_cache/`); **[coordinator]** `AGENTS.md` (mục Lệnh), `docs/decisions/16-gate-dau-tien.md` (dòng 16.5)
 
 **Interfaces:**
 - Produces: package `spider` cài được ở chế độ editable; lệnh `uv run pytest` chạy được.
@@ -73,9 +73,9 @@ def test_python_is_312():
 
 - [ ] **Step 3: Chạy** `uv run pytest tests/test_env.py -v` — mong đợi PASS sau Step 1 (nếu FAIL ở pin: sửa `pyproject.toml` cho đúng phiên bản đã cài).
 
-- [ ] **Step 4: Ghi lại** — thêm dòng `| 16.5 | Ghim mujoco==X.Y.Z, Python 3.12 | [Claude tự quyết] | Đang áp dụng |` vào `docs/decisions/16-gate-dau-tien.md`; thêm `uv run pytest -q` vào mục Lệnh của `AGENTS.md`.
+- [ ] **Step 4: [coordinator] Ghi lại** — thêm dòng `| 16.5 | Ghim mujoco==X.Y.Z, Python 3.12 | [Claude tự quyết] | Đang áp dụng |` vào `docs/decisions/16-gate-dau-tien.md`; thêm `uv run pytest -q` vào mục Lệnh của `AGENTS.md`.
 
-- [ ] **Step 5: Commit** — `git add pyproject.toml uv.lock .gitignore spider tests AGENTS.md docs && git commit -m "feat(env): uv project with pinned mujoco (T0.1)"`
+- [ ] **Step 5: Commit (implementer, trước Step 4)** — `git add pyproject.toml uv.lock .gitignore spider tests && git commit -m "feat(env): uv project with pinned mujoco (T0.1)"`. Báo lại phiên bản mujoco đã ghim cho coordinator.
 
 ---
 
@@ -116,7 +116,7 @@ def test_scene_uses_spec_solver_settings():        # 9.2
 - [ ] **Step 4: Chạy** `uv run pytest tests/test_scene.py -v` — mong đợi PASS.
 - [ ] **Step 5: Commit** — `git commit -m "feat(sim): scene and box-drop smoke test (T0.2, T0.3)"`
 
-Ghi chú: kiểm tra `uv run mjpython` ở 6.2 không còn cần vì 14.1 bỏ `launch_passive`. Ghi một dòng "Đã thay → 14.1" cho phần đó trong `docs/decisions/06-moi-truong-mo-phong.md` nếu chưa có.
+Ghi chú **[coordinator]**: kiểm tra `uv run mjpython` ở 6.2 không còn cần vì 14.1 bỏ `launch_passive`. Ghi chú "Đã thay → 14.1" cho phần đó trong `docs/decisions/06-moi-truong-mo-phong.md`.
 
 ---
 
@@ -265,8 +265,8 @@ def test_stand_keyframe_puts_feet_exactly_on_floor():        # Review Focus 5
 ### Task 5: Công cụ xem, ảnh chụp, bảng thành phần → cổng G1 (16.2–16.4)
 
 **Files:**
-- Create: `spider/model/parts.py`, `spider/sim/view.py`, `tests/test_view.py`, `docs/reference/g1/README.md`, `docs/reference/g1/*.png` (sinh ra)
-- Modify: `AGENTS.md` (mục Lệnh)
+- Create: `spider/model/parts.py`, `spider/sim/view.py`, `tests/test_view.py`
+- **[coordinator]** sau khi gộp: `docs/reference/g1/README.md`, `docs/reference/g1/*.png` (sinh bằng CLI), `AGENTS.md` (mục Lệnh)
 
 **Interfaces:**
 - Consumes: Task 4 `build_model`, `ACTUATORS`; Task 3 `load_params`, `servo_for`.
@@ -305,15 +305,15 @@ def test_snapshot_writes_four_nonblank_pngs(tmp_path):
 - [ ] **Step 2: Chạy** `uv run pytest tests/test_view.py -v` — FAIL.
 - [ ] **Step 3: Viết** `spider/model/parts.py` và `spider/sim/view.py` theo Interfaces.
 - [ ] **Step 4: Chạy** `uv run pytest -q` — toàn bộ PASS.
-- [ ] **Step 5: Sinh tài liệu G1** — chạy `uv run python -m spider.sim.view --snapshot docs/reference/g1` và `uv run python -m spider.sim.view --parts`. Viết `docs/reference/g1/README.md` gồm:
+- [ ] **Step 5: [coordinator, sau khi gộp] Sinh tài liệu G1** — chạy `uv run python -m spider.sim.view --snapshot docs/reference/g1` và `uv run python -m spider.sim.view --parts`. Viết `docs/reference/g1/README.md` gồm:
   - 4 ảnh.
   - Bảng thành phần (dán từ `--parts`).
   - Bảng tham số chính kèm đường dẫn `spider/model/params.toml`.
   - Cách xem 3D: lệnh mở viewer; trong viewer bật *Rendering → Label: Joint* và *Frame: Body* để thấy tên khớp; dùng *Control* để quay thử từng servo; Space để dừng hoặc chạy vật lý; chuột phải kéo để xoay camera.
   - Checklist cho người duyệt: 4 chân hình chữ X; mỗi chân 3 khớp quay đúng chiều (hông xoay ngang, đùi nhấc lên khi dương, gối gập xuống khi dương); kích thước và tỉ lệ giống ảnh tham khảo; tổng khối lượng.
-- [ ] **Step 6: Cập nhật** mục Lệnh trong `AGENTS.md`: `uv run python -m spider.sim.view` (xem), `--snapshot`, `--parts`.
-- [ ] **Step 7: Commit** — `git commit -m "feat(view): viewer tool, snapshots, parts table for gate G1"`
-- [ ] **Step 8: CỔNG G1 — dừng lại.** Báo người dùng: đường dẫn `docs/reference/g1/README.md` và lệnh mở viewer. Chờ người dùng duyệt. Nếu cần sửa: chỉ sửa `params.toml` (và ghi quyết định), chạy lại Step 5. Ghi kết quả duyệt thành dòng 16.6 trong `docs/decisions/16-gate-dau-tien.md`.
+- [ ] **Step 6: [coordinator] Cập nhật** mục Lệnh trong `AGENTS.md`: `uv run python -m spider.sim.view` (xem), `--snapshot`, `--parts`.
+- [ ] **Step 7: Commit** — implementer commit code sau Step 4: `git commit -m "feat(view): viewer tool, snapshots, parts table"`; coordinator commit tài liệu sau Step 6: `git commit -m "docs(g1): model snapshots and parts table for gate G1"`
+- [ ] **Step 8: [coordinator] CỔNG G1 — dừng lại.** Báo người dùng: đường dẫn `docs/reference/g1/README.md` và lệnh mở viewer. Chờ người dùng duyệt. Nếu cần sửa: chỉ sửa `params.toml` (và ghi quyết định), chạy lại Step 5. Ghi kết quả duyệt thành dòng 16.6 trong `docs/decisions/16-gate-dau-tien.md`.
 
 ---
 
@@ -321,12 +321,12 @@ def test_snapshot_writes_four_nonblank_pngs(tmp_path):
 
 Theo `docs/harness/task-graph.md`:
 
-1. **T1.4 — coordinator, tuần tự:** vòng mô phỏng `spider/sim/loop.py` (một luồng sở hữu `MjData`, hàng đợi lệnh, canh thời gian thật, báo hệ số thời gian thực); robot đứng ở keyframe `stand` vài giây; kiểm mô-men tĩnh bằng `mj_inverse` (9.5, 14.5). Viết **hợp đồng**: JSON lệnh controller (`vx, vy, wz, speed, stop`), JSON trạng thái (14.11), định dạng thư mục lần chạy (11.5), móc ghi log của vòng lặp. physics-verifier và determinism-verifier soát.
+1. **T1.4 — implementer, tuần tự:** vòng mô phỏng `spider/sim/loop.py` (một luồng sở hữu `MjData`, hàng đợi lệnh, canh thời gian thật, báo hệ số thời gian thực); robot đứng ở keyframe `stand` vài giây; kiểm mô-men tĩnh bằng `mj_inverse` (9.5, 14.5). Coordinator viết **hợp đồng** (`docs/harness/contracts.md`), implementer chuyển thành code: JSON lệnh controller (`vx, vy, wz, speed, stop`), JSON trạng thái (14.11), định dạng thư mục lần chạy (11.5), móc ghi log của vòng lặp. physics-verifier và determinism-verifier soát.
 2. **Tách 4 worker song song**, mỗi worker một worktree:
    - gait-worker: T1.6, IK giải trực tiếp + dáng đi.
    - checks-worker: T1.8 + T1.12, bộ kiểm tra mức 1/2, cổng khả thi trong code, script hook.
    - record-worker: T1.9, record, replay 2 chế độ, bug.
    - server-worker: T1.7 → T1.10 → T1.11, server 2 cổng, controller web, khoá, API agent, CLI `drive`.
 3. **Verifier:** physics (gait, checks), determinism (record), security (server).
-4. **Gộp — coordinator:** test đầu-cuối: agent lái qua CLI → lần chạy được ghi → replay chính xác khớp.
+4. **Gộp — coordinator** (chỉ gộp nhánh và chạy test, không sửa code): test đầu-cuối: agent lái qua CLI → lần chạy được ghi → replay chính xác khớp.
 5. **Cổng người dùng (14.8):** lái thử từ điện thoại qua Tailscale theo checklist.

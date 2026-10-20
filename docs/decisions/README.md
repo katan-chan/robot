@@ -41,6 +41,7 @@ Mọi quyết định đều sửa được về sau.
 | 14 | [14-builder-check.md](14-builder-check.md) | Kiểm tra cuối: viewer riêng, 2 chế độ replay, kích thước theo ảnh |
 | 15 | [15-kb-harness-agents.md](15-kb-harness-agents.md) | Knowledge base, harness (Harness²), chia agent |
 | 16 | [16-gate-dau-tien.md](16-gate-dau-tien.md) | Cổng G1: xem model 3D và các thành phần |
+| 17 | [17-dieu-phoi-subagent.md](17-dieu-phoi-subagent.md) | Phiên chính chỉ điều phối, việc giao cho subagent |
 
 `brainstorm-log.md` là bản nháp đầu tiên viết gộp một file. Đã được thay bằng các file 01–10, chỉ giữ để tham khảo.
 

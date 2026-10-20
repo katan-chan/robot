@@ -1107,6 +1107,97 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "17.1",
+   "type": "Decision",
+   "label": "Ưu tiên dùng subagent. Thực hiện kế hoạch theo cách Subagent-driven",
+   "text": "Ưu tiên dùng subagent. Thực hiện kế hoạch theo cách Subagent-driven",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L9",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.2",
+   "type": "Decision",
+   "label": "Agent chính (phiên chính, coordinator) **chỉ điều phối**: chia việc, giao việc, gọi verifier, gộp, g",
+   "text": "Agent chính (phiên chính, coordinator) **chỉ điều phối**: chia việc, giao việc, gọi verifier, gộp, ghi quyết định, giữ KB và cấu hình harness. Agent chính **không viết code sản phẩm**",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L10",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.3",
+   "type": "Decision",
+   "label": "Phần tuần tự (T0.1–T1.4) cũng giao cho subagent: vai trò mới `implementer`, mỗi lúc một subagent, ta",
+   "text": "Phần tuần tự (T0.1–T1.4) cũng giao cho subagent: vai trò mới `implementer`, mỗi lúc một subagent, task sau bắt đầu sau khi task trước đã gộp. Luật dừng vẫn giữ: không chạy song song việc tuần tự",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L11",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.4",
+   "type": "Decision",
+   "label": "Subagent viết code chạy trong git worktree riêng (`isolation: \"worktree\"`, tách từ HEAD trên máy: `w",
+   "text": "Subagent viết code chạy trong git worktree riêng (`isolation: \"worktree\"`, tách từ HEAD trên máy: `worktree.baseRef = \"head\"`), commit trên nhánh riêng. Coordinator gộp vào `main` bằng `git merge --ff-only` sau khi test và verifier qua",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L12",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.5",
+   "type": "Decision",
+   "label": "Hook `PreToolUse` `.claude/hooks/coordinator-guard.sh` chặn phiên chính sửa `spider/`, `tests/`, `to",
+   "text": "Hook `PreToolUse` `.claude/hooks/coordinator-guard.sh` chặn phiên chính sửa `spider/`, `tests/`, `tools/`, `web/`, `pyproject.toml`, `uv.lock` trong checkout chính. Sửa trong worktree thì không bị chặn",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L13",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.6",
+   "type": "Decision",
+   "label": "Coordinator chỉ ghi: `docs/`, `AGENTS.md`, `CLAUDE.md`, `harness.toml`, `.claude/`, `.codex/`, `.git",
+   "text": "Coordinator chỉ ghi: `docs/`, `AGENTS.md`, `CLAUDE.md`, `harness.toml`, `.claude/`, `.codex/`, `.githooks/`. `tools/` (kể cả `kb.py`, hook script) chuyển cho `implementer`",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L14",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.7",
+   "type": "Decision",
+   "label": "Thông tin chuyển giữa các subagent qua: kế hoạch (khối Interfaces của từng task), hợp đồng ở `docs/h",
+   "text": "Thông tin chuyển giữa các subagent qua: kế hoạch (khối Interfaces của từng task), hợp đồng ở `docs/harness/`, và knowledge graph. Không dựa vào trí nhớ trong hội thoại",
+   "decided_by": "claude-decided",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L15",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "3.1",
    "type": "Decision",
    "label": "Stack: Blender 5.2 → MJCF → MuJoCo + Python 3.12 (`uv`)",
@@ -2205,6 +2296,13 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:.claude/hooks/",
+   "type": "File",
+   "label": ".claude/hooks/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:.claude/settings.json",
    "type": "File",
    "label": ".claude/settings.json",
@@ -2289,6 +2387,20 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:docs/reference/",
+   "type": "File",
+   "label": "docs/reference/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/superpowers/",
+   "type": "File",
+   "label": "docs/superpowers/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:harness.toml",
    "type": "File",
    "label": "harness.toml",
@@ -2300,6 +2412,13 @@
    "type": "File",
    "label": "pyproject.toml",
    "src": "6.2",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:spider/__init__.py",
+   "type": "File",
+   "label": "spider/__init__.py",
+   "src": "docs/harness/task-graph.md",
    "by": "rule:file-ref"
   },
   {
@@ -2359,9 +2478,23 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:tests/test_env.py",
+   "type": "File",
+   "label": "tests/test_env.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:tests/test_gait.py",
    "type": "File",
    "label": "tests/test_gait.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_model.py",
+   "type": "File",
+   "label": "tests/test_model.py",
    "src": "docs/harness/task-graph.md",
    "by": "rule:file-ref"
   },
@@ -2373,9 +2506,23 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:tests/test_scene.py",
+   "type": "File",
+   "label": "tests/test_scene.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:tests/test_server.py",
    "type": "File",
    "label": "tests/test_server.py",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:tests/test_view.py",
+   "type": "File",
+   "label": "tests/test_view.py",
    "src": "docs/harness/task-graph.md",
    "by": "rule:file-ref"
   },
@@ -2391,6 +2538,13 @@
    "type": "File",
    "label": "tools/kb.py",
    "src": "10.8",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:uv.lock",
+   "type": "File",
+   "label": "uv.lock",
+   "src": "docs/harness/task-graph.md",
    "by": "rule:file-ref"
   },
   {
@@ -2499,8 +2653,8 @@
   {
    "id": "role:coordinator",
    "type": "AgentRole",
-   "label": "Điều phối: làm phần tuần tự, giữ hợp đồng, gộp kết quả, ghi quyết định",
-   "src": "docs/harness/task-graph.md",
+   "label": "Phiên chính, chỉ điều phối: giao việc, gọi verifier, gộp, ghi quyết định, giữ KB và harness",
+   "src": "17.2",
    "since": "2026-10-20",
    "by": "curated"
   },
@@ -2525,6 +2679,14 @@
    "type": "AgentRole",
    "label": "Người dùng: cổng duyệt cho việc khó đảo ngược",
    "src": "docs/harness/task-graph.md",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:implementer",
+   "type": "AgentRole",
+   "label": "Subagent làm phần tuần tự T0.1–T1.4 và tools/, mỗi lúc một agent, trong worktree",
+   "src": "17.3",
    "since": "2026-10-20",
    "by": "curated"
   },
@@ -3777,6 +3939,126 @@
    "rel": "CITES",
    "src": "docs/decisions/16-gate-dau-tien.md#L13",
    "to": "14.8"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L9",
+   "to": "harness:subagents"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L10",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L10",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L11",
+   "to": "role:implementer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L12",
+   "to": "role:checks-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L12",
+   "to": "role:gait-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L12",
+   "to": "role:implementer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L12",
+   "to": "role:record-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L12",
+   "to": "role:server-worker"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L13",
+   "to": "harness:plugins"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L13",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L14",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L14",
+   "to": "role:implementer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L15",
+   "to": "comp:kb"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "17.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L15",
+   "to": "harness:memory"
   },
   {
    "by": "curated",
@@ -5528,6 +5810,14 @@
    "from": "harness:plugins",
    "rel": "STORED_IN",
    "src": "harness.toml",
+   "to": "file:.claude/hooks/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:plugins",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
    "to": "file:.claude/settings.json"
   },
   {
@@ -5646,57 +5936,9 @@
    "by": "curated",
    "conf": 0.9,
    "from": "role:coordinator",
-   "rel": "PERFORMS",
+   "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
-   "to": "T0.1"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "PERFORMS",
-   "src": "docs/harness/task-graph.md",
-   "to": "T0.2"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "PERFORMS",
-   "src": "docs/harness/task-graph.md",
-   "to": "T0.3"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "PERFORMS",
-   "src": "docs/harness/task-graph.md",
-   "to": "T1.1"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "PERFORMS",
-   "src": "docs/harness/task-graph.md",
-   "to": "T1.2"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "PERFORMS",
-   "src": "docs/harness/task-graph.md",
-   "to": "T1.3"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "PERFORMS",
-   "src": "docs/harness/task-graph.md",
-   "to": "T1.4"
+   "to": "file:.claude/agents/"
   },
   {
    "by": "curated",
@@ -5704,7 +5946,7 @@
    "from": "role:coordinator",
    "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
-   "to": "file:.claude/agents/"
+   "to": "file:.claude/hooks/"
   },
   {
    "by": "curated",
@@ -5776,39 +6018,23 @@
    "from": "role:coordinator",
    "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
+   "to": "file:docs/reference/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/superpowers/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
    "to": "file:harness.toml"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "WRITES",
-   "src": "docs/harness/task-graph.md",
-   "to": "file:pyproject.toml"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "WRITES",
-   "src": "docs/harness/task-graph.md",
-   "to": "file:spider/model/"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "WRITES",
-   "src": "docs/harness/task-graph.md",
-   "to": "file:spider/sim/"
-  },
-  {
-   "by": "curated",
-   "conf": 0.9,
-   "from": "role:coordinator",
-   "rel": "WRITES",
-   "src": "docs/harness/task-graph.md",
-   "to": "file:tools/kb.py"
   },
   {
    "by": "curated",
@@ -5881,6 +6107,142 @@
    "rel": "REVIEWS",
    "src": "docs/harness/task-graph.md",
    "to": "T1.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T0.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.1"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.2"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.3"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "PERFORMS",
+   "src": "docs/harness/task-graph.md",
+   "to": "T1.4"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:pyproject.toml"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/__init__.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/model/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:spider/sim/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_env.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_model.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_scene.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tests/test_view.py"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:tools/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:implementer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:uv.lock"
   },
   {
    "by": "curated",

@@ -11,7 +11,7 @@ Truy vấn: `uv run tools/kb.py deps T1.11`, `uv run tools/kb.py show role:serve
 
 | Đoạn việc | Tính chất | Cách làm |
 |---|---|---|
-| T0.1 → T0.3 → T1.1 → T1.2 → T1.3 → T1.4 | Tuần tự. Bước sau cần kết quả của bước trước | **Một agent** (coordinator) |
+| T0.1 → T0.3 → T1.1 → T1.2 → T1.3 → T1.4 | Tuần tự. Bước sau cần kết quả của bước trước | **Một subagent `implementer` mỗi lúc**, lần lượt (17.3) |
 | Sau T1.4: T1.6, T1.7, T1.8, T1.9 | Độc lập, không đọc kết quả của nhau | **Song song**, mỗi worker một nhánh |
 | T1.10, T1.11 | Cần server của T1.7 | Cùng worker với T1.7, chạy tuần tự |
 | T1.12 | Cần bộ kiểm tra của T1.8 | Cùng worker với T1.8 |
@@ -22,7 +22,7 @@ Cạnh giả đã bỏ: T1.7 (server) **không** cần T1.6 (dáng đi) mới b�
 
 ```mermaid
 flowchart LR
-  subgraph PLAN["Kế hoạch — coordinator, tuần tự"]
+  subgraph PLAN["Tuần tự — implementer, mỗi lúc một subagent"]
     A[T0.1–T0.3<br/>môi trường] --> B[T1.1–T1.3<br/>tham số, model, servo] --> C[T1.4<br/>vòng mô phỏng + đứng]
     C --> K[[Hợp đồng:<br/>lệnh, trạng thái,<br/>thư mục lần chạy]]
   end
@@ -40,7 +40,7 @@ flowchart LR
   M --> H((Người dùng<br/>thử tay từ điện thoại<br/>14.8))
 ```
 
-**Hợp đồng** do coordinator viết ngay sau T1.4, trước khi tách việc. Gồm:
+**Hợp đồng** do coordinator viết thành tài liệu ở `docs/harness/contracts.md` ngay sau T1.4, trước khi tách việc. Implementer chuyển hợp đồng thành code. Gồm:
 - Dạng JSON của lệnh controller và của trạng thái robot (14.10, 14.11).
 - Định dạng thư mục lần chạy (11.5).
 - Giao diện của vòng mô phỏng: hàng đợi lệnh, móc ghi log.
@@ -51,7 +51,8 @@ Worker chỉ được dựa vào hợp đồng. Muốn đổi hợp đồng thì
 
 | Vai trò | Làm | Được ghi vào (một người ghi mỗi file) |
 |---|---|---|
-| coordinator | T0.1–T1.4, hợp đồng, gộp, ghi quyết định, KB, hooks | `AGENTS.md`, `CLAUDE.md`, `harness.toml`, `docs/decisions/`, `docs/kb/`, `docs/harness/`, `tools/kb.py`, `pyproject.toml`, `spider/model/`, `spider/sim/`, `.claude/`, `.codex/`, `.githooks/` |
+| coordinator (phiên chính) | **Chỉ điều phối** (17.2): giao task, gọi verifier, gộp nhánh, viết hợp đồng (tài liệu), ghi quyết định, giữ KB và cấu hình harness. Không viết code | `AGENTS.md`, `CLAUDE.md`, `harness.toml`, `docs/decisions/`, `docs/kb/`, `docs/harness/`, `docs/reference/`, `docs/superpowers/`, `.claude/`, `.codex/`, `.githooks/` |
+| implementer | T0.1–T1.4 lần lượt, sửa `tools/` khi được giao | `pyproject.toml`, `uv.lock`, `spider/__init__.py`, `spider/model/`, `spider/sim/`, `tools/`, `tests/test_env.py`, `tests/test_scene.py`, `tests/test_model.py`, `tests/test_view.py` |
 | gait-worker | T1.6 | `spider/gait/`, `tests/test_gait.py` |
 | checks-worker | T1.8, T1.12 (viết script hook; coordinator nối vào config) | `spider/checks/`, `tests/test_checks.py` |
 | record-worker | T1.9 | `spider/record/`, `docs/bugs/`, `tests/test_record.py` |
@@ -63,7 +64,15 @@ Worker chỉ được dựa vào hợp đồng. Muốn đổi hợp đồng thì
 
 Mỗi verifier trả lời **một câu hỏi khác nhau**, ở **context riêng** (không phải agent đã viết code). Kết luận phải dựa vào con số đo được, không dựa vào lời tự khai của worker.
 
-Trên Claude Code, worker chạy trong git worktree riêng (`isolation: "worktree"`). Verifier nằm ở `.claude/agents/`.
+Trên Claude Code, implementer và worker chạy trong git worktree riêng (`isolation: "worktree"`), commit trên nhánh riêng. Coordinator gộp bằng `git merge --ff-only` sau khi test và verifier qua (17.4). Hook `coordinator-guard.sh` chặn phiên chính sửa code ở checkout chính (17.5). Verifier nằm ở `.claude/agents/` và chỉ đọc.
+
+**Mỗi lần giao việc**, coordinator gửi cho subagent:
+- task và khối Interfaces của task đó, lấy từ kế hoạch;
+- các file nó được ghi (bảng trên);
+- lệnh test phải qua;
+- câu "chạy `uv run tools/kb.py impact <mã>` cho các quyết định liên quan trước khi sửa".
+
+Subagent trả về: nhánh, commit, kết quả test, và mọi điểm lệch khỏi kế hoạch.
 
 ## 4. Bốn giới hạn
 
