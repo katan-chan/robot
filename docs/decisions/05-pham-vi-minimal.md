@@ -10,7 +10,7 @@ Ngày: 2026-10-20.
 | 5.2 | Phần cứng thật quyết định sau. Trước tiên chốt bản minimal | [Người dùng] | Đang áp dụng |
 | 5.3 | Model phải chỉnh được về sau: kích thước, số khớp, giới hạn servo nằm ở một chỗ, đổi xong là sinh lại model | [Người dùng] (Claude diễn giải từ câu "khả năng sau này phải chỉnh được") | Đang áp dụng |
 | 5.4 | Nội dung bản minimal (xem dưới) | [Claude đề xuất] | Đã thay → xem Bước 7, 8 (hình dáng làm sau, điều khiển qua web, phải di chuyển được) |
-| 5.5 | Kích cỡ việc: nhỏ, mô tả trong chat và trong file này là đủ | [Claude đề xuất] | Chờ chốt |
+| 5.5 | Kích cỡ việc: nhỏ, mô tả trong chat và trong file này là đủ | [Claude đề xuất] | Đã thay → dự án lớn hơn dự kiến, tài liệu thiết kế chính là thư mục `docs/decisions/` |
 
 ## Nội dung bản minimal (5.4)
 

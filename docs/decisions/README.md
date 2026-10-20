@@ -63,7 +63,6 @@ Mọi quyết định đều sửa được về sau.
 |---|---|---|
 | 3.2 | Stack: tham số → Python sinh MJCF → MuJoCo; Blender chỉ làm mesh | Bước 3 |
 | 4.7 | RL lo đi, LLM ở tầng trên | Bước 4 |
-| 5.5 | Kích cỡ việc: nhỏ, mô tả trong file là đủ | Bước 5 |
 | 6.2 | Nội dung dựng môi trường mô phỏng | Bước 6 |
 | 7.2 | Trình tự Giai đoạn 0 → 8 (phụ thuộc 4.7) | Bước 7 |
 | 7.3 | Khối hình trước, Blender sau | Bước 7 |

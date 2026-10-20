@@ -14,7 +14,7 @@ Ngày: 2026-10-20. Trả lời 3 câu hỏi ở Bước 9.
 | 12.6 | Lý do chọn 12.5: điều khiển qua internet thì người điều khiển không nhìn thấy cửa sổ viewer trên Mac. Vẽ 3D trong trình duyệt (three.js hoặc MuJoCo WASM) đẹp hơn nhưng nhiều việc hơn | [Claude đề xuất] | Chờ chốt |
 | 12.7 | Servo: một **danh mục servo** (MG90S, SG90, MG996R…) trong file tham số. Mỗi loại ghi mô-men cực đại, tốc độ, khối lượng, kích thước, hành trình góc. Chọn servo theo tên: một loại chung cho cả robot, có thể ghi đè riêng cho từng vị trí khớp (hông xoay, hông nhấc, gối). Mặc định MG90S | [Claude đề xuất] | Chờ chốt |
 | 12.8 | Đổi servo thì bộ kiểm tra khả thi tự chạy lại (hook PostToolUse). Manifest của mỗi lần chạy ghi rõ servo đã dùng | [Claude đề xuất] | Chờ chốt |
-| 12.9 | Truy cập qua internet: **không mở cổng công khai**. Mặc định dùng Tailscale (mạng riêng giữa các thiết bị của bạn). Trang web vẫn có mật khẩu hoặc token. Server chỉ nghe trên mạng Tailscale và `127.0.0.1` | [Claude đề xuất] | Chờ chốt |
+| 12.9 | Truy cập qua internet: **không mở cổng công khai**. Mặc định dùng Tailscale (mạng riêng giữa các thiết bị của bạn). Xác thực bằng khoá theo 12.10–12.14 | [Claude đề xuất] | Chờ chốt |
 
 ## Cảnh báo bảo mật (12.9)
 
