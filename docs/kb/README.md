@@ -64,6 +64,6 @@ Lệnh tương ứng: `uv run tools/kb.py impact 12.7`
 
 ## Chất lượng (lần dựng đầu, 2026-10-20)
 
-- 235 nút, khoảng 420 cạnh (gồm Bước 15). `selftest` qua đủ CQ1–CQ12.
+- 235 nút, 428 cạnh (gồm Bước 15). `selftest` qua đủ CQ1–CQ12.
 - Lấy mẫu 50 cạnh CITES do luật trích xuất: 50/50 đúng. Lỗi đã sửa trong luật: số phiên bản ("Blender 5.2") bị nhận nhầm là mã quyết định.
 - Bug và Lesson đã có trong schema nhưng chưa có dữ liệu. Thêm khi có bug hoặc bài học đầu tiên.
