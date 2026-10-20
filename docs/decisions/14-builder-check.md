@@ -28,13 +28,13 @@ Thêm nhãn người chốt **[Claude tự quyết]**: điểm nhỏ, người t
 | 14.7 | Trang controller tự đổi giao diện theo thiết bị: màn hình cảm ứng hiện joystick ảo và nút dừng lớn, laptop dùng phím (WASD, Q/E để xoay, Space để dừng). Cả hai cùng gửi một loại lệnh lên server | [Claude tự quyết] | Đang áp dụng |
 | 14.8 | Phase 1 xong khi: (a) test tự động qua, gồm cả token và cổng từ xa; (b) **một lần thử tay** lái từ điện thoại qua Tailscale theo checklist; (c) một agent lái được robot qua API (14.9) | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 | 14.9 | Có một **cổng cho agent** điều khiển robot | [Người dùng] | Đang áp dụng |
-| 14.10 | Agent dùng **chung API** với trang controller: cùng loại lệnh (tiến/lùi, đi ngang, xoay, tốc độ, dừng), dạng JSON qua HTTP/WebSocket. Không làm API riêng. Kèm một lệnh dòng lệnh mỏng để agent gọi qua Bash (`... drive --vx 0.1 --for 2s`) | [Claude đề xuất] | Chờ chốt |
-| 14.11 | Agent **đọc** được trạng thái: vị trí và hướng thân, vận tốc, tải servo, kết quả kiểm tra khả thi, sự kiện gần nhất, và một ảnh chụp khung hình hiện tại. Nhờ vậy agent "thấy" được robot | [Claude đề xuất] | Chờ chốt |
-| 14.12 | Quyền truy cập: agent chạy trên máy này dùng cổng `127.0.0.1` (12.11) và phải tự khai tên, ví dụ `agent:claude`. Agent ở máy khác cần khoá như người (12.12). Tên agent được ghi vào log người lái (12.16) | [Claude đề xuất] | Chờ chốt |
-| 14.12a | Lệnh CLI có `--host` và `--key`. Mặc định nối `127.0.0.1`. Agent ở máy khác chỉ cần máy đó đã vào Tailscale, rồi chạy cùng CLI với `--host macbook-pro --key <token>`. Agent chạy trên cloud phải có auth key của Tailscale mới vào được mạng. Việc này để sau và cần xem xét bảo mật riêng | [Claude đề xuất] | Chờ chốt |
-| 14.12b | Robot thật sau này (Giai đoạn 8) dùng **cùng API và cùng CLI**. Agent không cần biết đang lái bản mô phỏng hay con thật | [Claude đề xuất] | Chờ chốt |
-| 14.13 | Người luôn được ưu tiên: người giành quyền lái từ agent bất cứ lúc nào. Nút dừng khẩn cấp thắng mọi lệnh của agent | [Claude đề xuất] | Chờ chốt |
-| 14.14 | MCP server (T6.1) để sau. Khi làm, MCP chỉ là lớp bọc mỏng quanh chính API này | [Claude đề xuất] | Chờ chốt |
+| 14.10 | Agent dùng **chung API** với trang controller: cùng loại lệnh (tiến/lùi, đi ngang, xoay, tốc độ, dừng), dạng JSON qua HTTP/WebSocket. Không làm API riêng. Kèm một lệnh dòng lệnh mỏng để agent gọi qua Bash (`... drive --vx 0.1 --for 2s`) | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 14.11 | Agent **đọc** được trạng thái: vị trí và hướng thân, vận tốc, tải servo, kết quả kiểm tra khả thi, sự kiện gần nhất, và một ảnh chụp khung hình hiện tại. Nhờ vậy agent "thấy" được robot | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 14.12 | Quyền truy cập: agent chạy trên máy này dùng cổng `127.0.0.1` (12.11) và phải tự khai tên, ví dụ `agent:claude`. Agent ở máy khác cần khoá như người (12.12). Tên agent được ghi vào log người lái (12.16) | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 14.12a | Lệnh CLI có `--host` và `--key`. Mặc định nối `127.0.0.1`. Agent ở máy khác chỉ cần máy đó đã vào Tailscale, rồi chạy cùng CLI với `--host macbook-pro --key <token>`. Agent chạy trên cloud phải có auth key của Tailscale mới vào được mạng. Việc này để sau và cần xem xét bảo mật riêng | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 14.12b | Robot thật sau này (Giai đoạn 8) dùng **cùng API và cùng CLI**. Agent không cần biết đang lái bản mô phỏng hay con thật | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 14.13 | Người luôn được ưu tiên: người giành quyền lái từ agent bất cứ lúc nào. Nút dừng khẩn cấp thắng mọi lệnh của agent | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 14.14 | MCP server (T6.1) để sau. Khi làm, MCP chỉ là lớp bọc mỏng quanh chính API này | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 
 ## Cách dùng Tailscale (trả lời câu hỏi của người dùng)
 
@@ -51,4 +51,4 @@ Lưu ý: không trỏ `tailscale serve` hoặc `tailscale funnel` vào cổng `1
 ## Câu hỏi cho người dùng
 
 1. ~~Đồng ý tiêu chí xong Phase 1 ở 14.8 không?~~ Đồng ý, kèm thêm cổng cho agent (14.9).
-2. Duyệt thiết kế cổng agent 14.10–14.14?
+2. ~~Duyệt thiết kế cổng agent 14.10–14.14?~~ Đã duyệt.

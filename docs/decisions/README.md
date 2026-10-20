@@ -53,18 +53,15 @@ Mọi quyết định đều sửa được về sau.
 - Xem robot ở đâu? → Cách đơn giản, dễ nhìn nhất (12.2), đề xuất ở 12.5.
 - Servo nào? → Phải thay được (12.3), đề xuất danh mục servo ở 12.7.
 - Lái từ thiết bị nào? → Điện thoại và laptop, không có tay cầm (14.6).
-- Tiêu chí xong Phase 1? → Test tự động + thử tay từ điện thoại + agent lái được qua API (14.8). Có cổng cho agent (14.9).
+- Tiêu chí xong Phase 1? → Test tự động + thử tay từ điện thoại + agent lái được qua API (14.8). Có cổng cho agent (14.9), thiết kế 14.10–14.14 đã duyệt.
 - Thiết kế record và mọi đề xuất khác? → Đã duyệt toàn bộ (13.1).
 - Ai được điều khiển qua internet? → Ai có token (khoá riêng, server chỉ lưu hash). Máy này luôn điều khiển được (12.10, 12.11).
 
 ## Câu hỏi còn mở
 
-1. Duyệt thiết kế cổng agent (14.10–14.14)? → Bước 14
-2. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
-3. Có đẩy repo lên remote (GitHub…) không? → Bước 11
+1. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
+2. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
-| Mã | Nội dung ngắn | File |
-|---|---|---|
-| 14.10–14.14 (kèm 14.12a, 14.12b) | Cổng agent: CLI qua Tailscale, chung API với controller, đọc trạng thái + ảnh, khai tên, người ưu tiên, MCP để sau | Bước 14 |
+Không còn mục nào.
