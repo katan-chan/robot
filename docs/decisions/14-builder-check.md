@@ -20,7 +20,26 @@ Thêm nhãn người chốt **[Claude tự quyết]**: điểm nhỏ, người t
 
 - Tailscale đã cài trên Mac (`/usr/local/bin/tailscale`) nhưng đang tắt (`Stopped`) và chưa nối với thiết bị nào.
 
+## Trả lời của người dùng
+
+| # | Quyết định | Người chốt | Trạng thái |
+|---|---|---|---|
+| 14.6 | Lái được từ cả điện thoại (nút cảm ứng) và laptop (bàn phím). **Không** hỗ trợ tay cầm chơi game | [Người dùng] | Đang áp dụng |
+| 14.7 | Trang controller tự đổi giao diện theo thiết bị: màn hình cảm ứng hiện joystick ảo và nút dừng lớn, laptop dùng phím (WASD, Q/E để xoay, Space để dừng). Cả hai cùng gửi một loại lệnh lên server | [Claude tự quyết] | Đang áp dụng |
+| 14.8 | Phase 1 xong khi: (a) test tự động qua, gồm cả token và cổng từ xa; (b) **một lần thử tay** lái từ điện thoại qua Tailscale theo checklist | [Claude đề xuất] | Chờ chốt |
+
+## Cách dùng Tailscale (trả lời câu hỏi của người dùng)
+
+1. **Trên Mac**: mở app Tailscale trên thanh menu, đăng nhập (Google, Apple, GitHub…).
+2. **Trên điện thoại và laptop khác**: cài app Tailscale (App Store / Google Play / tailscale.com), đăng nhập **cùng tài khoản**.
+3. Mỗi máy có một địa chỉ `100.x.y.z` và một tên, ví dụ `macbook-pro`. Kiểm tra bằng `tailscale status`.
+4. Server bật cổng từ xa trên địa chỉ Tailscale của Mac. Điện thoại mở `http://macbook-pro:<cổng>`. Dữ liệu đã được Tailscale mã hoá.
+5. Tạo khoá cho điện thoại bằng lệnh tạo khoá (12.12). Dán token vào trang web một lần, trình duyệt sẽ nhớ.
+6. Mac phải thức khi đang lái từ xa: server tự giữ máy không ngủ (`caffeinate`) trong lúc chạy.
+7. Cho người khác lái: dùng tính năng "Share" của Tailscale để chia sẻ riêng máy Mac, rồi cấp cho họ một khoá riêng.
+
+Lưu ý: không trỏ `tailscale serve` hoặc `tailscale funnel` vào cổng `127.0.0.1` (12.14). `funnel` mở máy ra internet công khai, không dùng.
+
 ## Câu hỏi cho người dùng
 
-1. Bạn sẽ lái robot từ thiết bị nào: điện thoại (nút cảm ứng), laptop (bàn phím), hay tay cầm chơi game thật?
-2. Phase 1 có cần thử lái thật từ thiết bị thứ hai qua Tailscale mới tính là xong không? Hay chỉ cần lái được trên máy này, còn phần truy cập từ xa và token chỉ cần làm xong và qua test tự động?
+1. Đồng ý tiêu chí xong Phase 1 ở 14.8 không?

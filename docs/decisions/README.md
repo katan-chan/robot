@@ -52,16 +52,18 @@ Mọi quyết định đều sửa được về sau.
 - Trang web điều khiển ở mức nào? → Một controller, điều khiển qua internet (12.1).
 - Xem robot ở đâu? → Cách đơn giản, dễ nhìn nhất (12.2), đề xuất ở 12.5.
 - Servo nào? → Phải thay được (12.3), đề xuất danh mục servo ở 12.7.
+- Lái từ thiết bị nào? → Điện thoại và laptop, không có tay cầm (14.6).
 - Thiết kế record và mọi đề xuất khác? → Đã duyệt toàn bộ (13.1).
 - Ai được điều khiển qua internet? → Ai có token (khoá riêng, server chỉ lưu hash). Máy này luôn điều khiển được (12.10, 12.11).
 
 ## Câu hỏi còn mở
 
-1. Lái robot từ thiết bị nào: điện thoại, laptop hay tay cầm? → Bước 14
-2. Phase 1 có cần thử lái thật từ thiết bị thứ hai qua Tailscale không? → Bước 14
-3. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
-4. Có đẩy repo lên remote (GitHub…) không? → Bước 11
+1. Tiêu chí xong Phase 1: test tự động + một lần thử tay lái từ điện thoại qua Tailscale (14.8)? → Bước 14
+2. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
+3. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
-Không còn mục nào. Toàn bộ đã duyệt ở 13.1.
+| Mã | Nội dung ngắn | File |
+|---|---|---|
+| 14.8 | Tiêu chí xong Phase 1 | Bước 14 |
