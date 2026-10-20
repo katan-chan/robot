@@ -1224,6 +1224,19 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "18.11",
+   "type": "Decision",
+   "label": "**Ưu tiên CLI hơn MCP** khi agent giao tiếp với công cụ (Blender, robot, các công cụ sau này). MCP c",
+   "text": "**Ưu tiên CLI hơn MCP** khi agent giao tiếp với công cụ (Blender, robot, các công cụ sau này). MCP chỉ dùng khi không có CLI tương đương",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 18,
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L19",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "18.2",
    "type": "Decision",
    "label": "Vật lý vẫn do MuJoCo lo (8.5, 13.3). Blender không dùng để mô phỏng vật lý",
@@ -1294,8 +1307,8 @@
    "label": "Agent giao tiếp với Blender qua **Blender CLI** chạy không giao diện (`blender -b models/spider.blen",
    "text": "Agent giao tiếp với Blender qua **Blender CLI** chạy không giao diện (`blender -b models/spider.blend --python <script> -- <args>`). Agent nào cũng dùng được qua Bash, không cần Blender đang mở. MCP chỉ là tuỳ chọn để xem hoặc chỉnh trên Blender đang mở",
    "decided_by": "user",
-   "status": "pending",
-   "status_raw": "Chờ chốt",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L15",
    "since": "2026-10-20",
