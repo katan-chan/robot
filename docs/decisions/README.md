@@ -34,6 +34,7 @@ Mọi quyết định đều sửa được về sau.
 | 9 | [09-review.md](09-review.md) | Review bởi subagent: sửa lỗi, ghi chú kỹ thuật, câu hỏi còn lại |
 | 10 | [10-harness-agent.md](10-harness-agent.md) | Harness cho agent: CLAUDE.md, AGENTS.md, hooks kiểm tra khả thi |
 | 11 | [11-record-bug-trace.md](11-record-bug-trace.md) | Module record: ghi lần chạy, replay, ghi bug, trace |
+| 12 | [12-controller-web.md](12-controller-web.md) | Trang web controller qua internet, xem robot trên web, danh mục servo |
 
 `brainstorm-log.md` là bản nháp đầu tiên viết gộp một file. Đã được thay bằng các file 01–10, chỉ giữ để tham khảo.
 
@@ -45,14 +46,16 @@ Mọi quyết định đều sửa được về sau.
 - Harness có được duyệt không? → Có, 10.4–10.11 (11.1).
 - Có dùng git không? → Có (11.13).
 - Có dùng agent khác không? → Có thể (11.14).
+- Trang web điều khiển ở mức nào? → Một controller, điều khiển qua internet (12.1).
+- Xem robot ở đâu? → Cách đơn giản, dễ nhìn nhất (12.2), đề xuất ở 12.5.
+- Servo nào? → Phải thay được (12.3), đề xuất danh mục servo ở 12.7.
 
 ## Câu hỏi còn mở
 
-1. Trang web điều khiển ở mức nào: lệnh hướng và tốc độ, từng khớp, hay cả hai? Có cần rẽ và xoay tại chỗ không? → Bước 9
-2. Xem robot ở đâu: trong trình duyệt, hay trong viewer MuJoCo? Chỉ dùng trên Mac này hay cả từ máy khác? → Bước 9
-3. Mô phỏng theo loại servo nào? (đề xuất MG90S) → Bước 9
-4. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
-5. Có đẩy repo lên remote (GitHub…) không? → Bước 11
+1. Ai được điều khiển qua internet: chỉ bạn, hay cả người khác? → Bước 12
+2. Thiết kế module record (11.5–11.16) đã duyệt chưa? → Bước 11
+3. Robot có cần bò trên tường và trần không? Để tới T5.1. → Bước 4
+4. Có đẩy repo lên remote (GitHub…) không? → Bước 11
 
 ## Đang chờ chốt
 
@@ -69,3 +72,4 @@ Mọi quyết định đều sửa được về sau.
 | 9.1–9.6 | Ghi chú kỹ thuật: servo, bộ giải, va chạm, ngưỡng kiểm tra, mô-men, kiến trúc web | Bước 9 |
 | 11.5–11.12 | Record: thư mục mỗi lần chạy, lệnh theo số bước, replay, file bug, test hồi quy, nút báo bug, luật sửa bug, định dạng | Bước 11 |
 | 11.15–11.16 | Hook cho Claude Code và Codex; nội dung `.gitignore` | Bước 11 |
+| 12.4–12.9 | Lệnh controller, xem robot qua khung hình gửi về web, danh mục servo, truy cập qua Tailscale | Bước 12 |
