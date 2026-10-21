@@ -52,7 +52,7 @@
                "pos": [x,y,z], "quat": [w,x,y,z],          // so với link cha, đơn vị m
                "joint": {"name": "fl_hip_pitch", "kind": "hip_pitch", "axis": [0,-1,0], "range": [lo,hi]},  // rad; torso: null
                "servo": "MG90S", "mesh": "meshes/fl_femur.obj",
-               "servos_on_body": [ {"name": "fl_knee_servo", "drives": "fl_knee", "mesh": "meshes/fl_knee_servo.obj"} ],
+               "servos_on_body": [ {"name": "fl_knee_servo", "drives": "fl_knee", "mesh": "meshes/fl_knee_servo.obj", "pos": [x,y,z], "quat": [w,x,y,z]} ],  // pos/quat so với body mang servo (thêm ở Task 5)
                "foot": null } ] }                            // tibia: {"name":"fl_foot","pos":[…],"radius":0.008}
 ```
 
@@ -294,7 +294,7 @@ def test_feet_match_blender_at_home(exported, inspected):      # Review Focus 4
     mujoco.mj_resetDataKeyframe(m, d, m.key("home").id); mujoco.mj_kinematics(m, d)
     for leg in ("fl", "fr", "rl", "rr"):
         got = d.site(f"{leg}_foot").xpos - d.body("torso").xpos
-        want = np.subtract(inspected["feet"][leg], inspected["feet"]["torso_origin"])
+        want = np.subtract(inspected["feet"][f"{leg}_foot"], inspected["feet"]["torso_origin"])
         assert np.allclose(got, want, atol=1e-6)
 
 def test_stand_keyframe_feet_on_floor(exported):               # Review Focus 5
@@ -320,13 +320,13 @@ def test_stand_keyframe_feet_on_floor(exported):               # Review Focus 5
 - `snapshot(m, out_dir, keyframe="stand") -> list[Path]`: 4 ảnh MuJoCo `front`, `side`, `top`, `iso`, vẽ bằng `mujoco.Renderer` + Pillow.
 - CLI `uv run python -m spider.sim.view [--keyframe stand|home] [--snapshot DIR] [--parts]`: không cờ thì mở `mujoco.viewer.launch`.
 
-- [ ] **Step 1: Test** `tests/test_view.py`:
+- [x] **Step 1: Test** `tests/test_view.py`:
   - Tổng `mass_g` = `mj_getTotalmass × 1000`.
   - Dòng `fl_tibia` có `joint == "fl_knee"`, `servo == "MG90S"`, `range_deg ≈ (-30, 150)`.
   - `snapshot` ghi 4 PNG có `std > 5`.
   - `tools/blender render --out tmp --views front,side,top,iso` ghi 4 PNG có `std > 5`.
-- [ ] **Step 2–4:** FAIL → viết → PASS. **Step 5: Commit** `feat(view): parts table, MuJoCo viewer and snapshots`.
-- [ ] **Step 6: [coordinator, sau khi gộp]** chạy `tools/blender render --out docs/reference/g1/blender`, `uv run python -m spider.sim.view --snapshot docs/reference/g1/mujoco`, và `--parts`. Viết `docs/reference/g1/README.md` gồm:
+- [x] **Step 2–4:** FAIL → viết → PASS. **Step 5: Commit** `feat(view): parts table, MuJoCo viewer and snapshots`.
+- [x] **Step 6: [coordinator, sau khi gộp]** chạy `tools/blender render --out docs/reference/g1/blender`, `uv run python -m spider.sim.view --snapshot docs/reference/g1/mujoco`, và `--parts`. Viết `docs/reference/g1/README.md` gồm:
   - Ảnh Blender và ảnh MuJoCo đặt cạnh nhau.
   - Bảng thành phần.
   - Cách xem trong Blender: mở `models/spider.blend`; Outliner → collection `robot` để thấy cây link; chọn link → N-panel → Item → Custom Properties để xem `joint`, `axis`, `range_deg`, `servo`.

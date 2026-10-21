@@ -50,11 +50,15 @@ uv run tools/kb.py impact 12.7      # đổi 12.7 thì ảnh hưởng tới đâ
 uv run tools/kb.py deps T1.11       # task nào phải xong trước
 git config core.hooksPath .githooks # bật hook pre-commit, làm một lần sau khi clone
 uv run pytest -q                    # chạy toàn bộ test (mujoco==3.16.0, Python 3.12)
-tools/blender version               # Blender tìm thấy ở đâu, phiên bản nào (JSON một dòng)
+tools/blender version               # Blender tìm thấy ở đâu, phiên bản nào (JSON một dòng); BLENDER_BIN chọn Blender, BLENDER_TIMEOUT (mặc định 300 s)
 tools/blender build --out models/spider.blend [--servo knee=MG996R] [--force]  # dựng model khởi điểm
 tools/blender inspect [--blend models/spider.blend]  # kiểm model theo Quy ước, in link + bàn chân
 tools/blender exec --blend B --expr "<python bpy>"   # chạy code bpy rồi lưu file
 tools/blender render --out DIR [--views front,side,top,iso]  # ảnh PNG (Workbench)
+tools/blender export [--blend models/spider.blend] [--out build/model]  # robot.json + mesh OBJ cho MuJoCo
+uv run python -m spider.sim.view [--keyframe stand|home]  # mở viewer MuJoCo (cần export trước)
+uv run python -m spider.sim.view --parts                  # bảng thành phần, khối lượng đọc từ MuJoCo
+uv run python -m spider.sim.view --snapshot DIR [--keyframe home]  # 4 ảnh PNG từ MuJoCo
 ```
 
 Các lệnh sẽ có ở Phase 1, thêm vào đây khi task tương ứng xong:
