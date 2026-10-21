@@ -5,7 +5,7 @@ from pathlib import Path
 import mujoco
 from PIL import Image
 
-from spider.model.build import build_model
+from spider.model.build import DEFAULT_EXPORT, build_model
 from spider.model.parts import parts_markdown
 
 # azimuth, elevation (độ). MuJoCo đặt camera ở lookat − distance·(cos el·cos az, cos el·sin az, sin el),
@@ -47,7 +47,7 @@ def main():
     p.add_argument("--keyframe", default="stand", choices=["stand", "home"])
     p.add_argument("--snapshot", type=Path, metavar="DIR")
     p.add_argument("--parts", action="store_true")
-    p.add_argument("--export-dir", type=Path, default=Path("build/model"))
+    p.add_argument("--export-dir", type=Path, default=DEFAULT_EXPORT)
     a = p.parse_args()
     m = build_model(a.export_dir)
     if a.parts:

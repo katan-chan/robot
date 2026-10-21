@@ -1,6 +1,6 @@
 """Dựng mujoco.MjSpec từ build/model/ (robot.json + meshes, xuất từ Blender) và TOML vật lý.
 Khối lượng gán vào geom, quán tính và vị trí chân do MuJoCo tính (13.2)."""
-import json
+import hashlib, json
 from pathlib import Path
 
 import mujoco
@@ -9,6 +9,9 @@ import numpy as np
 from spider.model.config import JOINT_KINDS, Physics, Servo, load_physics, load_servos
 from spider.sim.scene import add_scene
 
+ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_EXPORT = ROOT / "build/model"
+SOURCE_BLEND = ROOT / "models/spider.blend"
 LEGS = ("fl", "fr", "rl", "rr")
 ACTUATORS = [f"{leg}_{kind}" for leg in LEGS for kind in JOINT_KINDS]
 G = mujoco.mjtGeom
@@ -35,12 +38,15 @@ def _add_keys(spec: mujoco.MjSpec, physics: Physics):
         spec.add_key(name=name, qpos=d.qpos.tolist(), ctrl=ctrl)
 
 
-def build_spec(export_dir: Path = Path("build/model"), physics: Physics | None = None,
+def build_spec(export_dir: Path | None = None, physics: Physics | None = None,
                servos: dict[str, Servo] | None = None) -> mujoco.MjSpec:
-    export_dir = Path(export_dir).resolve()
+    export_dir = Path(export_dir or DEFAULT_EXPORT).resolve()
     physics = physics or load_physics()
     servos = servos or load_servos()
     robot = json.loads((export_dir / "robot.json").read_text())
+    if export_dir == Path(DEFAULT_EXPORT).resolve() and \
+            robot["source_sha256"] != hashlib.sha256(Path(SOURCE_BLEND).read_bytes()).hexdigest():
+        raise ValueError(f"{export_dir} cũ, không khớp {SOURCE_BLEND} (source_sha256 khác): chạy tools/blender export")
     drives = {l["joint"]["name"]: servos[l["servo"]] for l in robot["links"] if l["joint"]}
     density = physics.density * physics.fill
 
@@ -87,6 +93,6 @@ def build_spec(export_dir: Path = Path("build/model"), physics: Physics | None =
     return spec
 
 
-def build_model(export_dir: Path = Path("build/model"), physics: Physics | None = None,
+def build_model(export_dir: Path | None = None, physics: Physics | None = None,
                 servos: dict[str, Servo] | None = None) -> mujoco.MjModel:
     return build_spec(export_dir, physics, servos).compile()

@@ -71,6 +71,19 @@ def test_compiles_with_12_named_position_servos(exported):     # check:mjcf-comp
     assert [m.actuator(i).name for i in range(m.nu)] == ACTUATORS and m.nbody == 14 and m.njnt == 13
 
 
+def test_default_export_dir_must_match_source_blend(exported, tmp_path, monkeypatch):
+    import spider.model.build as b
+    assert b.DEFAULT_EXPORT == ROOT / "build/model" and b.SOURCE_BLEND == ROOT / "models/spider.blend"  # không theo cwd
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(b, "DEFAULT_EXPORT", exported)
+    monkeypatch.setattr(b, "SOURCE_BLEND", exported.parent / "s.blend")
+    assert b.build_model().nu == 12                                 # khớp nguồn
+    (tmp_path / "edited.blend").write_bytes(b"sua sau khi export")
+    monkeypatch.setattr(b, "SOURCE_BLEND", tmp_path / "edited.blend")
+    with pytest.raises(ValueError, match="tools/blender export"):
+        b.build_model()
+
+
 def test_total_mass_in_budget(exported):                       # 9.5
     assert 0.25 <= mujoco.mj_getTotalmass(build_model(exported)) <= 0.35
 

@@ -5,8 +5,10 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
+from spider.model.build import DEFAULT_EXPORT
 
-def parts_table(m: mujoco.MjModel, export_dir: Path = Path("build/model")) -> list[dict]:
+
+def parts_table(m: mujoco.MjModel, export_dir: Path = DEFAULT_EXPORT) -> list[dict]:
     """13 dòng (torso + 12 link). Tên servo nằm trong robot.json của bản export, không có trong MjModel."""
     servo = {l["name"]: l["servo"] for l in json.loads((Path(export_dir) / "robot.json").read_text())["links"]}
     rows = []
@@ -26,7 +28,7 @@ def parts_table(m: mujoco.MjModel, export_dir: Path = Path("build/model")) -> li
     return rows
 
 
-def parts_markdown(m: mujoco.MjModel, export_dir: Path = Path("build/model")) -> str:
+def parts_markdown(m: mujoco.MjModel, export_dir: Path = DEFAULT_EXPORT) -> str:
     lines = ["| body | parent | joint | range (deg) | servo | mass (g) | geoms |", "|---|---|---|---|---|---|---|"]
     for r in parts_table(m, export_dir):
         rng = "-" if r["range_deg"] is None else f"{r['range_deg'][0]:.0f} .. {r['range_deg'][1]:.0f}"
