@@ -1,6 +1,8 @@
 import hashlib, json, math, subprocess
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -45,10 +47,11 @@ def test_build_refuses_to_overwrite_without_force(tmp_path):
     assert hashlib.sha256(b.read_bytes()).hexdigest() == before
 
 
-def test_inspect_rejects_scaled_object(tmp_path):                 # Review Focus 1
+@pytest.mark.parametrize("prop", ["scale", "delta_scale"])
+def test_inspect_rejects_scaled_object(tmp_path, prop):           # Review Focus 1
     b = build(tmp_path)
     assert run("exec", "--blend", str(b), "--expr",
-               'bpy.data.objects["fl_femur"].scale = (1000, 1000, 1000)')[0] == 0
+               f'bpy.data.objects["fl_femur"].{prop} = (1000, 1000, 1000)')[0] == 0
     code, r = run("inspect", "--blend", str(b))
     assert code == 1
     assert any(e["check"] == "scale" and e["object"] == "fl_femur" for e in r["errors"])

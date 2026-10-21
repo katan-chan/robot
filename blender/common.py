@@ -67,10 +67,11 @@ def validate(scene, servos):
     if objs is None:
         return e + [err("collection", "robot", "không có collection 'robot' trong scene", "tạo collection 'robot' chứa mọi object của robot")]
 
-    for o in objs.values():
-        if any(abs(s - 1) > 1e-9 for s in o.scale):
-            e.append(err("scale", o.name, f"scale = {tuple(round(s, 6) for s in o.scale)}, cần (1, 1, 1)",
-                         "Object > Apply > Scale, hoặc sửa kích thước trong mesh"))
+    for o in objs.values():   # scale thế giới: gồm scale, delta_scale, cha, parent inverse; sai số float32
+        s = o.matrix_world.to_scale()
+        if any(abs(v - 1) > 1e-6 for v in s):
+            e.append(err("scale", o.name, f"scale thế giới = {tuple(round(v, 6) for v in s)}, cần (1, 1, 1)",
+                         "Object > Apply > Scale (cả Delta Scale), hoặc sửa kích thước trong mesh"))
 
     for name, (parent, kind) in LINKS.items():
         o = objs.get(name)
