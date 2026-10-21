@@ -1,3 +1,5 @@
+import itertools
+
 import mujoco
 import numpy as np
 import pytest
@@ -5,7 +7,7 @@ from PIL import Image
 
 from spider.model.build import build_model
 from spider.model.parts import parts_markdown, parts_table
-from spider.sim.view import snapshot
+from spider.sim.view import camera, snapshot
 from tests.test_build import blender, build_and_export
 
 
@@ -31,12 +33,31 @@ def test_parts_table(model, exported):
 
 def _check(paths):
     assert len(paths) == 4
-    for p in paths:
-        assert np.asarray(Image.open(p)).std() > 5, p
+    imgs = [np.asarray(Image.open(p).convert("RGB"), float) for p in paths]
+    for p, a in zip(paths, imgs):
+        assert a.std() > 5, p
+    for (p, a), (q, b) in itertools.combinations(zip(paths, imgs), 2):  # bốn góc nhìn phải khác nhau
+        assert (np.abs(a - b).max(axis=-1) > 10).mean() > 0.005, (p, q)
 
 
 def test_snapshot(model, tmp_path):
     _check(snapshot(model, tmp_path))
+
+
+BLENDER_VIEWS = {"front": (1, 0, 0), "side": (0, 1, 0), "top": (0, 0, 1), "iso": (1, 1, 1)}  # blender/render_views.py
+
+
+def test_snapshot_cameras_match_blender_views(model):
+    d = mujoco.MjData(model); mujoco.mj_forward(model, d)
+    with mujoco.Renderer(model, 48, 64) as r:
+        for name, want in BLENDER_VIEWS.items():
+            r.update_scene(d, camera(model, d, name))
+            left, right = r.scene.camera[0], r.scene.camera[1]   # hai mắt stereo, lấy trung điểm
+            eye = (np.array(left.pos) + right.pos) / 2 - d.body("torso").xpos
+            cos = eye @ want / np.linalg.norm(eye) / np.linalg.norm(want)
+            assert cos > np.cos(np.radians(10)), name  # cùng phía, lệch ≤ 10° (MuJoCo hạ camera 5° cho thấy sàn)
+            if name == "top":
+                assert left.up[1] > 0.99  # +y lên trên ảnh, như Blender
 
 
 def test_blender_render(exported, tmp_path):
