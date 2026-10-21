@@ -16,7 +16,7 @@ Ngày: 2026-10-20.
 - Một file cảnh MJCF: sàn phẳng, ánh sáng, trọng lực, và một khối hộp thả từ trên cao để thử vật lý.
 - Mở cảnh bằng viewer của MuJoCo (`python -m mujoco.viewer`; chỉ `launch_passive` mới bắt buộc `mjpython`).
 - Một script kiểm tra chạy không cần màn hình: mô phỏng vài giây, xác nhận khối hộp rơi xuống và nằm yên trên sàn.
-- Kiểm tra `uv run mjpython` có chạy không. Với Python do uv quản lý, lệnh này hay lỗi `Library not loaded: @rpath/libpython3.12.dylib`. Nếu lỗi thì ghi lại cách xử lý.
+- Kiểm tra `uv run mjpython` có chạy không. Với Python do uv quản lý, lệnh này hay lỗi `Library not loaded: @rpath/libpython3.12.dylib`. Nếu lỗi thì ghi lại cách xử lý. Không cần nữa: viewer là công cụ riêng `mujoco.viewer.launch`, không dùng `mjpython` (Đã thay → 14.1).
 - Ghim phiên bản `mujoco` trong uv, vì MuJoCo ra bản mới vài tuần một lần và hay đổi API actuator.
 
 **Thành công khi:**
