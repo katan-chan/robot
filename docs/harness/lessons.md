@@ -34,3 +34,12 @@ Mẫu:
 - Chuyện gì xảy ra: thiết kế "phiên chính bị hook chặn sửa code, giao code cho subagent" bị bộ kiểm hiểu là lách luật. Agent cũng không được tự đổi quyền của mình
 - Bài học: chạy kế hoạch ở chế độ thường (không auto mode), hoặc người dùng thêm `allow: Agent` trong `.claude/settings.json` (17.11). Quyền chỉ người dùng sửa
 - Đã thành luật chưa: chưa
+
+## L-004: Review từng task không thấy lỗi ở chỗ nối giữa các task
+- Ngày: 2026-10-21
+- Bằng chứng: review cuối d37c7b5..17cf137 tìm ra góc camera MuJoCo (Task 6) lệch với Blender (Task 4), và chưa test nào chạy trên `models/spider.blend` đã commit; review từng task đều Approved; sửa ở c8d0d6e, f68560d
+- Chuyện gì xảy ra: mỗi reviewer chỉ đọc diff của một task nên không so quy ước giữa hai task
+- Bài học: brief của task dùng lại quy ước từ task trước (góc nhìn, tên khoá, đơn vị) phải chép quy ước đó vào brief; review cuối phải soát riêng các chỗ nối
+- Đã thành luật chưa: chưa
+
+Ghi thêm cho L-003 (2026-10-21, phiên sau): giao việc cho subagent ở auto mode lần này không bị chặn (Task 3–6, review cuối). Bộ kiểm có thể đổi hành vi theo phiên, nên vẫn giữ cách xử lý trong L-003 khi bị chặn.
