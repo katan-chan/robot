@@ -145,7 +145,10 @@ def collect(scene):
                 "name": o["joint"], "kind": kind, "axis": [float(v) for v in o["axis"]],
                 "range": [math.radians(v) for v in o["range_deg"]]},
             "servo": o.get("servo"),
-            "servos_on_body": [{"name": c.name, "drives": c.name.removesuffix("_servo")}
+            # pos/quat của hộp servo so với link chứa nó (mesh OBJ ở khung cục bộ của hộp)
+            "servos_on_body": [{"name": c.name, "drives": c.name.removesuffix("_servo"),
+                                "pos": _r((o.matrix_world.inverted() @ c.matrix_world).to_translation()),
+                                "quat": _r((o.matrix_world.inverted() @ c.matrix_world).to_quaternion())}
                                for c in sorted(o.children, key=lambda c: c.name) if c.name.endswith("_servo")],
             "foot": foot,
         })

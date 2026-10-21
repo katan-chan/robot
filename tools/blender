@@ -6,7 +6,7 @@
 """Chạy Blender không giao diện cho repo này (18.7, 18.11).
 
 In đúng một dòng JSON ra stdout. Exit 0 khi "ok": true, exit 1 khi có lỗi.
-Lệnh con: version | build | inspect | exec | render. Xem blender/*.py.
+Lệnh con: version | build | inspect | export | exec | render. Xem blender/*.py.
 """
 import argparse, json, os, shutil, subprocess, sys, tempfile
 from pathlib import Path
@@ -17,7 +17,7 @@ CANDIDATES = (
     Path.home() / "Library/Application Support/Steam/steamapps/common/Blender/Blender.app/Contents/MacOS/Blender",
     Path("/Applications/Blender.app/Contents/MacOS/Blender"),
 )
-SCRIPTS = {"build": "build_spider.py", "inspect": "inspect_model.py", "render": "render_views.py"}
+SCRIPTS = {"build": "build_spider.py", "inspect": "inspect_model.py", "export": "export_model.py", "render": "render_views.py"}
 # a = các tham số sau "--": ["--result", <tmp.json>, ...]
 VERSION_EXPR = ("import bpy, sys, json, platform; a = sys.argv[sys.argv.index('--') + 1:]; "
                 "json.dump({'ok': True, 'blender': '.'.join(map(str, bpy.app.version)), "
@@ -57,6 +57,9 @@ def main():
     s.add_argument("--force", action="store_true")
     s = sub.add_parser("inspect")
     s.add_argument("--blend", type=Path, default=DEFAULT_BLEND)
+    s = sub.add_parser("export")
+    s.add_argument("--blend", type=Path, default=DEFAULT_BLEND)
+    s.add_argument("--out", type=Path, default=ROOT / "build/model")
     s = sub.add_parser("exec")
     s.add_argument("--blend", type=Path, required=True)
     s.add_argument("--expr", required=True)
@@ -93,6 +96,8 @@ def main():
             cmd.append(a.expr)
         elif a.cmd == "render":
             cmd += ["--out", str(a.out.resolve()), "--views", a.views]
+        elif a.cmd == "export":
+            cmd += ["--out", str(a.out.resolve())]
         proc = subprocess.run(cmd, capture_output=True, text=True)
         try:
             out = json.loads(result.read_text())
