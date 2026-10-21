@@ -64,7 +64,7 @@ Worker chỉ được dựa vào hợp đồng. Muốn đổi hợp đồng thì
 
 Mỗi verifier trả lời **một câu hỏi khác nhau**, ở **context riêng** (không phải agent đã viết code). Kết luận phải dựa vào con số đo được, không dựa vào lời tự khai của worker.
 
-Trên Claude Code, implementer và worker chạy trong git worktree riêng (`isolation: "worktree"`), commit trên nhánh riêng. Coordinator gộp bằng `git merge --ff-only` sau khi test và verifier qua (17.4). Hook `coordinator-guard.sh` chặn phiên chính sửa code ở checkout chính (17.5). Verifier nằm ở `.claude/agents/` và chỉ đọc.
+Trên Claude Code, implementer và worker chạy trong git worktree riêng (`isolation: "worktree"`), commit trên nhánh riêng. Coordinator gộp bằng `git merge --ff-only` sau khi test và verifier qua (17.4). Gộp xong thì xoá worktree và branch (17.8). Ở giai đoạn song song, worker rebase lên `main` mới nhất và chạy lại test trước khi gộp, để vẫn fast-forward được (17.9). Hook `coordinator-guard.sh` chặn phiên chính sửa code ở checkout chính (17.5). Verifier nằm ở `.claude/agents/` và chỉ đọc.
 
 **Mỗi lần giao việc**, coordinator gửi cho subagent:
 - task và khối Interfaces của task đó, lấy từ kế hoạch;

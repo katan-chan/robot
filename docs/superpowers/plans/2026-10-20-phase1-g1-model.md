@@ -74,8 +74,8 @@ Mesh OBJ ghi trong **khung cục bộ của object** (origin = khớp). `pos`/`q
 
 **Interfaces:** Produces package `spider` cài được ở chế độ editable; `uv run pytest` chạy được.
 
-- [ ] **Step 1:** `pyproject.toml`: `name = "spider"`, `requires-python = ">=3.12,<3.13"`, build backend `hatchling`, packages `["spider"]`. Chạy `uv python pin 3.12`, `uv add "mujoco>=3.7"`, `uv add Pillow`, `uv add --dev pytest`. Sửa dòng mujoco thành `mujoco==<bản vừa cài>`, rồi `uv lock`.
-- [ ] **Step 2: Test** `tests/test_env.py`
+- [x] **Step 1:** `pyproject.toml`: `name = "spider"`, `requires-python = ">=3.12,<3.13"`, build backend `hatchling`, packages `["spider"]`. Chạy `uv python pin 3.12`, `uv add "mujoco>=3.7"`, `uv add Pillow`, `uv add --dev pytest`. Sửa dòng mujoco thành `mujoco==<bản vừa cài>`, rồi `uv lock`.
+- [x] **Step 2: Test** `tests/test_env.py`
 
 ```python
 import tomllib, importlib.metadata, pathlib, re, sys
@@ -92,9 +92,9 @@ def test_python_is_312():
     assert sys.version_info[:2] == (3, 12)
 ```
 
-- [ ] **Step 3:** `uv run pytest tests/test_env.py -v` → PASS.
-- [ ] **Step 4: Commit** `feat(env): uv project with pinned mujoco (T0.1)`. Báo phiên bản mujoco cho coordinator.
-- [ ] **Step 5: [coordinator]** thêm dòng 16.5 (ghim `mujoco==X.Y.Z`, Python 3.12) vào `docs/decisions/16-gate-dau-tien.md`; thêm `uv run pytest -q` vào mục Lệnh của `AGENTS.md`.
+- [x] **Step 3:** `uv run pytest tests/test_env.py -v` → PASS.
+- [x] **Step 4: Commit** `feat(env): uv project with pinned mujoco (T0.1)`. Báo phiên bản mujoco cho coordinator.
+- [x] **Step 5: [coordinator]** thêm dòng 16.5 (ghim `mujoco==X.Y.Z`, Python 3.12) vào `docs/decisions/16-gate-dau-tien.md`; thêm `uv run pytest -q` vào mục Lệnh của `AGENTS.md`.
 
 ---
 
@@ -109,7 +109,7 @@ def test_python_is_312():
 - `box_drop_spec(height: float = 0.5, half: float = 0.05) -> mujoco.MjSpec`
   - Hộp `box` có freejoint, `contype=1`, `conaffinity=0`, khối lượng 0.1 kg.
 
-- [ ] **Step 1: Test**
+- [x] **Step 1: Test**
 
 ```python
 import mujoco, numpy as np
@@ -126,8 +126,8 @@ def test_scene_solver_settings():                  # 9.2
     assert m.opt.timestep == 0.002 and m.opt.integrator == mujoco.mjtIntegrator.mjINT_IMPLICITFAST
 ```
 
-- [ ] **Step 2:** chạy → FAIL. **Step 3:** viết bằng API `MjSpec` (kiểm tên thuộc tính theo phiên bản đã ghim). **Step 4:** chạy → PASS. **Step 5: Commit** `feat(sim): scene and box-drop smoke test (T0.2, T0.3)`.
-- [ ] **Step 6: [coordinator]** ghi chú trong `docs/decisions/06-moi-truong-mo-phong.md`: kiểm `mjpython` → "Đã thay → 14.1".
+- [x] **Step 2:** chạy → FAIL. **Step 3:** viết bằng API `MjSpec` (kiểm tên thuộc tính theo phiên bản đã ghim). **Step 4:** chạy → PASS. **Step 5: Commit** `feat(sim): scene and box-drop smoke test (T0.2, T0.3)`.
+- [x] **Step 6: [coordinator]** ghi chú trong `docs/decisions/06-moi-truong-mo-phong.md`: kiểm `mjpython` → "Đã thay → 14.1".
 
 ---
 

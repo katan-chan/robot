@@ -1133,6 +1133,45 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "17.10",
+   "type": "Decision",
+   "label": "Tiến độ kế hoạch ghi trong git: coordinator đánh dấu `- [x]` các bước đã xong trong file kế hoạch, c",
+   "text": "Tiến độ kế hoạch ghi trong git: coordinator đánh dấu `- [x]` các bước đã xong trong file kế hoạch, commit cùng bước coordinator của task (17.7)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L18",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.11",
+   "type": "Decision",
+   "label": "Cổng người dùng (task-graph.md mục 5) chặn bằng máy trong `.claude/settings.json` → `permissions`: `",
+   "text": "Cổng người dùng (task-graph.md mục 5) chặn bằng máy trong `.claude/settings.json` → `permissions`: `allow` `Agent`; `ask` `git push`, `git remote add/set-url`, `tailscale`; `deny` `tailscale funnel`, `--no-verify`. Agent không được tự sửa quyền của mình, nên **người dùng tự sửa file này**",
+   "decided_by": "user-confirmed",
+   "status": "pending",
+   "status_raw": "Chờ chốt",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L19",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.12",
+   "type": "Decision",
+   "label": "`.claude/worktrees/` vào `.gitignore`, để `git add -A` không commit nhầm worktree thành gitlink. Imp",
+   "text": "`.claude/worktrees/` vào `.gitignore`, để `git add -A` không commit nhầm worktree thành gitlink. Implementer làm cùng Task 3",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L20",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "17.2",
    "type": "Decision",
    "label": "Agent chính (phiên chính, coordinator) **chỉ điều phối**: chia việc, giao việc, gọi verifier, gộp, g",
@@ -1207,6 +1246,32 @@
    "status_raw": "Đang áp dụng",
    "step": 17,
    "src": "docs/decisions/17-dieu-phoi-subagent.md#L15",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.8",
+   "type": "Decision",
+   "label": "Sau mỗi lần gộp, coordinator xoá worktree và branch đã gộp (`git worktree remove`, rồi `git branch -",
+   "text": "Sau mỗi lần gộp, coordinator xoá worktree và branch đã gộp (`git worktree remove`, rồi `git branch -d`; lệnh này từ chối branch chưa gộp)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L16",
+   "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "17.9",
+   "type": "Decision",
+   "label": "Giai đoạn song song: worker rebase nhánh của mình lên `main` mới nhất, chạy lại test, rồi coordinato",
+   "text": "Giai đoạn song song: worker rebase nhánh của mình lên `main` mới nhất, chạy lại test, rồi coordinator gộp `--ff-only`. Lịch sử `main` giữ thẳng",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 17,
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L17",
    "since": "2026-10-20",
    "by": "rule:decision-table"
   },
@@ -4183,6 +4248,14 @@
    "rel": "CONSTRAINS",
    "src": "docs/decisions/17-dieu-phoi-subagent.md#L9",
    "to": "harness:subagents"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "17.10",
+   "rel": "CITES",
+   "src": "docs/decisions/17-dieu-phoi-subagent.md#L18",
+   "to": "17.7"
   },
   {
    "by": "curated",

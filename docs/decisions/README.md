@@ -70,4 +70,4 @@ Mọi quyết định đều sửa được về sau.
 
 ## Đang chờ chốt
 
-Không còn mục nào.
+- 17.11: người dùng tự thêm `permissions` vào `.claude/settings.json` (agent không được tự sửa quyền).
