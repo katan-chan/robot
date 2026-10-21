@@ -1,4 +1,4 @@
-import json, math, subprocess
+import json, math, shutil, subprocess
 from pathlib import Path
 
 import mujoco
@@ -111,3 +111,14 @@ def test_stand_keyframe_feet_on_floor(exported):               # Review Focus 5
     lowest = min(d.site(f"{l}_foot").xpos[2] for l in ("fl", "fr", "rl", "rr"))
     assert abs(lowest - m.geom("fl_foot_geom").size[0]) < 1e-4
     assert np.allclose(d.ctrl, m.key("stand").qpos[7:])
+
+
+def test_stand_uses_each_foot_radius(exported, tmp_path):
+    out = tmp_path / "model"; shutil.copytree(exported, out)
+    r = json.loads((out / "robot.json").read_text())
+    next(l for l in r["links"] if l["name"] == "fl_tibia")["foot"]["radius"] = 0.02   # fl to hơn, các chân khác 0.008
+    (out / "robot.json").write_text(json.dumps(r))
+    m = build_model(out); d = mujoco.MjData(m)
+    mujoco.mj_resetDataKeyframe(m, d, m.key("stand").id); mujoco.mj_kinematics(m, d)
+    bottoms = [d.site(f"{l}_foot").xpos[2] - m.geom(f"{l}_foot_geom").size[0] for l in ("fl", "fr", "rl", "rr")]
+    assert abs(min(bottoms)) < 1e-9

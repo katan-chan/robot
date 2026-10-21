@@ -20,8 +20,9 @@ def _bbox(obj: Path):
     return v.min(axis=0), v.max(axis=0)
 
 
-def _add_keys(spec: mujoco.MjSpec, physics: Physics, foot_radius: float):
-    """home: mọi khớp 0; stand: theo physics.stand. Dời z thân để bàn chân thấp nhất chạm sàn."""
+def _add_keys(spec: mujoco.MjSpec, physics: Physics):
+    """home: mọi khớp 0; stand: theo physics.stand. Dời z thân để đáy cầu bàn chân thấp nhất
+    (tâm − bán kính của chính chân đó) chạm sàn."""
     m = spec.compile()
     d = mujoco.MjData(m)
     for name, angle in (("home", dict.fromkeys(JOINT_KINDS, 0.0)), ("stand", physics.stand)):
@@ -30,8 +31,7 @@ def _add_keys(spec: mujoco.MjSpec, physics: Physics, foot_radius: float):
         for a, q in zip(ACTUATORS, ctrl):
             d.qpos[m.joint(a).qposadr[0]] = q
         mujoco.mj_kinematics(m, d)
-        lowest = min(d.site(f"{leg}_foot").xpos[2] for leg in LEGS)
-        d.qpos[2] += foot_radius - lowest
+        d.qpos[2] -= min(d.site(f"{leg}_foot").xpos[2] - m.geom(f"{leg}_foot_geom").size[0] for leg in LEGS)
         spec.add_key(name=name, qpos=d.qpos.tolist(), ctrl=ctrl)
 
 
@@ -71,7 +71,6 @@ def build_spec(export_dir: Path = Path("build/model"), physics: Physics | None =
             b.add_joint(name=j["name"], type=mujoco.mjtJoint.mjJNT_HINGE, axis=j["axis"], range=j["range"],
                         limited=ON, armature=sv.armature, damping=sv.damping, frictionloss=sv.frictionloss)
         if f := l["foot"]:
-            foot_radius = f["radius"]
             b.add_geom(name=f"{f['name']}_geom", type=G.mjGEOM_SPHERE, size=[f["radius"], 0, 0], pos=f["pos"],
                        density=density, friction=[physics.foot_friction, 0.005, 0.0001], condim=3,
                        contype=1, conaffinity=0)
@@ -84,7 +83,7 @@ def build_spec(export_dir: Path = Path("build/model"), physics: Physics | None =
         a.forcelimited, a.forcerange = ON, [-sv.stall_torque, sv.stall_torque]
         a.ctrllimited, a.ctrlrange = ON, list(j.range)
 
-    _add_keys(spec, physics, foot_radius)
+    _add_keys(spec, physics)
     return spec
 
 
