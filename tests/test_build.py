@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from spider.model.build import ACTUATORS, build_model
+from spider.model.config import load_physics, load_servos
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -68,7 +69,23 @@ def test_export_refuses_non_export_dir(exported, tmp_path):
 
 def test_compiles_with_12_named_position_servos(exported):     # check:mjcf-compiles
     m = build_model(exported)
-    assert [m.actuator(i).name for i in range(m.nu)] == ACTUATORS and m.nbody == 14 and m.njnt == 13
+    assert [m.actuator(i).name for i in range(m.nu)] == [
+        "fl_hip_yaw", "fl_hip_pitch", "fl_knee", "fr_hip_yaw", "fr_hip_pitch", "fr_knee",
+        "rl_hip_yaw", "rl_hip_pitch", "rl_knee", "rr_hip_yaw", "rr_hip_pitch", "rr_knee"]
+    assert ACTUATORS == [m.actuator(i).name for i in range(m.nu)] and m.nbody == 14 and m.njnt == 13
+
+
+def test_actuators_and_joints_follow_config(exported):        # 9.1, 13.4
+    m, sv, ph = build_model(exported), load_servos()["MG90S"], load_physics()
+    for i in range(m.nu):
+        a = m.actuator(i); j = m.joint(a.name); dof = j.dofadr[0]
+        assert a.gainprm[0] == pytest.approx(sv.stall_torque / ph.kp_error)
+        assert np.allclose(a.ctrlrange, j.range)
+        assert (m.dof_damping[dof], m.dof_frictionloss[dof], m.dof_armature[dof]) == pytest.approx(
+            (sv.damping, sv.frictionloss, sv.armature))
+    for leg in ("fl", "fr", "rl", "rr"):
+        g = m.geom(f"{leg}_foot_geom")
+        assert g.friction[0] == pytest.approx(0.9) and g.condim[0] == 3
 
 
 def test_default_export_dir_must_match_source_blend(exported, tmp_path, monkeypatch):
