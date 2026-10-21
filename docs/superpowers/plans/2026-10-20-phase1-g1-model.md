@@ -201,7 +201,7 @@ def test_scene_solver_settings():                  # 9.2
   - Có 4 Empty bàn chân.
   - Có 12 hộp servo đúng tên.
 
-- [ ] **Step 1: Test** `tests/test_blender.py` (gọi `tools/blender` bằng `subprocess`, đọc JSON; mỗi test dựng file `.blend` riêng trong `tmp_path`, không đụng `models/spider.blend`):
+- [x] **Step 1: Test** `tests/test_blender.py` (gọi `tools/blender` bằng `subprocess`, đọc JSON; mỗi test dựng file `.blend` riêng trong `tmp_path`, không đụng `models/spider.blend`):
 
 ```python
 def run(*args): ...   # subprocess.run(["tools/blender", *args]) → (returncode, json.loads(stdout))
@@ -230,14 +230,14 @@ def test_inspect_rejects_bad_servo_and_wide_range(tmp_path):      # Review Focus
     # build hợp lệ, exec đặt range_deg của fl_tibia = [-30, 160] → lỗi check "range", object "fl_tibia"
 ```
 
-- [ ] **Step 2:** `uv run pytest tests/test_blender.py -v` → FAIL.
-- [ ] **Step 3:** viết `tools/blender` và `blender/*.py` theo Interfaces và Quy ước.
+- [x] **Step 2:** `uv run pytest tests/test_blender.py -v` → FAIL.
+- [x] **Step 3:** viết `tools/blender` và `blender/*.py` theo Interfaces và Quy ước.
   - `build_spider.py` dựng mesh bằng `bpy.data`/`bmesh`, không dùng `bpy.ops`, để chạy không giao diện cho ổn định: thân là hộp; mỗi đoạn chân là trụ dọc +x cục bộ; hộp servo; Empty bàn chân.
   - Tô màu giống ảnh tham khảo: thân xám, coxa xanh lá, femur tím, tibia đen.
-- [ ] **Step 4:** chạy → PASS.
-- [ ] **Step 5: Sinh model nguồn:** `tools/blender build --out models/spider.blend`, rồi `tools/blender inspect` → `"ok": true`.
-- [ ] **Step 6: Commit** `feat(blender): CLI wrapper, source model, inspect and render (T1.2)`, gồm cả `models/spider.blend`.
-- [ ] **Step 7: [coordinator]** mục Lệnh của `AGENTS.md`: `tools/blender version|build|inspect|exec|render`.
+- [x] **Step 4:** chạy → PASS.
+- [x] **Step 5: Sinh model nguồn:** `tools/blender build --out models/spider.blend`, rồi `tools/blender inspect` → `"ok": true`.
+- [x] **Step 6: Commit** `feat(blender): CLI wrapper, source model, inspect and render (T1.2)`, gồm cả `models/spider.blend`.
+- [x] **Step 7: [coordinator]** mục Lệnh của `AGENTS.md`: `tools/blender version|build|inspect|exec|render`.
 
 ---
 
