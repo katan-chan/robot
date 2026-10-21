@@ -12,7 +12,7 @@ from mathutils import Matrix
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as c
 
-TORSO = (0.10, 0.08, 0.035)                      # m, dài x rộng x cao
+TORSO = (0.10, 0.08, 0.010)                     # m, dài x rộng x cao
 LENGTH = {"coxa": 0.03, "femur": 0.055, "tibia": 0.075}
 SEG_RADIUS = 0.006
 FOOT_RADIUS = 0.008
