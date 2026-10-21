@@ -150,7 +150,7 @@ def test_scene_solver_settings():                  # 9.2
 - `parse_physics(d: dict) -> Physics`; `load_physics(path=PHYSICS) -> Physics`
 - Hằng `JOINT_KINDS = ("hip_yaw", "hip_pitch", "knee")`; đường dẫn `SERVOS`, `PHYSICS`.
 
-- [ ] **Step 1: `servos.toml`** (datasheet ở 4.8 V; `armature`, `damping`, `frictionloss` là **ước lượng**, ghi trong trường `source`, hiệu chỉnh ở Giai đoạn 8, 13.4):
+- [x] **Step 1: `servos.toml`** (datasheet ở 4.8 V; `armature`, `damping`, `frictionloss` là **ước lượng**, ghi trong trường `source`, hiệu chỉnh ở Giai đoạn 8, 13.4):
 
 | tên | stall_torque N·m | speed rad/s | mass kg | size m | travel_deg | armature kg·m² | damping | frictionloss |
 |---|---|---|---|---|---|---|---|---|
@@ -158,15 +158,15 @@ def test_scene_solver_settings():                  # 9.2
 | SG90 | 0.177 | 10.47 | 0.009 | [0.0222, 0.0118, 0.031] | 180 | 1.5e-4 | 0.01 | 0.01 |
 | MG996R | 0.92 | 6.16 | 0.055 | [0.0407, 0.0197, 0.0429] | 180 | 1e-3 | 0.05 | 0.05 |
 
-- [ ] **Step 2: `physics.toml`**, mỗi trường một dòng chú thích tiếng Việt kèm đơn vị:
+- [x] **Step 2: `physics.toml`**, mỗi trường một dòng chú thích tiếng Việt kèm đơn vị:
   - `torso_extra_mass = 0.10` (2 pin 18650 + mạch)
   - `[material] density = 1240` (PLA), `fill = 0.35` (ước lượng)
   - `[contact] foot_friction = 0.9`
   - `[actuator] kp_error_deg = 11.46`, `dampratio = 1.0`
   - `[stand_deg] hip_yaw = 0`, `hip_pitch = 30`, `knee = 100`
   - `[budget] mass_kg = [0.25, 0.35]` (9.5)
-- [ ] **Step 3: Test** `tests/test_config.py`: `load_physics()` đổi `knee` stand sang rad (`math.radians(100)`); `parse_physics` báo `ValueError` nêu tên trường khi `density <= 0`, `fill ∉ (0, 1]`, hoặc thiếu khoá `stand_deg.knee`; `load_servos()["MG996R"].stall_torque == 0.92` và `travel == math.radians(180)`.
-- [ ] **Step 4:** chạy → FAIL. **Step 5:** viết `config.py` bằng `tomllib` + `dataclasses`. **Step 6:** chạy → PASS. **Step 7: Commit** `feat(model): physics TOML and servo catalog (T1.1)`.
+- [x] **Step 3: Test** `tests/test_config.py`: `load_physics()` đổi `knee` stand sang rad (`math.radians(100)`); `parse_physics` báo `ValueError` nêu tên trường khi `density <= 0`, `fill ∉ (0, 1]`, hoặc thiếu khoá `stand_deg.knee`; `load_servos()["MG996R"].stall_torque == 0.92` và `travel == math.radians(180)`.
+- [x] **Step 4:** chạy → FAIL. **Step 5:** viết `config.py` bằng `tomllib` + `dataclasses`. **Step 6:** chạy → PASS. **Step 7: Commit** `feat(model): physics TOML and servo catalog (T1.1)`.
 
 ---
 
