@@ -49,6 +49,23 @@ def test_export_refuses_invalid_model(tmp_path):
     assert p.returncode == 1 and not (tmp_path / "m").exists()
 
 
+def test_export_replaces_output_dir(exported, tmp_path):
+    out = tmp_path / "m"
+    blender("export", "--blend", str(exported.parent / "s.blend"), "--out", str(out))
+    (out / "meshes/old_name.obj").write_text("stale")
+    blender("export", "--blend", str(exported.parent / "s.blend"), "--out", str(out))
+    assert not (out / "meshes/old_name.obj").exists() and (out / "robot.json").is_file()
+    assert [p.name for p in tmp_path.iterdir()] == ["m"]          # không để lại thư mục tạm
+
+
+def test_export_refuses_non_export_dir(exported, tmp_path):
+    (tmp_path / "keep.txt").write_text("x")                        # thư mục có dữ liệu khác, không có robot.json
+    p = subprocess.run([str(ROOT / "tools/blender"), "export", "--blend", str(exported.parent / "s.blend"),
+                        "--out", str(tmp_path)], cwd=ROOT, capture_output=True, text=True)
+    assert p.returncode == 1 and json.loads(p.stdout)["errors"][0]["check"] == "out"
+    assert [x.name for x in tmp_path.iterdir()] == ["keep.txt"]
+
+
 def test_compiles_with_12_named_position_servos(exported):     # check:mjcf-compiles
     m = build_model(exported)
     assert [m.actuator(i).name for i in range(m.nu)] == ACTUATORS and m.nbody == 14 and m.njnt == 13
