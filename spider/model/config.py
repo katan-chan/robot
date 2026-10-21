@@ -34,14 +34,25 @@ class Physics:
     mass_budget: tuple[float, float]  # kg
 
 
+SERVO_FIELDS = ("stall_torque", "speed", "mass", "size", "travel_deg", "armature", "damping", "frictionloss")
+SERVO_POSITIVE = ("stall_torque", "speed", "mass", "travel_deg")
+
+
+def _servo(n: str, s: dict) -> Servo:
+    for k in SERVO_FIELDS:
+        if k not in s:
+            raise ValueError(f"servo {n}: thiếu trường {k}")
+    for k in SERVO_POSITIVE:
+        if not s[k] > 0:
+            raise ValueError(f"servo {n}: {k} phải > 0, nhận {s[k]}")
+    return Servo(n, s["stall_torque"], s["speed"], s["mass"], tuple(s["size"]),
+                 math.radians(s["travel_deg"]), s["armature"], s["damping"], s["frictionloss"])
+
+
 def load_servos(path=SERVOS) -> dict[str, Servo]:
     with open(path, "rb") as f:
         raw = tomllib.load(f)
-    return {
-        n: Servo(n, s["stall_torque"], s["speed"], s["mass"], tuple(s["size"]),
-                 math.radians(s["travel_deg"]), s["armature"], s["damping"], s["frictionloss"])
-        for n, s in raw.items()
-    }
+    return {n: _servo(n, s) for n, s in raw.items()}
 
 
 def _get(d: dict, dotted: str):
@@ -52,10 +63,15 @@ def _get(d: dict, dotted: str):
     return d
 
 
+def _positive(d: dict, dotted: str):
+    v = _get(d, dotted)
+    if not v > 0:
+        raise ValueError(f"{dotted} phải > 0, nhận {v}")
+    return v
+
+
 def parse_physics(d: dict) -> Physics:
-    density = _get(d, "material.density")
-    if not density > 0:
-        raise ValueError(f"density phải > 0, nhận {density}")
+    density = _positive(d, "material.density")
     fill = _get(d, "material.fill")
     if not 0 < fill <= 1:
         raise ValueError(f"fill phải thuộc (0, 1], nhận {fill}")
@@ -64,11 +80,11 @@ def parse_physics(d: dict) -> Physics:
     if not 0 < lo <= hi:
         raise ValueError(f"budget.mass_kg phải có 0 < min <= max, nhận {[lo, hi]}")
     return Physics(
-        torso_extra_mass=_get(d, "torso_extra_mass"),
+        torso_extra_mass=_positive(d, "torso_extra_mass"),
         density=density, fill=fill,
-        foot_friction=_get(d, "contact.foot_friction"),
-        kp_error=math.radians(_get(d, "actuator.kp_error_deg")),
-        dampratio=_get(d, "actuator.dampratio"),
+        foot_friction=_positive(d, "contact.foot_friction"),
+        kp_error=math.radians(_positive(d, "actuator.kp_error_deg")),
+        dampratio=_positive(d, "actuator.dampratio"),
         stand=stand, mass_budget=(lo, hi),
     )
 
