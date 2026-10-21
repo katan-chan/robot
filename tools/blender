@@ -17,6 +17,7 @@ CANDIDATES = (
     Path.home() / "Library/Application Support/Steam/steamapps/common/Blender/Blender.app/Contents/MacOS/Blender",
     Path("/Applications/Blender.app/Contents/MacOS/Blender"),
 )
+TIMEOUT = float(os.environ.get("BLENDER_TIMEOUT", 300))  # s, Blender treo thì dừng và báo lỗi JSON
 SCRIPTS = {"build": "build_spider.py", "inspect": "inspect_model.py", "export": "export_model.py", "render": "render_views.py"}
 # a = các tham số sau "--": ["--result", <tmp.json>, ...]
 VERSION_EXPR = ("import bpy, sys, json, platform; a = sys.argv[sys.argv.index('--') + 1:]; "
@@ -37,7 +38,11 @@ def fail(check, obj, msg, fix):
 
 
 def find_blender():
-    for p in (os.environ.get("BLENDER_BIN"), shutil.which("blender"), *CANDIDATES):
+    if env := os.environ.get("BLENDER_BIN"):
+        if not Path(env).is_file():
+            emit(fail("blender", "BLENDER_BIN", f"BLENDER_BIN={env} không phải file", "sửa hoặc bỏ biến BLENDER_BIN"))
+        return env
+    for p in (shutil.which("blender"), *CANDIDATES):
         if p and Path(p).is_file():
             return str(p)
 
@@ -98,7 +103,10 @@ def main():
             cmd += ["--out", str(a.out.resolve()), "--views", a.views]
         elif a.cmd == "export":
             cmd += ["--out", str(a.out.resolve())]
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        try:
+            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=TIMEOUT)
+        except subprocess.TimeoutExpired:
+            emit(fail("blender", "", f"Blender timeout sau {TIMEOUT:g} s, đã dừng", "kiểm script/model, hoặc tăng BLENDER_TIMEOUT"))
         try:
             out = json.loads(result.read_text())
         except (OSError, ValueError):

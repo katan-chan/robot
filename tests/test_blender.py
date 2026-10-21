@@ -1,4 +1,4 @@
-import hashlib, json, math, subprocess
+import hashlib, json, math, os, subprocess
 from pathlib import Path
 
 import pytest
@@ -6,14 +6,27 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def run(*args):
-    p = subprocess.run([str(ROOT / "tools/blender"), *args], cwd=ROOT, capture_output=True, text=True)
+def run(*args, **env):
+    p = subprocess.run([str(ROOT / "tools/blender"), *args], cwd=ROOT, capture_output=True, text=True,
+                       env={**os.environ, **env})
     return p.returncode, json.loads(p.stdout)
 
 
 def test_bad_args_give_json_error():
     code, r = run("inspect", "--bogus")
     assert code == 1 and any(e["check"] == "args" for e in r["errors"])
+
+
+def test_bad_blender_bin_gives_json_error(tmp_path):
+    code, r = run("version", BLENDER_BIN=str(tmp_path / "missing"))
+    assert code == 1 and r["errors"][0]["check"] == "blender" and r["errors"][0]["object"] == "BLENDER_BIN"
+
+
+def test_hung_blender_times_out(tmp_path):
+    fake = tmp_path / "blender"
+    fake.write_text("#!/bin/sh\nexec sleep 30\n"); fake.chmod(0o755)
+    code, r = run("version", BLENDER_BIN=str(fake), BLENDER_TIMEOUT="1")
+    assert code == 1 and r["errors"][0]["check"] == "blender" and "timeout" in r["errors"][0]["msg"]
 
 
 def build(tmp_path, *extra):
