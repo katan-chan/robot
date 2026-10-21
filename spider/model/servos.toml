@@ -1,0 +1,35 @@
+# Danh mục servo. Số datasheet ở 4.8 V. Mô-men cực đại = mô-men kẹt (stall).
+# armature, damping, frictionloss là ƯỚC LƯỢNG, hiệu chỉnh ở Giai đoạn 8 (13.4).
+
+[MG90S]
+stall_torque = 0.177                  # N·m, mô-men kẹt ở 4.8 V
+speed = 10.47                         # rad/s, tốc độ không tải
+mass = 0.0134                         # kg
+size = [0.0228, 0.0122, 0.0285]       # m, hộp dài x rộng x cao
+travel_deg = 180                      # độ, hành trình
+armature = 2e-4                       # kg·m², quán tính rotor quy đổi (ước lượng)
+damping = 0.01                        # N·m·s/rad, ma sát nhớt (ước lượng)
+frictionloss = 0.01                   # N·m, ma sát khô (ước lượng)
+source = "datasheet 4.8 V; armature/damping/frictionloss là ước lượng, hiệu chỉnh ở Giai đoạn 8"
+
+[SG90]
+stall_torque = 0.177                  # N·m
+speed = 10.47                         # rad/s
+mass = 0.009                          # kg
+size = [0.0222, 0.0118, 0.031]        # m
+travel_deg = 180                      # độ
+armature = 1.5e-4                     # kg·m² (ước lượng)
+damping = 0.01                        # N·m·s/rad (ước lượng)
+frictionloss = 0.01                   # N·m (ước lượng)
+source = "datasheet 4.8 V; armature/damping/frictionloss là ước lượng, hiệu chỉnh ở Giai đoạn 8"
+
+[MG996R]
+stall_torque = 0.92                   # N·m
+speed = 6.16                          # rad/s
+mass = 0.055                          # kg
+size = [0.0407, 0.0197, 0.0429]       # m
+travel_deg = 180                      # độ
+armature = 1e-3                       # kg·m² (ước lượng)
+damping = 0.05                        # N·m·s/rad (ước lượng)
+frictionloss = 0.05                   # N·m (ước lượng)
+source = "datasheet 4.8 V; armature/damping/frictionloss là ước lượng, hiệu chỉnh ở Giai đoạn 8"

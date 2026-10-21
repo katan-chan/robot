@@ -1,0 +1,22 @@
+# Tham số vật lý của robot. Góc ghi bằng độ, bộ đọc đổi sang rad.
+
+torso_extra_mass = 0.10   # kg, 2 pin 18650 + mạch gắn vào thân
+
+[material]
+density = 1240            # kg/m³, nhựa PLA
+fill = 0.35               # 0-1, tỉ lệ đặc khi in 3D (ước lượng)
+
+[contact]
+foot_friction = 0.9       # hệ số ma sát trượt của bàn chân, không đơn vị
+
+[actuator]
+kp_error_deg = 11.46      # độ, sai lệch góc tạo ra mô-men kẹt (đặt kp)
+dampratio = 1.0           # không đơn vị, tỉ số giảm chấn
+
+[stand_deg]               # tư thế đứng của mỗi chân
+hip_yaw = 0               # độ
+hip_pitch = 30            # độ
+knee = 100                # độ
+
+[budget]
+mass_kg = [0.25, 0.35]    # kg, khoảng khối lượng tổng cho phép (9.5)
