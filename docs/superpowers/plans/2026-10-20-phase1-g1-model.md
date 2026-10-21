@@ -42,7 +42,7 @@
 - **Trục khớp:** `hip_yaw` = (0, 0, 1). `hip_pitch` = (0, −1, 0), dương = nhấc đùi lên. `knee` = (0, 1, 0), dương = gập cẳng xuống.
 - **Servo:** object mesh hộp `{leg}_{kind}_servo` làm con của link cha của khớp nó lái. Vỏ servo nằm trên body cha: servo `hip_yaw` trên `torso`, `hip_pitch` trên `coxa`, `knee` trên `femur`.
 - **Bàn chân:** Empty kiểu sphere `{leg}_foot`, con của `{leg}_tibia`, `empty_display_size` = bán kính.
-- **Bố trí chữ X (14.4):** gốc chân tại góc thân `(±0.05, ±0.04, 0)`, hướng `fl = +45°`, `fr = −45°`, `rl = +135°`, `rr = −135°`. Kích thước khởi điểm: thân 0.10 × 0.08 × 0.035 m; coxa 0.03, femur 0.055, tibia 0.075 m; bán kính đoạn chân 0.006 m; bán kính bàn chân 0.008 m; khoảng khớp `hip_yaw [−60, 60]`, `hip_pitch [−90, 90]`, `knee [−30, 150]` độ; servo mặc định `MG90S`.
+- **Bố trí chữ X (14.4):** gốc chân tại góc thân `(±0.05, ±0.04, 0)`, hướng `fl = +45°`, `fr = −45°`, `rl = +135°`, `rr = −135°`. Kích thước khởi điểm: thân 0.10 × 0.08 × 0.010 m (tấm phẳng như ảnh; bản đầu 0.035 m vượt ngân sách khối lượng, xem ledger Task 5); coxa 0.03, femur 0.055, tibia 0.075 m; bán kính đoạn chân 0.006 m; bán kính bàn chân 0.008 m; khoảng khớp `hip_yaw [−60, 60]`, `hip_pitch [−90, 90]`, `knee [−30, 150]` độ; servo mặc định `MG90S`.
 
 ### Định dạng `build/model/robot.json` (hợp đồng Blender → MuJoCo)
 
@@ -265,7 +265,7 @@ def test_inspect_rejects_bad_servo_and_wide_range(tmp_path):      # Review Focus
     - Keyframe `home` (mọi khớp 0) và `stand` (theo `physics.stand`, `ctrl` = cùng giá trị). Độ cao thân: compile, đặt `qpos`, `mj_kinematics`, đọc `site_xpos` thấp nhất, dời z để chân chạm sàn; rồi `add_key` và compile lại.
   - `ACTUATORS: list[str]` — `fl, fr, rl, rr` × `hip_yaw, hip_pitch, knee`.
 
-- [ ] **Step 1: Test** `tests/test_build.py`. Fixture `exported`: `tools/blender build` vào `tmp_path`, rồi `tools/blender export`. Fixture `inspected`: kết quả `inspect` của cùng file.
+- [x] **Step 1: Test** `tests/test_build.py`. Fixture `exported`: `tools/blender build` vào `tmp_path`, rồi `tools/blender export`. Fixture `inspected`: kết quả `inspect` của cùng file.
 
 ```python
 def test_compiles_with_12_named_position_servos(exported):     # check:mjcf-compiles
@@ -305,8 +305,8 @@ def test_stand_keyframe_feet_on_floor(exported):               # Review Focus 5
     assert np.allclose(d.ctrl, m.key("stand").qpos[7:])
 ```
 
-- [ ] **Step 2:** chạy → FAIL. **Step 3:** viết `export_model.py` (OBJ tự ghi từ `evaluated_get(depsgraph).to_mesh()` và `loop_triangles`, không dùng operator xuất) và `build.py`. **Step 4:** `uv run pytest -q` → PASS. Nếu ngân sách khối lượng hỏng: báo coordinator, không tự đổi ngưỡng (14.5).
-- [ ] **Step 5: Commit** `feat(model): export Blender model and build MuJoCo spec (T1.3)`.
+- [x] **Step 2:** chạy → FAIL. **Step 3:** viết `export_model.py` (OBJ tự ghi từ `evaluated_get(depsgraph).to_mesh()` và `loop_triangles`, không dùng operator xuất) và `build.py`. **Step 4:** `uv run pytest -q` → PASS. Nếu ngân sách khối lượng hỏng: báo coordinator, không tự đổi ngưỡng (14.5).
+- [x] **Step 5: Commit** `feat(model): export Blender model and build MuJoCo spec (T1.3)`.
 
 ---
 
