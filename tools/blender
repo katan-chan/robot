@@ -42,8 +42,13 @@ def find_blender():
             return str(p)
 
 
+class Parser(argparse.ArgumentParser):  # subparsers inherit this class
+    def error(self, msg):
+        emit(fail("args", "", msg, self.format_usage().strip()))
+
+
 def main():
-    p = argparse.ArgumentParser(prog="tools/blender")
+    p = Parser(prog="tools/blender")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("version")
     s = sub.add_parser("build")

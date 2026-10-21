@@ -9,6 +9,11 @@ def run(*args):
     return p.returncode, json.loads(p.stdout)
 
 
+def test_bad_args_give_json_error():
+    code, r = run("inspect", "--bogus")
+    assert code == 1 and any(e["check"] == "args" for e in r["errors"])
+
+
 def build(tmp_path, *extra):
     b = tmp_path / "s.blend"
     assert run("build", "--out", str(b), *extra)[0] == 0
