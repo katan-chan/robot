@@ -28,7 +28,7 @@ def test_parts_table(model, exported):
     assert len(rows) == 13
     assert sum(r["mass_g"] for r in rows) == pytest.approx(mujoco.mj_getTotalmass(model) * 1000)
     t = next(r for r in rows if r["body"] == "fl_tibia")
-    assert t["joint"] == "fl_knee" and t["servo"] == "MG90S" and t["parent"] == "fl_femur"
+    assert t["joint"] == "fl_knee" and t["servo"] == "DS3235" and t["parent"] == "fl_femur"
     assert t["range_deg"] == pytest.approx((-30, 150))
     assert "Tổng" in parts_markdown(model, exported)
 

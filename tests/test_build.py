@@ -9,6 +9,7 @@ from spider.model.build import ACTUATORS, build_model
 from spider.model.config import load_physics, load_servos
 
 ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_SERVO = {"hip_yaw": "DS3235", "hip_pitch": "DS3240", "knee": "DS3235"}   # 19.4
 
 
 def blender(*args):
@@ -76,9 +77,10 @@ def test_compiles_with_12_named_position_servos(exported):     # check:mjcf-comp
 
 
 def test_actuators_and_joints_follow_config(exported):        # 9.1, 13.4
-    m, sv, ph = build_model(exported), load_servos()["MG90S"], load_physics()
+    m, servos, ph = build_model(exported), load_servos(), load_physics()
     for i in range(m.nu):
         a = m.actuator(i); j = m.joint(a.name); dof = j.dofadr[0]
+        sv = servos[DEFAULT_SERVO[a.name.split("_", 1)[1]]]
         assert a.gainprm[0] == pytest.approx(sv.stall_torque / ph.kp_error)
         assert np.allclose(a.ctrlrange, j.range)
         assert (m.dof_damping[dof], m.dof_frictionloss[dof], m.dof_armature[dof]) == pytest.approx(
@@ -107,16 +109,17 @@ def test_total_mass_in_budget(exported):                       # 9.5
 
 def test_actuator_limits_follow_servo(exported):               # 9.1, 12.7
     m = build_model(exported)
-    assert np.allclose(m.actuator("fl_knee").forcerange, [-0.177, 0.177]) and m.joint("fl_knee").armature == 2e-4
+    assert np.allclose(m.actuator("fl_knee").forcerange, [-3.4, 3.4]) and m.joint("fl_knee").armature == 5e-3
+    assert np.allclose(m.actuator("fl_hip_pitch").forcerange, [-3.92, 3.92])
 
 
 def test_knee_override_in_blender_changes_only_knees(tmp_path, exported):  # Review Focus 3
     base, m = build_model(exported), build_model(build_and_export(tmp_path, "--servo", "knee=MG996R"))
     for leg in ("fl", "fr", "rl", "rr"):
         assert np.allclose(m.actuator(f"{leg}_knee").forcerange, [-0.92, 0.92])
-        assert np.allclose(m.actuator(f"{leg}_hip_pitch").forcerange, [-0.177, 0.177])
-        assert np.allclose(m.actuator(f"{leg}_hip_yaw").forcerange, [-0.177, 0.177])
-    assert math.isclose(mujoco.mj_getTotalmass(m) - mujoco.mj_getTotalmass(base), 4 * (0.055 - 0.0134), abs_tol=1e-9)
+        assert np.allclose(m.actuator(f"{leg}_hip_pitch").forcerange, [-3.92, 3.92])
+        assert np.allclose(m.actuator(f"{leg}_hip_yaw").forcerange, [-3.4, 3.4])
+    assert math.isclose(mujoco.mj_getTotalmass(m) - mujoco.mj_getTotalmass(base), 4 * (0.055 - 0.065), abs_tol=1e-9)
 
 
 def test_only_feet_and_torso_touch_floor(exported):            # 9.3
@@ -146,7 +149,7 @@ def test_stand_keyframe_feet_on_floor(exported):               # Review Focus 5
 def test_stand_uses_each_foot_radius(exported, tmp_path):
     out = tmp_path / "model"; shutil.copytree(exported, out)
     r = json.loads((out / "robot.json").read_text())
-    next(l for l in r["links"] if l["name"] == "fl_tibia")["foot"]["radius"] = 0.02   # fl to hơn, các chân khác 0.008
+    next(l for l in r["links"] if l["name"] == "fl_tibia")["foot"]["radius"] = 0.02   # fl to hơn, các chân khác 0.012
     (out / "robot.json").write_text(json.dumps(r))
     m = build_model(out); d = mujoco.MjData(m)
     mujoco.mj_resetDataKeyframe(m, d, m.key("stand").id); mujoco.mj_kinematics(m, d)

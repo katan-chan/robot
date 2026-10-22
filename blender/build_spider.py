@@ -12,11 +12,12 @@ from mathutils import Matrix
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as c
 
-TORSO = (0.10, 0.08, 0.010)                     # m, dài x rộng x cao
-LENGTH = {"coxa": 0.03, "femur": 0.055, "tibia": 0.075}
-SEG_RADIUS = 0.006
-FOOT_RADIUS = 0.008
-ROOTS = {"fl": (0.05, 0.04, 45), "fr": (0.05, -0.04, -45), "rl": (-0.05, 0.04, 135), "rr": (-0.05, -0.04, -135)}
+# Cấu hình B (19.3)
+TORSO = (0.20, 0.16, 0.010)                     # m, dài x rộng x cao
+LENGTH = {"coxa": 0.05, "femur": 0.09, "tibia": 0.12}
+SEG_RADIUS = 0.010
+FOOT_RADIUS = 0.012
+ROOTS = {"fl": (0.10, 0.08, 45), "fr": (0.10, -0.08, -45), "rl": (-0.10, 0.08, 135), "rr": (-0.10, -0.08, -135)}
 AXIS = {"hip_yaw": (0.0, 0.0, 1.0), "hip_pitch": (0.0, -1.0, 0.0), "knee": (0.0, 1.0, 0.0)}
 RANGE = {"hip_yaw": (-60.0, 60.0), "hip_pitch": (-90.0, 90.0), "knee": (-30.0, 150.0)}
 COLOR = {"torso": (0.45, 0.45, 0.45, 1), "coxa": (0.1, 0.6, 0.15, 1), "femur": (0.45, 0.15, 0.65, 1),
@@ -39,7 +40,7 @@ def build(a):
     if out.exists() and not a.force:
         return {"ok": False, "errors": [c.err("exists", str(out), "file đã có", "thêm --force để ghi đè")]}
     servos = c.load_servos()
-    choice, errors = dict.fromkeys(c.KINDS, c.DEFAULT_SERVO), []
+    choice, errors = dict(c.DEFAULT_SERVO), []
     for item in a.servo:
         kind, _, name = item.partition("=")
         if kind not in c.KINDS:

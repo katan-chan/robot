@@ -12,7 +12,7 @@ LEGS = ("fl", "fr", "rl", "rr")
 KINDS = ("hip_yaw", "hip_pitch", "knee")
 SEGMENTS = ("coxa", "femur", "tibia")      # đoạn thứ i do khớp KINDS[i] lái
 PROPS = ("joint", "kind", "axis", "range_deg", "servo")
-DEFAULT_SERVO = "MG90S"
+DEFAULT_SERVO = {"hip_yaw": "DS3235", "hip_pitch": "DS3240", "knee": "DS3235"}   # 19.4
 
 # tên link -> (cha, loại khớp nối với cha), theo thứ tự cha trước con
 LINKS = {"torso": (None, None)}

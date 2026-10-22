@@ -48,6 +48,8 @@ def test_build_then_inspect_has_13_links_in_x_layout(tmp_path):
     assert len(links) == 13 and links["fl_tibia"]["parent"] == "fl_femur"
     assert links["fl_femur"]["joint"]["axis"] == [0, -1, 0]
     assert links["rr_tibia"]["joint"]["name"] == "rr_knee"
+    assert [links[f"fl_{s}"]["servo"] for s in ("coxa", "femur", "tibia")] == ["DS3235", "DS3240", "DS3235"]  # 19.4
+    assert links["fl_coxa"]["pos"] == pytest.approx([0.10, 0.08, 0])                                        # 19.3
     assert math.isclose(math.degrees(links["fl_coxa"]["joint"]["range"][1]), 60)
     assert set(r["feet"]) == {"fl_foot", "fr_foot", "rl_foot", "rr_foot", "torso_origin"}
 

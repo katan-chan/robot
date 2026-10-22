@@ -33,3 +33,25 @@ armature = 1e-3                       # kg·m² (ước lượng)
 damping = 0.05                        # N·m·s/rad (ước lượng)
 frictionloss = 0.05                   # N·m (ước lượng)
 source = "datasheet 4.8 V; armature/damping/frictionloss là ước lượng, hiệu chỉnh ở Giai đoạn 8"
+
+[DS3235]
+stall_torque = 3.4                    # N·m (~35 kg·cm)
+speed = 8.0                           # rad/s
+mass = 0.065                          # kg
+size = [0.040, 0.020, 0.041]          # m
+travel_deg = 180                      # độ
+armature = 5e-3                       # kg·m² (ước lượng)
+damping = 0.2                         # N·m·s/rad (ước lượng)
+frictionloss = 0.1                    # N·m (ước lượng)
+source = "ước lượng cho servo 35 kg·cm (19.4), chưa đối chiếu datasheet; hiệu chỉnh ở Giai đoạn 8 (13.4)"
+
+[DS3240]
+stall_torque = 3.92                   # N·m (~40 kg·cm)
+speed = 7.5                           # rad/s
+mass = 0.066                          # kg
+size = [0.040, 0.020, 0.041]          # m
+travel_deg = 180                      # độ
+armature = 5e-3                       # kg·m² (ước lượng)
+damping = 0.2                         # N·m·s/rad (ước lượng)
+frictionloss = 0.1                    # N·m (ước lượng)
+source = "ước lượng cho servo 40 kg·cm (19.4), chưa đối chiếu datasheet; hiệu chỉnh ở Giai đoạn 8 (13.4)"

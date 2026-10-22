@@ -43,4 +43,8 @@ def test_load_servos_rejects_bad_entry(tmp_path, field, value):
 def test_servo_catalog():
     s = load_servos()["MG996R"]
     assert s.stall_torque == 0.92 and s.travel == math.radians(180)
-    assert set(load_servos()) == {"MG90S", "SG90", "MG996R"}
+    assert set(load_servos()) == {"MG90S", "SG90", "MG996R", "DS3235", "DS3240"}
+    ds35, ds40 = load_servos()["DS3235"], load_servos()["DS3240"]          # 19.4
+    assert (ds35.stall_torque, ds35.speed, ds35.mass, ds35.size) == (3.4, 8.0, 0.065, (0.040, 0.020, 0.041))
+    assert (ds40.stall_torque, ds40.speed, ds40.mass, ds40.size) == (3.92, 7.5, 0.066, (0.040, 0.020, 0.041))
+    assert (ds40.armature, ds40.damping, ds40.frictionloss, ds40.travel) == (5e-3, 0.2, 0.1, math.radians(180))
