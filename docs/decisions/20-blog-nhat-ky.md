@@ -17,6 +17,7 @@ Ngày: 2026-10-22. Nguồn: `docs/superpowers/specs/2026-10-22-blog-journal-desi
 | 20.9 | Vai trò mới **journal-writer** chỉ ghi `docs/journal/_drafts/` và `docs/journal/posts/`. Coordinator ghi phần còn lại của `docs/journal/`, `docs/_config.yml`, `docs/index.md`. Implementer viết lệnh quay video trong `spider/sim/`. Thêm `docs/journal/` vào thành phần memory của `harness.toml` | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 | 20.10 | GitHub Pages dựng từ nhánh `main`, thư mục `/docs`, bằng Jekyll mặc định (theme `minima`). Repo là `katan-chan/robot`, blog ở `https://katan-chan.github.io/robot/journal/` (`baseurl: /robot`) | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 | 20.11 | Clip là mp4 H.264, dài tối đa khoảng 20 s, không quá 10 MB. Quay video chỉ render, không chạy `mj_step`, không đổi `MjData` của lần chạy thật (luật 3). Không commit video của người khác, `reference/` chỉ chứa link | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 20.12 | Hook `PostToolUse` (Bash) `.claude/hooks/journal-reminder.sh` **nhắc** coordinator để lại chất liệu blog. Gộp task (`git merge`) thì nhắc ghi beat vào `notes/`. Đánh dấu gate bằng `git tag -a gN` thì nhắc chụp media, viết note gate và giao journal-writer viết bài nháp. Hook không tự viết bài và không đăng (20.8). Không dùng phiên Claude chạy ngầm (`claude -p`), vì tốn token, không ai giám sát, và thiếu bối cảnh | [Người dùng] chọn phương án A do Claude đề xuất | Đang áp dụng |
 
 ## Ghi chú
 

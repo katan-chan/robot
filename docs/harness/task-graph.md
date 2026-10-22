@@ -116,6 +116,8 @@ Câu hỏi thứ hai cho blog (20.7): **có chuyện gì đáng kể cho blog kh
 
 ## Khi qua gate
 
+Khi người dùng duyệt một gate, coordinator đánh dấu bằng `git tag -a gN -m "Gate GN passed"`. Hook `journal-reminder.sh` thấy lệnh này thì nhắc các bước dưới (20.12). Gộp một task thì hook nhắc câu hỏi beat ở mục 7.
+
 Khi qua mỗi gate (20.7), coordinator chạy ba lệnh chụp và quay vào `docs/journal/media/<gate>/`, rồi viết note cho gate và giao journal-writer viết bài nháp:
 
 ```sh
