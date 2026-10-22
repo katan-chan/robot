@@ -147,7 +147,7 @@ Note viết bằng tiếng Anh (*tôi chọn*, vì repo công khai và bài vi�
 
 - Tên lệnh và cờ cho video. Ví dụ `spider.sim.view --video OUT.mp4 --orbit`, hoặc một lệnh gom cả bước chụp ở gate.
 - Độ phân giải, fps, góc camera của video, miễn là trong giới hạn dung lượng.
-- Cấu hình Jekyll (`docs/_config.yml`, theme có sẵn của Pages), trang chủ `/journal/`, và cách tránh Jekyll lỗi với nội dung có `{{`.
+- Cấu hình Jekyll (`docs/_config.yml`, theme có sẵn của Pages), trang chủ `/journal/`, và cách tránh Jekyll lỗi với nội dung có cú pháp Liquid (cặp ngoặc nhọn kép).
 - Công cụ quét secret, ví dụ `gitleaks` nếu có sẵn hoặc grep theo mẫu. Không thêm dependency Python.
 - Có chép ảnh G1 sang `media/g1/` hay trỏ thẳng tới `docs/reference/g1/`.
 - Test cho phần quay video. Theo luật repo, có ít nhất một test kiểm tra lệnh ra file mp4 hợp lệ và không đổi state của lần chạy.
