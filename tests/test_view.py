@@ -1,4 +1,6 @@
 import itertools
+import json
+import subprocess
 
 import mujoco
 import numpy as np
@@ -7,7 +9,7 @@ from PIL import Image
 
 from spider.model.build import build_model
 from spider.model.parts import parts_markdown, parts_table
-from spider.sim.view import camera, snapshot
+from spider.sim.view import camera, orbit_video, snapshot
 from tests.test_build import blender, build_and_export
 
 
@@ -63,3 +65,32 @@ def test_snapshot_cameras_match_blender_views(model):
 def test_blender_render(exported, tmp_path):
     blender("render", "--blend", str(exported.parent / "s.blend"), "--out", str(tmp_path), "--views", "front,side,top,iso")
     _check(sorted(tmp_path.glob("*.png")))
+
+
+def _probe(p):
+    out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                          "stream=codec_name,width,height,nb_frames", "-of", "json", str(p)],
+                         capture_output=True, text=True, check=True).stdout
+    return json.loads(out)["streams"][0]
+
+
+def test_orbit_video(model, tmp_path):
+    p = orbit_video(model, tmp_path / "orbit.mp4", seconds=2, fps=15)
+    s = _probe(p)
+    assert (s["codec_name"], s["width"], s["height"]) == ("h264", 1280, 720)
+    assert int(s["nb_frames"]) == 30
+    assert p.stat().st_size < 10 * 1024 * 1024
+
+
+def test_orbit_video_no_physics(model, tmp_path):
+    # chỉ render: robot đứng yên, camera quay đúng 360°, nên khung đầu ≈ khung cuối (robot không đổ)
+    frames = orbit_video(model, tmp_path / "o.mp4", seconds=1, fps=12, return_frames=True)[1]
+    assert np.abs(frames[0].astype(float) - frames[-1].astype(float)).mean() < 8
+    assert np.abs(frames[0].astype(float) - frames[len(frames) // 2].astype(float)).mean() > 8
+
+
+def test_orbit_video_without_ffmpeg(model, tmp_path, monkeypatch):
+    monkeypatch.setenv("PATH", "/nonexistent")
+    with pytest.raises(RuntimeError, match="ffmpeg"):
+        orbit_video(model, tmp_path / "x.mp4", seconds=1)
+    assert not (tmp_path / "x.mp4").exists()

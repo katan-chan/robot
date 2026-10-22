@@ -51,6 +51,7 @@ def build_spec(export_dir: Path | None = None, physics: Physics | None = None,
     density = physics.density * physics.fill
 
     spec = mujoco.MjSpec()
+    spec.visual.global_.offwidth, spec.visual.global_.offheight = 1280, 720  # bộ đệm ảnh cho video, không đổi vật lý
     add_scene(spec)
     bodies = {None: spec.worldbody}
 
