@@ -40,7 +40,7 @@ Harness phải tự giữ lại chất liệu trong lúc làm, để khi viết 
 - **Một repo công khai duy nhất.** Người dùng chọn đẩy chính repo robot lên GitHub và không giấu notes, quyết định hay code. GitHub Pages phục vụ blog từ repo này.
 - **Phải hỏi người dùng trước** khi tạo remote, push, hay đổi repo sang công khai (luật 6, task-graph mục 5).
 - **Quét secret trước lần push đầu tiên.** Phải quét toàn bộ lịch sử git, không chỉ cây hiện tại. Thấy gì thì dừng lại và báo người dùng.
-- **Đổi email tác giả trong lịch sử git** (người dùng chọn). Đổi mọi commit có tác giả hoặc committer `minh.le@gosmartlog.com` sang `lebinhminh_t67@hus.edu.vn`. Bước này làm trước lần push đầu tiên, sau khi quét secret.
+- **Đổi email tác giả trong lịch sử git** (người dùng chọn). Đổi mọi commit có tác giả hoặc committer `ad@ads-MacBook-Pro.local` (tên máy) sang `lebinhminh_t67@hus.edu.vn`. Bước này làm trước lần push đầu tiên, sau khi quét secret.
   - Việc này không đảo ngược được, vì mọi mã commit sẽ đổi. Phải hỏi người dùng ngay trước khi chạy, và giữ một bản backup (bundle hoặc nhánh sao lưu) cho tới khi push xong.
   - Sau khi viết lại, cập nhật mọi mã commit được nhắc trong `docs/`, ví dụ c121e68 hay c8d0d6e.
   - Đặt `git config user.email lebinhminh_t67@hus.edu.vn` chỉ cho repo này (người dùng chọn). Không đặt ở mức `--global`.

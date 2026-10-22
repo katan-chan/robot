@@ -9,3 +9,5 @@ defaults:
 exclude:
   - kb/graph.json
   - journal/templates
+header_pages:
+  - journal/index.md

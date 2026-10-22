@@ -1616,8 +1616,8 @@
   {
    "id": "20.4",
    "type": "Decision",
-   "label": "Xuất bản bằng **GitHub Pages**. Đổi email tác giả trong lịch sử git từ `minh.le@gosmartlog.com` sang",
-   "text": "Xuất bản bằng **GitHub Pages**. Đổi email tác giả trong lịch sử git từ `minh.le@gosmartlog.com` sang `lebinhminh_t67@hus.edu.vn`, chỉ đặt `git config user.email` cho repo này (không `--global`). Viết lại lịch sử không đảo ngược được: hỏi ngay trước khi chạy, giữ bản backup tới khi push xong",
+   "label": "Xuất bản bằng **GitHub Pages**. Đổi email tác giả trong lịch sử git từ `ad@ads-MacBook-Pro.local` (t",
+   "text": "Xuất bản bằng **GitHub Pages**. Đổi email tác giả trong lịch sử git từ `ad@ads-MacBook-Pro.local` (tên máy) sang `lebinhminh_t67@hus.edu.vn`, chỉ đặt `git config user.email` cho repo này (không `--global`). Viết lại lịch sử không đảo ngược được: hỏi ngay trước khi chạy, giữ bản backup tới khi push xong",
    "decided_by": "user",
    "status": "active",
    "status_raw": "Đang áp dụng",

@@ -280,12 +280,12 @@ git rev-list --reverse main > $S/old.txt
 git filter-branch --env-filter '
 for v in AUTHOR COMMITTER; do
   eval e=\$GIT_${v}_EMAIL
-  [ "$e" = "minh.le@gosmartlog.com" ] && export GIT_${v}_EMAIL=lebinhminh_t67@hus.edu.vn
+  [ "$e" = "ad@ads-MacBook-Pro.local" ] && export GIT_${v}_EMAIL=lebinhminh_t67@hus.edu.vn
 done' -- --all
 git rev-list --reverse main > $S/new.txt
 ```
 
-Expected: `git log --all --format='%ae %ce' | sort -u | grep -c gosmartlog` in `0`.
+Expected: `git log --all --format='%ae %ce' | sort -u | grep -c ads-MacBook-Pro` in `0`.
 
 - [ ] **Step 4: Cập nhật mã commit trong tài liệu**
 
