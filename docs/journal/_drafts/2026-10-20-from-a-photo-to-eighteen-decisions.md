@@ -54,7 +54,7 @@ Then the hook ran into the platform itself. The next day, Claude Code's "auto mo
 
 ![A four-legged hobby spider robot with purple and green 3D-printed legs and a battery pack on top](../media/brainstorm/spider-reference.png)
 
-*The reference photo the robot is based on (decision 4.1): four legs, three servos per leg, batteries on top. It is someone else's hobby build, not ours.*
+*The reference photo the robot is based on (decision 4.1): four legs, three servos per leg, batteries on top. It is someone else's hobby build, not ours. Photo credit: Electromania (watermark top right), a frame from their build video; all rights remain with them.*
 
 There are no other pictures from this day. It was all text.
 
