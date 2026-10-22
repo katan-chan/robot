@@ -78,8 +78,9 @@ def build_spec(export_dir: Path | None = None, physics: Physics | None = None,
             b.add_joint(name=j["name"], type=mujoco.mjtJoint.mjJNT_HINGE, axis=j["axis"], range=j["range"],
                         limited=ON, armature=sv.armature, damping=sv.damping, frictionloss=sv.frictionloss)
         if f := l["foot"]:
+            # priority > sàn: MuJoCo lấy nguyên tham số tiếp xúc của bàn chân, không lấy max ma sát hai geom (BUG-001)
             b.add_geom(name=f"{f['name']}_geom", type=G.mjGEOM_SPHERE, size=[f["radius"], 0, 0], pos=f["pos"],
-                       density=density, friction=[physics.foot_friction, 0.005, 0.0001], condim=3,
+                       density=density, friction=[physics.foot_friction, 0.005, 0.0001], condim=3, priority=1,
                        contype=1, conaffinity=0)
             b.add_site(name=f["name"], pos=f["pos"])
 
