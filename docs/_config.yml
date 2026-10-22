@@ -1,5 +1,11 @@
 title: Spider Robot Journal
 baseurl: /robot
 theme: minima
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
 exclude:
   - kb/graph.json
+  - journal/templates
