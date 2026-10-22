@@ -48,7 +48,7 @@ Harness phải tự giữ lại chất liệu trong lúc làm, để khi viết 
 - **Phân quyền ghi giữ đúng task-graph mục 3.** `docs/journal/` thuộc coordinator. Code quay video nằm ở `spider/sim/`, do implementer làm trong worktree.
 - **Không thêm dependency Python mới.** `ffmpeg` đã có sẵn ở `/opt/homebrew/bin/ffmpeg`. MuJoCo đã có `mujoco.Renderer` offscreen, và Pillow đã có.
 - **Dung lượng.** Mỗi clip là mp4 H.264, dài tối đa khoảng 20 giây, không quá 10 MB (*tôi chọn*). GitHub chặn file trên 100 MB, và site Pages giới hạn 1 GB.
-- **Ghi quyết định theo đúng quy trình.** Thêm `docs/decisions/19-*.md`, cập nhật `docs/kb/curated.toml`, `harness.toml` (thành phần memory) và task-graph mục 3 và 7. Sửa `harness.toml` cần người dùng duyệt.
+- **Ghi quyết định theo đúng quy trình.** Thêm `docs/decisions/20-*.md`, cập nhật `docs/kb/curated.toml`, `harness.toml` (thành phần memory) và task-graph mục 3 và 7. Sửa `harness.toml` cần người dùng duyệt.
 
 ## 4. Những gì đã chốt
 

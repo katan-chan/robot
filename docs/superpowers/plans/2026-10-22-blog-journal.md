@@ -117,7 +117,7 @@ git commit -m "feat(sim): orbit video of the model via ffmpeg (journal media)"
 Task này làm song song với Task 1, vì chỉ đụng tài liệu.
 
 **Files:**
-- Create: `docs/decisions/19-blog-nhat-ky.md`, theo khuôn file 18: bảng quyết định 19.1–19.N. Nội dung chép từ spec mục 3–4.8: blog, giọng kể, một repo công khai, cấu trúc thư mục, beat, hai bước harness, `_drafts`, vai trò journal-writer, Pages `main:/docs`, đổi email.
+- Create: `docs/decisions/20-blog-nhat-ky.md`, theo khuôn file 18: bảng quyết định 20.1–20.N. Nội dung chép từ spec mục 3–4.8: blog, giọng kể, một repo công khai, cấu trúc thư mục, beat, hai bước harness, `_drafts`, vai trò journal-writer, Pages `main:/docs`, đổi email.
 - Create:
   - `docs/_config.yml`: `title: Spider Robot Journal`, `baseurl: /robot`, `theme: minima`, `exclude: [kb/graph.json]`.
   - `docs/index.md`: một dòng giới thiệu kèm link `journal/`.
@@ -130,15 +130,15 @@ Task này làm song song với Task 1, vì chỉ đụng tài liệu.
 - Create: `docs/journal/notes/.gitkeep`, `docs/journal/media/.gitkeep`.
 - Modify:
   - `docs/harness/task-graph.md`: bảng mục 3 thêm dòng journal-writer, dòng coordinator thêm các đường dẫn journal. Mục 7 thêm câu hỏi beat. Thêm mục "Khi qua gate" ghi 3 lệnh chụp ở Task 4.
-  - `docs/kb/curated.toml`: thêm `role:journal-writer`. `WRITES` có các đường dẫn theo Global Constraints. Nối quyết định 19.x vào role và harness.
+  - `docs/kb/curated.toml`: thêm `role:journal-writer`. `WRITES` có các đường dẫn theo Global Constraints. Nối quyết định 20.x vào role và harness.
   - `harness.toml`: thêm `docs/journal/` vào `components.memory.paths`.
   - `AGENTS.md`: bảng "Nguồn sự thật" thêm dòng Blog, mục "Lệnh" thêm lệnh `--video`.
 
 - [ ] **Step 1: Viết các file trên**
 - [ ] **Step 2: Kiểm KB**
 
-Run: `uv run tools/kb.py check && uv run tools/kb.py selftest && uv run tools/kb.py show 19.1`
-Expected: `KB OK`; selftest qua; 19.1 có cạnh tới `role:journal-writer` hoặc `harness:memory`.
+Run: `uv run tools/kb.py check && uv run tools/kb.py selftest && uv run tools/kb.py show 20.1`
+Expected: `KB OK`; selftest qua; 20.1 có cạnh tới `role:journal-writer` hoặc `harness:memory`.
 
 - [ ] **Step 3: Kiểm Liquid**
 
