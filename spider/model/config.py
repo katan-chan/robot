@@ -31,7 +31,10 @@ class Physics:
     kp_error: float          # rad
     dampratio: float
     stand: dict[str, float]  # rad
-    mass_budget: tuple[float, float]  # kg
+    payload_mass: float      # kg, 0 = không tải
+    payload_size: tuple[float, float, float]  # m
+    robot_budget: tuple[float, float]  # kg, robot không tải
+    total_max: float         # kg, có tải
 
 
 SERVO_FIELDS = ("stall_torque", "speed", "mass", "size", "travel_deg", "armature", "damping", "frictionloss")
@@ -76,16 +79,23 @@ def parse_physics(d: dict) -> Physics:
     if not 0 < fill <= 1:
         raise ValueError(f"fill phải thuộc (0, 1], nhận {fill}")
     stand = {k: math.radians(_get(d, f"stand_deg.{k}")) for k in JOINT_KINDS}
-    lo, hi = _get(d, "budget.mass_kg")
+    lo, hi = _get(d, "budget.robot_kg")
     if not 0 < lo <= hi:
-        raise ValueError(f"budget.mass_kg phải có 0 < min <= max, nhận {[lo, hi]}")
+        raise ValueError(f"budget.robot_kg phải có 0 < min <= max, nhận {[lo, hi]}")
+    payload_mass = _get(d, "payload.mass_kg")
+    if not payload_mass >= 0:
+        raise ValueError(f"payload.mass_kg phải >= 0, nhận {payload_mass}")
+    size = _get(d, "payload.size")
+    if len(size) != 3 or not all(v > 0 for v in size):
+        raise ValueError(f"payload.size phải là 3 số > 0, nhận {size}")
     return Physics(
         torso_extra_mass=_positive(d, "torso_extra_mass"),
         density=density, fill=fill,
         foot_friction=_positive(d, "contact.foot_friction"),
         kp_error=math.radians(_positive(d, "actuator.kp_error_deg")),
         dampratio=_positive(d, "actuator.dampratio"),
-        stand=stand, mass_budget=(lo, hi),
+        stand=stand, payload_mass=payload_mass, payload_size=tuple(size),
+        robot_budget=(lo, hi), total_max=_positive(d, "budget.total_max_kg"),
     )
 
 

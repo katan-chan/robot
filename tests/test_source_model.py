@@ -4,7 +4,7 @@ import pytest
 
 from tests.test_build import ROOT, blender
 from tests.test_build import (test_feet_match_blender_at_home, test_stand_keyframe_feet_on_floor,  # noqa: F401
-                              test_total_mass_in_budget)
+                              test_total_mass_in_budget, test_payload_geom, test_stand_with_payload_holds)
 
 SOURCE = ROOT / "models/spider.blend"
 

@@ -1,6 +1,6 @@
 # Tham số vật lý của robot. Góc ghi bằng độ, bộ đọc đổi sang rad.
 
-torso_extra_mass = 0.10   # kg, 2 pin 18650 + mạch gắn vào thân
+torso_extra_mass = 0.20   # kg, pin LiPo 2S 7.4 V 2–3 Ah + mạch hạ áp 20–30 A gắn vào thân (ước lượng, 19.5)
 
 [material]
 density = 1240            # kg/m³, nhựa PLA
@@ -18,5 +18,10 @@ hip_yaw = 0               # độ
 hip_pitch = 30            # độ
 knee = 100                # độ
 
-[budget]
-mass_kg = [0.25, 0.35]    # kg, khoảng khối lượng tổng cho phép (9.5)
+[payload]                 # hộp tải đặt giữa mặt trên thân (19.6); mass_kg = 0 thì không có tải
+mass_kg = 2.0             # kg
+size = [0.15, 0.12, 0.05] # m, dài x rộng x cao
+
+[budget]                  # 19.7, thay 9.5
+robot_kg = [1.10, 1.45]   # kg, khoảng khối lượng robot không tải
+total_max_kg = 3.5        # kg, tổng có tải tối đa

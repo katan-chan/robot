@@ -5,9 +5,11 @@ import subprocess
 import mujoco
 import numpy as np
 import pytest
+from dataclasses import replace
 from PIL import Image
 
 from spider.model.build import build_model
+from spider.model.config import load_physics
 from spider.model.parts import parts_markdown, parts_table
 from spider.sim.view import camera, orbit_video, snapshot
 from tests.test_build import blender, build_and_export
@@ -25,7 +27,11 @@ def model(exported):
 
 def test_parts_table(model, exported):
     rows = parts_table(model, exported)
-    assert len(rows) == 13
+    assert len(rows) == 14
+    pay = rows[-1]
+    assert pay["body"] == "payload" and pay["parent"] == "torso" and pay["mass_g"] == pytest.approx(2000)
+    bare = build_model(exported, replace(load_physics(), payload_mass=0.0))         # torso không gồm tải
+    assert rows[0]["mass_g"] == pytest.approx(bare.body("torso").mass[0] * 1000)
     assert sum(r["mass_g"] for r in rows) == pytest.approx(mujoco.mj_getTotalmass(model) * 1000)
     t = next(r for r in rows if r["body"] == "fl_tibia")
     assert t["joint"] == "fl_knee" and t["servo"] == "DS3235" and t["parent"] == "fl_femur"

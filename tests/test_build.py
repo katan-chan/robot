@@ -1,4 +1,5 @@
 import json, math, shutil, subprocess
+from dataclasses import replace
 from pathlib import Path
 
 import mujoco
@@ -103,8 +104,35 @@ def test_default_export_dir_must_match_source_blend(exported, tmp_path, monkeypa
         b.build_model()
 
 
-def test_total_mass_in_budget(exported):                       # 9.5
-    assert 0.25 <= mujoco.mj_getTotalmass(build_model(exported)) <= 0.35
+def unloaded(exported):
+    return build_model(exported, replace(load_physics(), payload_mass=0.0))
+
+
+def test_total_mass_in_budget(exported):                       # 19.7
+    assert 1.10 <= mujoco.mj_getTotalmass(unloaded(exported)) <= 1.45
+    assert mujoco.mj_getTotalmass(build_model(exported)) <= 3.5
+
+
+def test_payload_geom(exported):                               # 19.6
+    m, bare = build_model(exported), unloaded(exported)
+    g = m.geom("payload_geom")
+    assert g.bodyid[0] == m.body("torso").id and g.contype[0] == 0 and g.conaffinity[0] == 0
+    assert np.allclose(g.size, [0.075, 0.06, 0.025])
+    top = m.geom("torso_geom").pos[2] + m.geom("torso_geom").size[2]
+    assert np.allclose(g.pos, [*m.geom("torso_geom").pos[:2], top + 0.025])   # giữa mặt trên thân
+    assert math.isclose(mujoco.mj_getTotalmass(m) - mujoco.mj_getTotalmass(bare), 2.0, abs_tol=1e-9)
+    assert "payload_geom" not in [bare.geom(i).name for i in range(bare.ngeom)]
+
+
+def test_stand_with_payload_holds(exported):                   # 19.8, 10.5: không nới 50%
+    m = build_model(exported); d = mujoco.MjData(m)
+    mujoco.mj_resetDataKeyframe(m, d, m.key("stand").id)
+    torso, floor, peak = m.geom("torso_geom").id, m.geom("floor").id, np.zeros(m.nu)
+    while d.time < 1.0:
+        mujoco.mj_step(m, d)
+        peak = np.maximum(peak, np.abs(d.actuator_force) / m.actuator_forcerange[:, 1])
+        assert not any({c.geom1, c.geom2} == {torso, floor} for c in d.contact[:d.ncon]), d.time
+    assert peak.max() < 0.5, dict(zip(ACTUATORS, peak.round(3)))
 
 
 def test_actuator_limits_follow_servo(exported):               # 9.1, 12.7

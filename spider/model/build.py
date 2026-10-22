@@ -73,6 +73,11 @@ def build_spec(export_dir: Path | None = None, physics: Physics | None = None,
             lo, hi = _bbox(export_dir / l["mesh"])
             b.add_geom(name="torso_geom", type=G.mjGEOM_BOX, pos=(lo + hi) / 2, size=(hi - lo) / 2,
                        mass=physics.torso_extra_mass, contype=1, conaffinity=0)
+            if physics.payload_mass > 0:          # hộp tải giữa mặt trên thân (19.6)
+                half = np.array(physics.payload_size) / 2
+                b.add_geom(name="payload_geom", type=G.mjGEOM_BOX, size=half,
+                           pos=[(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, hi[2] + half[2]],
+                           mass=physics.payload_mass, contype=0, conaffinity=0, rgba=[0.85, 0.55, 0.15, 1])
         else:
             sv = drives[j["name"]]
             b.add_joint(name=j["name"], type=mujoco.mjtJoint.mjJNT_HINGE, axis=j["axis"], range=j["range"],

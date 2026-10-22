@@ -9,7 +9,9 @@ def test_physics_converts_to_rad():                # 13.4
     p = load_physics()
     assert p.stand["knee"] == pytest.approx(math.radians(100))
     assert p.kp_error == pytest.approx(math.radians(11.46))
-    assert p.mass_budget == (0.25, 0.35)
+    assert p.robot_budget == (1.10, 1.45) and p.total_max == 3.5          # 19.7
+    assert p.payload_mass == 2.0 and p.payload_size == (0.15, 0.12, 0.05)  # 19.6
+    assert p.torso_extra_mass == 0.20                                      # 19.5
 
 @pytest.mark.parametrize("mutate, field", [
     (lambda d: d["material"].update(density=0), "density"),
@@ -20,6 +22,11 @@ def test_physics_converts_to_rad():                # 13.4
     (lambda d: d["contact"].update(foot_friction=-0.1), "contact.foot_friction"),
     (lambda d: d["actuator"].update(kp_error_deg=0), "actuator.kp_error_deg"),
     (lambda d: d["actuator"].update(dampratio=0), "actuator.dampratio"),
+    (lambda d: d["payload"].update(mass_kg=-0.1), "payload.mass_kg"),
+    (lambda d: d["payload"].update(size=[0.15, 0, 0.05]), "payload.size"),
+    (lambda d: d["payload"].update(size=[0.15, 0.12]), "payload.size"),
+    (lambda d: d["budget"].update(robot_kg=[1.45, 1.10]), "budget.robot_kg"),
+    (lambda d: d["budget"].update(total_max_kg=0), "budget.total_max_kg"),
 ])
 def test_parse_physics_rejects_bad_input(mutate, field):
     d = _raw(); mutate(d)
