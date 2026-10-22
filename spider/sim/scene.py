@@ -7,7 +7,9 @@ def add_scene(spec: mujoco.MjSpec) -> None:
     spec.option.timestep = 0.002
     spec.option.integrator = mujoco.mjtIntegrator.mjINT_IMPLICITFAST
     # Chân không bò dưới giới hạn ma sát (BUG-002): nón elliptic + impratio 10 làm ma sát cứng hơn,
-    # noslip_iterations 10 khử trượt mềm còn lại. Chỉ cả hai mới đạt < 0.5 mm / 2 s ở 50% μ·m·g.
+    # noslip_iterations 10 khử trượt mềm còn lại. Chỉ cả hai mới đạt < 0.5 mm / 2 s ở 50% μ·m·g,
+    # với lực tăng dần trong 0.5 s, đẩy theo mọi hướng. Đẩy đột ngột theo đường chéo thì một chân trượt
+    # ≈ 0.7 mm một lần rồi đứng (quá độ, không bò): rủi ro ghi ở G1.
     spec.option.cone = mujoco.mjtCone.mjCONE_ELLIPTIC
     spec.option.impratio = 10
     spec.option.noslip_iterations = 10
