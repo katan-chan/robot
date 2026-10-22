@@ -6,7 +6,7 @@ layout: post
 
 ## Hook
 
-Five steps into the first design conversation, Claude wrote decision 5.5: the job is small, a description in chat plus one file is enough, no separate design document needed. By the end of that same day, 20 October 2026, the project had eighteen numbered files of decisions, a plan reviewed by two sub-agents, a rulebook for physics and security, a design for a web controller and a task graph. Not one line of code existed yet.
+Decision 5.5 says: the job is small, a description in chat plus one file is enough. Claude wrote it five steps into our first design conversation, on 20 October 2026. By the end of that same day there were eighteen numbered decision files, and still not one line of code.
 
 This post is about that day: what I got wrong, what the agents got wrong, and the habit that made those mistakes cheap.
 
@@ -20,7 +20,7 @@ I do this with Claude, an AI coding agent. Every decision we make goes into a nu
 
 Four things went wrong. In two, the plan kept changing under us, mostly because of my answers. The other two were agent problems.
 
-**The size estimate.** Decision 5.5 was Claude's proposal, and it did not survive the day. Nobody planned the growth. Each answer I gave opened new questions: how do I reach the robot remotely over a VPN, what stops it in an emergency, how does an agent get access to it. The record shows the result, decision steps 6 to 18 all dated the same day. It does not show the moment the estimate flipped, and I won't reconstruct one after the fact.
+**"It's a small project" was wrong.** Decision 5.5 was Claude's proposal, and it did not survive the day. By evening the eighteen files held a plan reviewed by two sub-agents, a rulebook for physics and security, a design for a web controller and a task graph. Nobody planned that growth. Each answer I gave opened new questions: how do I reach the robot remotely over a VPN, what stops it in an emergency, how does an agent get access to it. The record shows the result, decision steps 6 to 18 all dated the same day. It does not show the moment the estimate flipped, and I won't reconstruct one after the fact.
 
 **The tool chain changed twice before any code.** Claude first proposed Blender, a 3D modelling program, feeding an XML robot description (MJCF, MuJoCo's file format) into MuJoCo ([decision 3.1](https://github.com/katan-chan/robot/blob/main/docs/decisions/03-phan-cung-may.md)). In an independent review of the plan this became decision 3.2, and I confirmed it: the robot's measurements live in a text file, a Python script generates the MJCF, and Blender only exports meshes for display. Later the same day I reversed that ([decision 18.1](https://github.com/katan-chan/robot/blob/main/docs/decisions/18-blender-nguon-chinh.md)): Blender is where the robot's shape is edited, and the model is exported from Blender into MuJoCo. Blender first, then parameters first, then Blender first again. The decision file records what I decided, not why, so I won't invent a reason now. The cost was real: the plan for the first milestone had to be rewritten.
 
