@@ -800,8 +800,8 @@
    "label": "Ảnh tham khảo lưu tại [`docs/reference/spider-reference.png`](../reference/spider-reference.png). Kí",
    "text": "Ảnh tham khảo lưu tại [`docs/reference/spider-reference.png`](../reference/spider-reference.png). Kích thước khởi điểm lấy theo tỉ lệ trong ảnh: hông xếp hình chữ X, thân khoảng 10 cm, chân duỗi khoảng 15 cm",
    "decided_by": "claude-decided",
-   "status": "active",
-   "status_raw": "Đang áp dụng",
+   "status": "superseded",
+   "status_raw": "Đã thay → 19.3 (kích thước); ảnh tham khảo vẫn dùng",
    "step": 14,
    "src": "docs/decisions/14-builder-check.md#L14",
    "since": "2026-10-20",
@@ -1333,8 +1333,8 @@
    "label": "Cổng G1 xem model và các thành phần **trong Blender**. Thêm: model đã xuất mở được trong MuJoCo, và ",
    "text": "Cổng G1 xem model và các thành phần **trong Blender**. Thêm: model đã xuất mở được trong MuJoCo, và bảng thành phần đọc từ MuJoCo khớp với Blender",
    "decided_by": "user-confirmed",
-   "status": "active",
-   "status_raw": "Đang áp dụng",
+   "status": "superseded",
+   "status_raw": "Đã thay một phần → 19.10 (xem trong MuJoCo)",
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L11",
    "since": "2026-10-20",
@@ -1416,6 +1416,136 @@
    "step": 18,
    "src": "docs/decisions/18-blender-nguon-chinh.md#L17",
    "since": "2026-10-20",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.1",
+   "type": "Decision",
+   "label": "Tải mục tiêu **2 kg**, đặt thấp ở giữa thân. Thăng bằng là khả năng chính",
+   "text": "Tải mục tiêu **2 kg**, đặt thấp ở giữa thân. Thăng bằng là khả năng chính",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L26",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.10",
+   "type": "Decision",
+   "label": "Khi xem hay kiểm model thì chỉ mở MuJoCo. Blender vẫn là nơi chỉnh hình học (18.1), chỉ mở khi cần s",
+   "text": "Khi xem hay kiểm model thì chỉ mở MuJoCo. Blender vẫn là nơi chỉnh hình học (18.1), chỉ mở khi cần sửa. Thay phần \"xem trong Blender\" của 18.3",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L35",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.2",
+   "type": "Decision",
+   "label": "Robot vẫn giống ảnh tham khảo (4.1): 4 chân xếp chữ X, chân xoè. Chỉ to hơn",
+   "text": "Robot vẫn giống ảnh tham khảo (4.1): 4 chân xếp chữ X, chân xoè. Chỉ to hơn",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L27",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.3",
+   "type": "Decision",
+   "label": "Kích thước theo cấu hình B: thân tấm 0.20 × 0.16 × 0.010 m; gốc chân `(±0.10, ±0.08, 0)`; coxa 0.05,",
+   "text": "Kích thước theo cấu hình B: thân tấm 0.20 × 0.16 × 0.010 m; gốc chân `(±0.10, ±0.08, 0)`; coxa 0.05, femur 0.09, tibia 0.12 m; bán kính đoạn chân 0.010 m; bán kính bàn chân 0.012 m. Dáng đứng giữ `hip_pitch 30°`, `knee 100°`. Thay kích thước ở 14.4",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L28",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.4",
+   "type": "Decision",
+   "label": "Servo: `hip_pitch` dùng loại 40 kg·cm (DS3240); `hip_yaw` và `knee` dùng loại 35 kg·cm (DS3235). Thô",
+   "text": "Servo: `hip_pitch` dùng loại 40 kg·cm (DS3240); `hip_yaw` và `knee` dùng loại 35 kg·cm (DS3235). Thông số trong danh mục là **ước lượng**, hiệu chỉnh theo datasheet hoặc đo servo thật (13.4)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L29",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.5",
+   "type": "Decision",
+   "label": "Nguồn: pin LiPo 2S 7.4 V, 2–3 Ah, kèm mạch hạ áp chịu 20–30 A. `torso_extra_mass` = 0.20 kg (ước lượ",
+   "text": "Nguồn: pin LiPo 2S 7.4 V, 2–3 Ah, kèm mạch hạ áp chịu 20–30 A. `torso_extra_mass` = 0.20 kg (ước lượng)",
+   "decided_by": "claude-proposed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L30",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.6",
+   "type": "Decision",
+   "label": "Tải là một hộp 2 kg, 0.15 × 0.12 × 0.05 m, đặt giữa mặt trên thân. Khối lượng và kích thước tải nằm ",
+   "text": "Tải là một hộp 2 kg, 0.15 × 0.12 × 0.05 m, đặt giữa mặt trên thân. Khối lượng và kích thước tải nằm trong `physics.toml`. Đặt khối lượng tải bằng 0 thì chạy được bản không tải",
+   "decided_by": "claude-proposed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L31",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.7",
+   "type": "Decision",
+   "label": "Ngân sách khối lượng tính riêng cho robot không tải: khoảng 1.1–1.45 kg (đo: 1.28 kg). Tổng có tải k",
+   "text": "Ngân sách khối lượng tính riêng cho robot không tải: khoảng 1.1–1.45 kg (đo: 1.28 kg). Tổng có tải không quá 3.5 kg. Thay ngân sách 250–350 g ở 9.5",
+   "decided_by": "claude-proposed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L32",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.8",
+   "type": "Decision",
+   "label": "Kiểm tra mô-men tĩnh (thay số liệu ở 9.5): **có tải 2 kg**, đứng 3 chân, mọi khớp không quá 50% mô-m",
+   "text": "Kiểm tra mô-men tĩnh (thay số liệu ở 9.5): **có tải 2 kg**, đứng 3 chân, mọi khớp không quá 50% mô-men cực đại. Không nới 50% (10.5, 14.5). Số đo hiện tại: hip_pitch 0.45, knee 0.25, hip_yaw 0.03",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L33",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "19.9",
+   "type": "Decision",
+   "label": "Hai lỗi phát hiện khi đo, sửa theo 11.11 trước khi qua G1: **BUG-001** ma sát bàn chân không có tác ",
+   "text": "Hai lỗi phát hiện khi đo, sửa theo 11.11 trước khi qua G1: **BUG-001** ma sát bàn chân không có tác dụng (sàn để mặc định 1.0, MuJoCo lấy giá trị lớn hơn); **BUG-002** chân bò dần khi chịu lực ngang liên tục (thiết lập bộ giải tiếp xúc hiện tại)",
+   "decided_by": "claude-proposed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 19,
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L34",
+   "since": "2026-10-22",
    "by": "rule:decision-table"
   },
   {
@@ -1816,8 +1946,8 @@
    "label": "Kiểm tra mô-men tĩnh trong T1.4. Với servo cỡ MG90S và robot 250–350 g, mô-men ở hông/gối khi đứng 3",
    "text": "Kiểm tra mô-men tĩnh trong T1.4. Với servo cỡ MG90S và robot 250–350 g, mô-men ở hông/gối khi đứng 3 chân khoảng 0.08–0.1 N·m, gần 50% mô-men cực đại, sát giới hạn. Kích thước chân phải chọn theo kiểm tra này",
    "decided_by": "user-confirmed",
-   "status": "active",
-   "status_raw": "Đang áp dụng",
+   "status": "superseded",
+   "status_raw": "Đã thay → 19.7, 19.8 (tải 2 kg)",
    "step": 9,
    "src": "docs/decisions/09-review.md#L48",
    "since": "2026-10-20",
@@ -4450,6 +4580,14 @@
    "to": "comp:sim-loop"
   },
   {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "18.3",
+   "rel": "CITES",
+   "src": "docs/decisions/18-blender-nguon-chinh.md#L11",
+   "to": "19.10"
+  },
+  {
    "by": "curated",
    "conf": 0.9,
    "from": "18.3",
@@ -4576,6 +4714,102 @@
    "rel": "CONSTRAINS",
    "src": "docs/decisions/18-blender-nguon-chinh.md#L17",
    "to": "comp:mjcf-builder"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.10",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L35",
+   "to": "18.1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.10",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L35",
+   "to": "18.3"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.2",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L27",
+   "to": "4.1"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.3",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L28",
+   "to": "14.4"
+  },
+  {
+   "by": "rule:supersedes",
+   "conf": 1.0,
+   "from": "19.3",
+   "rel": "SUPERSEDES",
+   "src": "docs/decisions/14-builder-check.md#L14",
+   "to": "14.4"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.4",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L29",
+   "to": "13.4"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.7",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L32",
+   "to": "9.5"
+  },
+  {
+   "by": "rule:supersedes",
+   "conf": 1.0,
+   "from": "19.7",
+   "rel": "SUPERSEDES",
+   "src": "docs/decisions/09-review.md#L48",
+   "to": "9.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.8",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L33",
+   "to": "10.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.8",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L33",
+   "to": "14.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.8",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L33",
+   "to": "9.5"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "19.9",
+   "rel": "CITES",
+   "src": "docs/decisions/19-tai-2kg-thang-bang.md#L34",
+   "to": "11.11"
   },
   {
    "by": "curated",
@@ -4744,6 +4978,14 @@
    "rel": "CONSTRAINS",
    "src": "docs/decisions/09-review.md#L47",
    "to": "comp:feasibility-gate"
+  },
+  {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "9.5",
+   "rel": "CITES",
+   "src": "docs/decisions/09-review.md#L48",
+   "to": "19.8"
   },
   {
    "by": "curated",

@@ -43,6 +43,7 @@ Mọi quyết định đều sửa được về sau.
 | 16 | [16-gate-dau-tien.md](16-gate-dau-tien.md) | Cổng G1: xem model 3D và các thành phần |
 | 17 | [17-dieu-phoi-subagent.md](17-dieu-phoi-subagent.md) | Phiên chính chỉ điều phối, việc giao cho subagent |
 | 18 | [18-blender-nguon-chinh.md](18-blender-nguon-chinh.md) | Blender là nơi chỉnh model chính, xuất sang MuJoCo |
+| 19 | [19-tai-2kg-thang-bang.md](19-tai-2kg-thang-bang.md) | Chở tải 2 kg, ưu tiên thăng bằng: kích thước, servo, nguồn, ngân sách mới |
 
 `brainstorm-log.md` là bản nháp đầu tiên viết gộp một file. Đã được thay bằng các file 01–10, chỉ giữ để tham khảo.
 

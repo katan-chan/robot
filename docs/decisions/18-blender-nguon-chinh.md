@@ -8,7 +8,7 @@ Ngày: 2026-10-20.
 |---|---|---|---|
 | 18.1 | Blender là nơi **chỉnh model 3D chính** của robot. Model được **xuất từ Blender** sang trình mô phỏng chính xác hơn (MuJoCo) để chạy vật lý | [Người dùng] | Đang áp dụng |
 | 18.2 | Vật lý vẫn do MuJoCo lo (8.5, 13.3). Blender không dùng để mô phỏng vật lý | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
-| 18.3 | Cổng G1 xem model và các thành phần **trong Blender**. Thêm: model đã xuất mở được trong MuJoCo, và bảng thành phần đọc từ MuJoCo khớp với Blender | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
+| 18.3 | Cổng G1 xem model và các thành phần **trong Blender**. Thêm: model đã xuất mở được trong MuJoCo, và bảng thành phần đọc từ MuJoCo khớp với Blender | [Người dùng] xác nhận đề xuất của Claude | Đã thay một phần → 19.10 (xem trong MuJoCo) |
 | 18.4 | Phần vật lý không nằm trong hình học (danh mục servo, khối lượng servo và pin, ma sát, bộ giải) vẫn ở file TOML trong repo. Blender giữ hình dáng, vị trí khớp, trục khớp, giới hạn khớp, và servo nào gắn ở khớp nào | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 | 18.5 | Xuất bằng script `bpy` riêng của dự án (phương án b), không dùng LinkForge | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
 | 18.6 | File `.blend` (nguồn) và file xuất đều nằm trong repo. `models/spider.blend` là nguồn, được commit. Kết quả xuất (mô tả robot + mesh từng link) là file sinh ra, ghi vào `build/model/`, không commit, chạy lại lệnh xuất là có. Giống quan hệ giữa docs và `graph.json` | [Người dùng] xác nhận đề xuất của Claude | Đang áp dụng |
