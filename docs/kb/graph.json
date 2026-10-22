@@ -1549,6 +1549,149 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "20.1",
+   "type": "Decision",
+   "label": "Có một blog ghi lại quá trình làm robot nhện, từ brainstorm tới sản phẩm thật. Blog viết bằng **tiến",
+   "text": "Có một blog ghi lại quá trình làm robot nhện, từ brainstorm tới sản phẩm thật. Blog viết bằng **tiếng Anh**, người đọc là bất kỳ ai. Link blog để gắn vào portfolio sau này",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L9",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.10",
+   "type": "Decision",
+   "label": "GitHub Pages dựng từ nhánh `main`, thư mục `/docs`, bằng Jekyll mặc định (theme `minima`). Repo là `",
+   "text": "GitHub Pages dựng từ nhánh `main`, thư mục `/docs`, bằng Jekyll mặc định (theme `minima`). Repo là `katan-chan/robot`, blog ở `https://katan-chan.github.io/robot/journal/` (`baseurl: /robot`)",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L18",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.11",
+   "type": "Decision",
+   "label": "Clip là mp4 H.264, dài tối đa khoảng 20 s, không quá 10 MB. Quay video chỉ render, không chạy `mj_st",
+   "text": "Clip là mp4 H.264, dài tối đa khoảng 20 s, không quá 10 MB. Quay video chỉ render, không chạy `mj_step`, không đổi `MjData` của lần chạy thật (luật 3). Không commit video của người khác, `reference/` chỉ chứa link",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L19",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.2",
+   "type": "Decision",
+   "label": "Giọng kể cụ thể, không chung chung: lỗi nào, quyết định nào, commit nào. Trọng tâm là **vấn đề của a",
+   "text": "Giọng kể cụ thể, không chung chung: lỗi nào, quyết định nào, commit nào. Trọng tâm là **vấn đề của agent** và **vấn đề của người dùng**. Robot là bối cảnh. Không giấu hay tô đẹp sai lầm",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L10",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.3",
+   "type": "Decision",
+   "label": "**Một repo công khai duy nhất**, không giấu notes, quyết định hay code. Trước lần push đầu tiên phải",
+   "text": "**Một repo công khai duy nhất**, không giấu notes, quyết định hay code. Trước lần push đầu tiên phải quét secret toàn bộ lịch sử git. Tạo remote, push, đổi sang công khai đều phải hỏi người dùng (task-graph mục 5)",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L11",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.4",
+   "type": "Decision",
+   "label": "Xuất bản bằng **GitHub Pages**. Đổi email tác giả trong lịch sử git từ `minh.le@gosmartlog.com` sang",
+   "text": "Xuất bản bằng **GitHub Pages**. Đổi email tác giả trong lịch sử git từ `minh.le@gosmartlog.com` sang `lebinhminh_t67@hus.edu.vn`, chỉ đặt `git config user.email` cho repo này (không `--global`). Viết lại lịch sử không đảo ngược được: hỏi ngay trước khi chạy, giữ bản backup tới khi push xong",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L12",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.5",
+   "type": "Decision",
+   "label": "Cấu trúc `docs/journal/`: `notes/<version>.md`, `media/<version>/`, `reference/README.md`, `template",
+   "text": "Cấu trúc `docs/journal/`: `notes/<version>.md`, `media/<version>/`, `reference/README.md`, `templates/note.md`, `templates/post.md`, `posts/YYYY-MM-DD-<slug>.md`, `_drafts/`. `<version>` là tên gate: `brainstorm`, `g1`, `g2`…",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L13",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.6",
+   "type": "Decision",
+   "label": "Mỗi **beat** trong note gồm: tiêu đề ngắn; loại (`agent-problem`, `human-problem`, `idea`); chuyện g",
+   "text": "Mỗi **beat** trong note gồm: tiêu đề ngắn; loại (`agent-problem`, `human-problem`, `idea`); chuyện gì xảy ra; cách giải; bằng chứng (mã quyết định, commit, L-NNN, BUG-NNN, mã lần chạy); media nếu có. Mỗi beat tự đứng được bằng tiếng Anh, link tới tài liệu tiếng Việt chỉ để tham khảo thêm",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L14",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.7",
+   "type": "Decision",
+   "label": "Hai bước mới của harness. (1) Sau mỗi task được gộp, coordinator hỏi thêm \"có chuyện gì đáng kể cho ",
+   "text": "Hai bước mới của harness. (1) Sau mỗi task được gộp, coordinator hỏi thêm \"có chuyện gì đáng kể cho blog không?\", có thì thêm beat vào note của version hiện tại (không bắt buộc). (2) Khi qua mỗi gate: chụp ảnh Blender, ảnh MuJoCo, quay video MuJoCo vào `media/<gate>/`, viết note, rồi giao journal-writer viết bài nháp",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L15",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.8",
+   "type": "Decision",
+   "label": "Bài nháp nằm trong `docs/journal/_drafts/` (Jekyll không đưa lên site). Chỉ bài trong `posts/` lên s",
+   "text": "Bài nháp nằm trong `docs/journal/_drafts/` (Jekyll không đưa lên site). Chỉ bài trong `posts/` lên site, và chỉ sau khi người dùng duyệt từng bài. Không tự động đăng",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L16",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
+   "id": "20.9",
+   "type": "Decision",
+   "label": "Vai trò mới **journal-writer** chỉ ghi `docs/journal/_drafts/` và `docs/journal/posts/`. Coordinator",
+   "text": "Vai trò mới **journal-writer** chỉ ghi `docs/journal/_drafts/` và `docs/journal/posts/`. Coordinator ghi phần còn lại của `docs/journal/`, `docs/_config.yml`, `docs/index.md`. Implementer viết lệnh quay video trong `spider/sim/`. Thêm `docs/journal/` vào thành phần memory của `harness.toml`",
+   "decided_by": "user-confirmed",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L17",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "3.1",
    "type": "Decision",
    "label": "Stack: Blender 5.2 → MJCF → MuJoCo + Python 3.12 (`uv`)",
@@ -2734,6 +2877,13 @@
    "by": "rule:file-ref"
   },
   {
+   "id": "file:docs/_config.yml",
+   "type": "File",
+   "label": "docs/_config.yml",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
    "id": "file:docs/bugs/",
    "type": "File",
    "label": "docs/bugs/",
@@ -2766,6 +2916,69 @@
    "type": "File",
    "label": "docs/harness/task-graph.md",
    "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/index.md",
+   "type": "File",
+   "label": "docs/index.md",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/",
+   "type": "File",
+   "label": "docs/journal/",
+   "src": "harness.toml",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/_drafts/",
+   "type": "File",
+   "label": "docs/journal/_drafts/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/index.md",
+   "type": "File",
+   "label": "docs/journal/index.md",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/media/",
+   "type": "File",
+   "label": "docs/journal/media/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/notes/",
+   "type": "File",
+   "label": "docs/journal/notes/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/posts/",
+   "type": "File",
+   "label": "docs/journal/posts/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/reference/",
+   "type": "File",
+   "label": "docs/journal/reference/",
+   "src": "docs/harness/task-graph.md",
+   "by": "rule:file-ref"
+  },
+  {
+   "id": "file:docs/journal/templates/",
+   "type": "File",
+   "label": "docs/journal/templates/",
+   "src": "docs/harness/task-graph.md",
    "by": "rule:file-ref"
   },
   {
@@ -3118,6 +3331,14 @@
    "type": "AgentRole",
    "label": "Subagent làm phần tuần tự T0.1–T1.4 và tools/, mỗi lúc một agent, trong worktree",
    "src": "17.3",
+   "since": "2026-10-20",
+   "by": "curated"
+  },
+  {
+   "id": "role:journal-writer",
+   "type": "AgentRole",
+   "label": "Viết bài nháp tiếng Anh cho blog từ notes và media; chỉ ghi _drafts/ và posts/",
+   "src": "20.9",
    "since": "2026-10-20",
    "by": "curated"
   },
@@ -4810,6 +5031,158 @@
    "rel": "CITES",
    "src": "docs/decisions/19-tai-2kg-thang-bang.md#L34",
    "to": "11.11"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L9",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.1",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L9",
+   "to": "role:journal-writer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.10",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L18",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.11",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L19",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.2",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L10",
+   "to": "role:journal-writer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L11",
+   "to": "harness:guardrails"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.3",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L11",
+   "to": "role:human"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.4",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L12",
+   "to": "role:human"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.5",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L13",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L14",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.6",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L14",
+   "to": "role:journal-writer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L15",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.7",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L15",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L16",
+   "to": "role:human"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.8",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L16",
+   "to": "role:journal-writer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L17",
+   "to": "harness:memory"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L17",
+   "to": "role:coordinator"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L17",
+   "to": "role:implementer"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "20.9",
+   "rel": "CONSTRAINS",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L17",
+   "to": "role:journal-writer"
   },
   {
    "by": "curated",
@@ -6657,6 +7030,14 @@
    "from": "harness:memory",
    "rel": "STORED_IN",
    "src": "harness.toml",
+   "to": "file:docs/journal/"
+  },
+  {
+   "by": "rule:harness",
+   "conf": 1.0,
+   "from": "harness:memory",
+   "rel": "STORED_IN",
+   "src": "harness.toml",
    "to": "file:docs/kb/"
   },
   {
@@ -6849,6 +7230,14 @@
    "from": "role:coordinator",
    "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
+   "to": "file:docs/_config.yml"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
    "to": "file:docs/decisions/"
   },
   {
@@ -6858,6 +7247,54 @@
    "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
    "to": "file:docs/harness/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/index.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/journal/index.md"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/journal/media/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/journal/notes/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/journal/reference/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:coordinator",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/journal/templates/"
   },
   {
    "by": "curated",
@@ -7146,6 +7583,22 @@
    "rel": "WRITES",
    "src": "docs/harness/task-graph.md",
    "to": "file:uv.lock"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:journal-writer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/journal/_drafts/"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "role:journal-writer",
+   "rel": "WRITES",
+   "src": "docs/harness/task-graph.md",
+   "to": "file:docs/journal/posts/"
   },
   {
    "by": "curated",

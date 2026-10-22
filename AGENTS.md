@@ -25,6 +25,7 @@ Stack: model 3D nguồn trong Blender (`models/spider.blend`) → `tools/blender
 | Task và thứ tự | [docs/decisions/07-trinh-tu-task.md](docs/decisions/07-trinh-tu-task.md) |
 | Ai làm gì, ai được ghi file nào | [docs/harness/task-graph.md](docs/harness/task-graph.md) |
 | Bài học đã rút ra | [docs/harness/lessons.md](docs/harness/lessons.md) |
+| Blog nhật ký (tiếng Anh, công khai) | [docs/journal/](docs/journal/index.md), quyết định [20](docs/decisions/20-blog-nhat-ky.md) |
 
 ## Quy trình làm việc
 
@@ -59,6 +60,7 @@ tools/blender export [--blend models/spider.blend] [--out build/model]  # robot.
 uv run python -m spider.sim.view [--keyframe stand|home]  # mở viewer MuJoCo (cần export trước)
 uv run python -m spider.sim.view --parts                  # bảng thành phần, khối lượng đọc từ MuJoCo
 uv run python -m spider.sim.view --snapshot DIR [--keyframe home]  # 4 ảnh PNG từ MuJoCo
+uv run python -m spider.sim.view --video OUT.mp4 [--keyframe stand]  # video xoay quanh robot, chỉ render (không mj_step)
 ```
 
 Các lệnh sẽ có ở Phase 1, thêm vào đây khi task tương ứng xong:

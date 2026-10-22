@@ -16,7 +16,7 @@ mutability = "evolvable"
 desc = "Luật bắt buộc. Bắt đầu ngắn; mỗi luật mới phải kèm bằng chứng (10.10)"
 
 [components.memory]
-paths = ["docs/decisions/", "docs/kb/", "docs/harness/lessons.md", "docs/bugs/"]
+paths = ["docs/decisions/", "docs/kb/", "docs/harness/lessons.md", "docs/bugs/", "docs/journal/"]
 mutability = "evolvable"
 desc = "Quyết định, knowledge graph, bài học, bug. Bài học bắt đầu rỗng"
 

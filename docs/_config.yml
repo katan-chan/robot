@@ -1,0 +1,5 @@
+title: Spider Robot Journal
+baseurl: /robot
+theme: minima
+exclude:
+  - kb/graph.json

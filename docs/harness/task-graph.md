@@ -51,12 +51,13 @@ Worker chỉ được dựa vào hợp đồng. Muốn đổi hợp đồng thì
 
 | Vai trò | Làm | Được ghi vào (một người ghi mỗi file) |
 |---|---|---|
-| coordinator (phiên chính) | **Chỉ điều phối** (17.2): giao task, gọi verifier, gộp nhánh, viết hợp đồng (tài liệu), ghi quyết định, giữ KB và cấu hình harness. Không viết code | `AGENTS.md`, `CLAUDE.md`, `harness.toml`, `docs/decisions/`, `docs/kb/`, `docs/harness/`, `docs/reference/`, `docs/superpowers/`, `.claude/`, `.codex/`, `.githooks/` |
+| coordinator (phiên chính) | **Chỉ điều phối** (17.2): giao task, gọi verifier, gộp nhánh, viết hợp đồng (tài liệu), ghi quyết định, giữ KB và cấu hình harness. Không viết code | `AGENTS.md`, `CLAUDE.md`, `harness.toml`, `docs/decisions/`, `docs/kb/`, `docs/harness/`, `docs/reference/`, `docs/superpowers/`, `docs/_config.yml`, `docs/index.md`, `docs/journal/notes/`, `docs/journal/media/`, `docs/journal/reference/`, `docs/journal/templates/`, `docs/journal/index.md`, `.claude/`, `.codex/`, `.githooks/` |
 | implementer | T0.1–T1.4 lần lượt, sửa `tools/` khi được giao | `pyproject.toml`, `uv.lock`, `spider/__init__.py`, `spider/model/`, `spider/sim/`, `tools/`, `blender/`, `models/`, `.gitignore`, `tests/test_env.py`, `tests/test_scene.py`, `tests/test_config.py`, `tests/test_blender.py`, `tests/test_build.py`, `tests/test_model.py`, `tests/test_view.py`, `tests/test_source_model.py`, `tests/test_contact.py` |
 | gait-worker | T1.6 | `spider/gait/`, `tests/test_gait.py` |
 | checks-worker | T1.8, T1.12 (viết script hook; coordinator nối vào config) | `spider/checks/`, `tests/test_checks.py` |
 | record-worker | T1.9 | `spider/record/`, `docs/bugs/`, `tests/test_record.py` |
 | server-worker | T1.7, T1.10, T1.11 | `spider/server/`, `spider/cli.py`, `web/`, `tests/test_server.py` |
+| journal-writer | Viết bài nháp tiếng Anh cho blog từ notes và media; người dùng duyệt xong thì chuyển từ `_drafts/` sang `posts/` (20.8, 20.9) | `docs/journal/_drafts/`, `docs/journal/posts/` |
 | physics-verifier | Soát T1.4, T1.6, T1.8: số liệu có hợp lý không? | Không ghi gì |
 | determinism-verifier | Soát T1.4, T1.9: chạy lại có giống hệt không? | Không ghi gì |
 | security-verifier | Soát T1.7, T1.10, T1.11: lách được khoá không? | Không ghi gì |
@@ -110,3 +111,17 @@ Sau khi gộp một task, coordinator tự hỏi: có gì làm agent đi sai ho�
 - Nếu có: ghi một bài học vào `docs/harness/lessons.md`. Bài học phải kèm bằng chứng (mã bug, mã lần chạy, commit).
 - Bài học lặp lại từ 2 lần, hoặc gây hậu quả nặng: đề xuất thêm thành **luật luôn bật** trong `AGENTS.md`. Người dùng duyệt (mục 5).
 - Không thêm luật nào mà không có bằng chứng (10.10).
+
+Câu hỏi thứ hai cho blog (20.7): **có chuyện gì đáng kể cho blog không?** Có thì thêm một beat vào `docs/journal/notes/<version hiện tại>.md` theo `docs/journal/templates/note.md`. Không có thì bỏ qua, không bắt buộc.
+
+## Khi qua gate
+
+Khi qua mỗi gate (20.7), coordinator chạy ba lệnh chụp và quay vào `docs/journal/media/<gate>/`, rồi viết note cho gate và giao journal-writer viết bài nháp:
+
+```sh
+tools/blender render --out docs/journal/media/<gate>/blender
+uv run python -m spider.sim.view --snapshot docs/journal/media/<gate>/mujoco --keyframe stand
+uv run python -m spider.sim.view --video docs/journal/media/<gate>/orbit.mp4 --keyframe stand
+```
+
+Video chỉ render, không chạy `mj_step` (20.11).

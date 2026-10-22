@@ -106,6 +106,7 @@ REVIEWS = "docs/harness/task-graph.md"
 "role:physics-verifier"     = { label = "Kiểm vật lý ở context riêng: số liệu có hợp lý không?", src = "docs/harness/task-graph.md", stored_in = ".claude/agents/physics-verifier.md" }
 "role:determinism-verifier" = { label = "Kiểm tái hiện ở context riêng: chạy lại có giống hệt không?", src = "docs/harness/task-graph.md", stored_in = ".claude/agents/determinism-verifier.md" }
 "role:security-verifier"    = { label = "Kiểm bảo mật ở context riêng: có lách được khoá không?", src = "docs/harness/task-graph.md", stored_in = ".claude/agents/security-verifier.md" }
+"role:journal-writer"       = { label = "Viết bài nháp tiếng Anh cho blog từ notes và media; chỉ ghi _drafts/ và posts/", src = "20.9" }
 "role:human"                = { label = "Người dùng: cổng duyệt cho việc khó đảo ngược", src = "docs/harness/task-graph.md" }
 
 # ---------------------------------------------------------------- cạnh
@@ -194,6 +195,17 @@ REVIEWS = "docs/harness/task-graph.md"
 "18.9"   = ["comp:blender-scripts", "comp:mjcf-builder"]
 "18.10"  = ["comp:blend-model", "harness:guardrails"]
 "18.11"  = ["harness:guardrails", "comp:cli"]
+"20.1"   = ["harness:memory", "role:journal-writer"]
+"20.2"   = ["role:journal-writer"]
+"20.3"   = ["harness:guardrails", "role:human"]
+"20.4"   = ["role:human"]
+"20.5"   = ["harness:memory"]
+"20.6"   = ["harness:memory", "role:journal-writer"]
+"20.7"   = ["role:coordinator", "harness:memory"]
+"20.8"   = ["role:journal-writer", "role:human"]
+"20.9"   = ["role:journal-writer", "role:coordinator", "role:implementer", "harness:memory"]
+"20.10"  = ["harness:memory"]
+"20.11"  = ["harness:guardrails"]
 "17.1"   = ["harness:subagents"]
 "17.2"   = ["role:coordinator", "harness:guardrails"]
 "17.3"   = ["role:implementer"]
@@ -306,8 +318,9 @@ REVIEWS = "docs/harness/task-graph.md"
 
 # Một người ghi mỗi file/thư mục (task-graph.md, luật 2).
 [edges.WRITES]
-"role:coordinator"   = ["AGENTS.md", "CLAUDE.md", "harness.toml", "docs/decisions/", "docs/kb/", "docs/harness/", "docs/reference/", "docs/superpowers/", ".claude/settings.json", ".claude/agents/", ".claude/hooks/", ".codex/hooks.json", ".githooks/"]
+"role:coordinator"   = ["AGENTS.md", "CLAUDE.md", "harness.toml", "docs/decisions/", "docs/kb/", "docs/harness/", "docs/reference/", "docs/superpowers/", "docs/_config.yml", "docs/index.md", "docs/journal/notes/", "docs/journal/media/", "docs/journal/reference/", "docs/journal/templates/", "docs/journal/index.md", ".claude/settings.json", ".claude/agents/", ".claude/hooks/", ".codex/hooks.json", ".githooks/"]
 "role:implementer"   = ["pyproject.toml", "uv.lock", "spider/__init__.py", "spider/model/", "spider/sim/", "tools/", "blender/", "models/", ".gitignore", "tests/test_env.py", "tests/test_scene.py", "tests/test_config.py", "tests/test_blender.py", "tests/test_build.py", "tests/test_model.py", "tests/test_view.py"]
+"role:journal-writer" = ["docs/journal/_drafts/", "docs/journal/posts/"]
 "role:gait-worker"   = ["spider/gait/", "tests/test_gait.py"]
 "role:checks-worker" = ["spider/checks/", "tests/test_checks.py"]
 "role:record-worker" = ["spider/record/", "docs/bugs/", "tests/test_record.py"]
