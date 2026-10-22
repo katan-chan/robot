@@ -6,6 +6,11 @@ def add_scene(spec: mujoco.MjSpec) -> None:
     spec.compiler.degree = False
     spec.option.timestep = 0.002
     spec.option.integrator = mujoco.mjtIntegrator.mjINT_IMPLICITFAST
+    # Chân không bò dưới giới hạn ma sát (BUG-002): nón elliptic + impratio 10 làm ma sát cứng hơn,
+    # noslip_iterations 10 khử trượt mềm còn lại. Chỉ cả hai mới đạt < 0.5 mm / 2 s ở 50% μ·m·g.
+    spec.option.cone = mujoco.mjtCone.mjCONE_ELLIPTIC
+    spec.option.impratio = 10
+    spec.option.noslip_iterations = 10
     spec.add_texture(name="grid", type=mujoco.mjtTexture.mjTEXTURE_2D,
                      builtin=mujoco.mjtBuiltin.mjBUILTIN_CHECKER,
                      rgb1=[0.2, 0.3, 0.4], rgb2=[0.1, 0.2, 0.3], width=256, height=256)
