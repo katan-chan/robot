@@ -1588,6 +1588,19 @@
    "by": "rule:decision-table"
   },
   {
+   "id": "20.12",
+   "type": "Decision",
+   "label": "Hook `PostToolUse` (Bash) `.claude/hooks/journal-reminder.sh` **nhắc** coordinator để lại chất liệu ",
+   "text": "Hook `PostToolUse` (Bash) `.claude/hooks/journal-reminder.sh` **nhắc** coordinator để lại chất liệu blog. Gộp task (`git merge`) thì nhắc ghi beat vào `notes/`. Đánh dấu gate bằng `git tag -a gN` thì nhắc chụp media, viết note gate và giao journal-writer viết bài nháp. Hook không tự viết bài và không đăng (20.8). Không dùng phiên Claude chạy ngầm (`claude -p`), vì tốn token, không ai giám sát, và thiếu bối cảnh",
+   "decided_by": "user",
+   "status": "active",
+   "status_raw": "Đang áp dụng",
+   "step": 20,
+   "src": "docs/decisions/20-blog-nhat-ky.md#L20",
+   "since": "2026-10-22",
+   "by": "rule:decision-table"
+  },
+  {
    "id": "20.2",
    "type": "Decision",
    "label": "Giọng kể cụ thể, không chung chung: lỗi nào, quyết định nào, commit nào. Trọng tâm là **vấn đề của a",
@@ -5065,6 +5078,14 @@
    "to": "harness:guardrails"
   },
   {
+   "by": "rule:cites",
+   "conf": 1.0,
+   "from": "20.12",
+   "rel": "CITES",
+   "src": "docs/decisions/20-blog-nhat-ky.md#L20",
+   "to": "20.8"
+  },
+  {
    "by": "curated",
    "conf": 0.9,
    "from": "20.2",
@@ -6654,6 +6675,14 @@
    "from": "check:mass-budget",
    "rel": "VERIFIES",
    "src": "docs/decisions/10-harness-agent.md",
+   "to": "19.7"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:mass-budget",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
    "to": "8.5"
   },
   {
@@ -6815,6 +6844,14 @@
    "rel": "VERIFIES",
    "src": "docs/decisions/10-harness-agent.md",
    "to": "14.5"
+  },
+  {
+   "by": "curated",
+   "conf": 0.9,
+   "from": "check:static-torque",
+   "rel": "VERIFIES",
+   "src": "docs/decisions/10-harness-agent.md",
+   "to": "19.8"
   },
   {
    "by": "curated",

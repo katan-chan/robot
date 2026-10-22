@@ -39,3 +39,7 @@ Cả 4 trượt trước khi đổ. Lực đẩy chủ yếu đo độ trượt.
 - Dưới tải, servo bị lún: lệnh nhấc chân 50 mm nhưng chân chỉ lên khoảng 20 mm. Dáng đi (T1.6) phải tính tới, hoặc chỉnh `kp_error` khi có số đo servo thật.
 - Ma sát 0.6 thì dốc tối đa khoảng 16°, do ma sát giới hạn chứ không do servo. Bàn chân cần bọc cao su.
 - Tải nặng làm trọng tâm cao hơn. Đặt tải càng thấp càng tốt.
+- Số đo 19.8 phụ thuộc cách đo (physics-verifier, model cấu hình B có tải, sau BUG-002). Đứng 3 chân, nhấc lần lượt từng chân:
+  - `mj_inverse` tại tư thế đã ổn định (`qvel = qacc = 0`), chân xấu nhất fr/rr: hip_pitch 0.448, knee 0.235, hip_yaw 0.014. Đây là số dùng cho kiểm tra 19.8, vì không dựa vào ma sát gánh lực ngang.
+  - Mô phỏng giữ 1.5 s, đọc `actuator_force`: hip_pitch 0.28, knee 0.18, hip_yaw 0.06. Với bộ giải cũ (trước BUG-002) cách này cho hip_pitch 0.446.
+- Đẩy ngang đột ngột (lực bậc thang 0.5·μ·m·g) theo hướng chéo 30–45° làm một bàn chân chạm giới hạn ma sát và trượt một lần khoảng 0.7 mm trong 0.5 s đầu, sau đó không bò. Đẩy tăng dần trong 0.5 s thì mọi hướng dưới 0.5 mm. Đây là rủi ro cần chốt ở G1: hạ tải xuống thấp hoặc mở rộng thế đứng nếu cần chịu được va đẩy đột ngột.

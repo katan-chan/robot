@@ -42,7 +42,8 @@
 - **Trục khớp:** `hip_yaw` = (0, 0, 1). `hip_pitch` = (0, −1, 0), dương = nhấc đùi lên. `knee` = (0, 1, 0), dương = gập cẳng xuống.
 - **Servo:** object mesh hộp `{leg}_{kind}_servo` làm con của link cha của khớp nó lái. Vỏ servo nằm trên body cha: servo `hip_yaw` trên `torso`, `hip_pitch` trên `coxa`, `knee` trên `femur`.
 - **Bàn chân:** Empty kiểu sphere `{leg}_foot`, con của `{leg}_tibia`, `empty_display_size` = bán kính.
-- **Bố trí chữ X (14.4):** gốc chân tại góc thân `(±0.05, ±0.04, 0)`, hướng `fl = +45°`, `fr = −45°`, `rl = +135°`, `rr = −135°`. Kích thước khởi điểm: thân 0.10 × 0.08 × 0.010 m (tấm phẳng như ảnh; bản đầu 0.035 m vượt ngân sách khối lượng, xem ledger Task 5); coxa 0.03, femur 0.055, tibia 0.075 m; bán kính đoạn chân 0.006 m; bán kính bàn chân 0.008 m; khoảng khớp `hip_yaw [−60, 60]`, `hip_pitch [−90, 90]`, `knee [−30, 150]` độ; servo mặc định `MG90S`.
+- **Bố trí chữ X (14.4):** gốc chân tại góc thân `(±0.10, ±0.08, 0)`, hướng `fl = +45°`, `fr = −45°`, `rl = +135°`, `rr = −135°`. Kích thước (cấu hình B, 19.3): thân tấm 0.20 × 0.16 × 0.010 m; coxa 0.05, femur 0.09, tibia 0.12 m; bán kính đoạn chân 0.010 m; bán kính bàn chân 0.012 m; khoảng khớp `hip_yaw [−60, 60]`, `hip_pitch [−90, 90]`, `knee [−30, 150]` độ. Servo mặc định theo loại khớp (19.4): `hip_yaw` = `DS3235`, `hip_pitch` = `DS3240`, `knee` = `DS3235`; `--servo kind=NAME` ghi đè được.
+  - Đã thay → 19.3, 19.4: bản trước dùng gốc chân `(±0.05, ±0.04, 0)`, thân 0.10 × 0.08 × 0.010 m (bản đầu 0.035 m vượt ngân sách, xem ledger Task 5), coxa 0.03, femur 0.055, tibia 0.075 m, bán kính đoạn chân 0.006 m, bàn chân 0.008 m, mọi khớp `MG90S`.
 
 ### Định dạng `build/model/robot.json` (hợp đồng Blender → MuJoCo)
 
