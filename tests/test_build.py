@@ -6,8 +6,8 @@ import mujoco
 import numpy as np
 import pytest
 
-from spider.model.build import ACTUATORS, build_model
-from spider.model.config import load_physics, load_servos
+from spider.model.build import ACTUATORS, LEGS, build_model
+from spider.model.config import JOINT_KINDS, load_physics, load_servos
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SERVO = {"hip_yaw": "DS3235", "hip_pitch": "DS3240", "knee": "DS3235"}   # 19.4
@@ -124,7 +124,7 @@ def test_payload_geom(exported):                               # 19.6
     assert "payload_geom" not in [bare.geom(i).name for i in range(bare.ngeom)]
 
 
-def test_stand_with_payload_holds(exported):                   # 19.8, 10.5: không nới 50%
+def test_stand_with_payload_holds(exported):                   # 19.1/stand, 10.5: không nới 50%
     m = build_model(exported); d = mujoco.MjData(m)
     mujoco.mj_resetDataKeyframe(m, d, m.key("stand").id)
     torso, floor, peak = m.geom("torso_geom").id, m.geom("floor").id, np.zeros(m.nu)
@@ -133,6 +133,67 @@ def test_stand_with_payload_holds(exported):                   # 19.8, 10.5: kh�
         peak = np.maximum(peak, np.abs(d.actuator_force) / m.actuator_forcerange[:, 1])
         assert not any({c.geom1, c.geom2} == {torso, floor} for c in d.contact[:d.ncon]), d.time
     assert peak.max() < 0.5, dict(zip(ACTUATORS, peak.round(3)))
+
+
+def _ik(m, qpos, targets):
+    """Bình phương tối thiểu có giảm chấn trên Jacobian của MuJoCo (mj_jacSite): chỉnh 3 khớp mỗi chân để
+    site bàn chân tới đích (khung thế giới); thân giữ nguyên ở qpos. Trả về (ctrl, sai số lớn nhất m)."""
+    d, jac = mujoco.MjData(m), np.zeros((3, m.nv))
+    d.qpos[:] = qpos
+    for _ in range(200):
+        mujoco.mj_kinematics(m, d); mujoco.mj_comPos(m, d)
+        err = 0.0
+        for leg, t in targets.items():
+            e = t - d.site(f"{leg}_foot").xpos
+            err = max(err, float(np.linalg.norm(e)))
+            mujoco.mj_jacSite(m, d, jac, None, m.site(f"{leg}_foot").id)
+            js = [m.joint(f"{leg}_{k}") for k in JOINT_KINDS]
+            J = jac[:, [j.dofadr[0] for j in js]]
+            for j, dq in zip(js, J.T @ np.linalg.solve(J @ J.T + 1e-6 * np.eye(3), e)):
+                d.qpos[j.qposadr[0]] = np.clip(d.qpos[j.qposadr[0]] + dq, *j.range)
+        if err < 1e-7:
+            break
+    return np.array([d.qpos[m.joint(a).qposadr[0]] for a in ACTUATORS]), err
+
+
+def three_leg_ratios(m, lift, h=0.04):
+    """Đứng 3 chân tĩnh (cách đo của probe da08237): dời thân ngang về tâm nội tiếp tam giác 3 chân đứng,
+    rồi nhấc chân `lift` lên h (lệnh). Ramp 1 s + giữ 1 s, ramp nhấc 0.5 s + giữ 1.5 s. Ở tư thế đã lắng,
+    mj_inverse với qvel = qacc = 0 cho mô-men tĩnh; trả về {actuator: |qfrc_inverse| / stall} và MjData."""
+    key, d = m.key("stand"), mujoco.MjData(m)
+    mujoco.mj_resetDataKeyframe(m, d, key.id); mujoco.mj_kinematics(m, d); mujoco.mj_comPos(m, d)
+    feet = {leg: d.site(f"{leg}_foot").xpos.copy() for leg in LEGS}
+    A, B, C = (feet[leg][:2] for leg in LEGS if leg != lift)
+    w = np.linalg.norm([B - C, C - A, A - B], axis=1)
+    inc = (w[0] * A + w[1] * B + w[2] * C) / w.sum()                 # tâm nội tiếp (hình học)
+    for alpha in np.arange(1.0, 0.0, -0.05):                       # dời xa nhất mà chân còn với tới
+        q = key.qpos.copy(); q[:2] += alpha * (inc - d.subtree_com[m.body("torso").id][:2])
+        (plant, e1), (up, e2) = _ik(m, q, feet), _ik(m, q, {**feet, lift: feet[lift] + [0, 0, h]})
+        if max(e1, e2) < 1e-4:
+            break
+    assert max(e1, e2) < 1e-4, (lift, e1, e2)
+    mujoco.mj_resetDataKeyframe(m, d, key.id)
+    for c1, ramp, hold in ((plant, 1.0, 1.0), (up, 0.5, 1.5)):
+        c0, t0 = d.ctrl.copy(), d.time
+        while d.time < t0 + ramp + hold:
+            d.ctrl[:] = c0 + (c1 - c0) * min(1.0, (d.time - t0) / ramp)
+            mujoco.mj_step(m, d)
+    assert np.abs(d.qvel).max() < 1e-3, (lift, np.abs(d.qvel).max())   # đã lắng
+    d.qvel[:] = 0; d.qacc[:] = 0
+    mujoco.mj_inverse(m, d)
+    dof = [m.joint(a).dofadr[0] for a in ACTUATORS]
+    return dict(zip(ACTUATORS, np.abs(d.qfrc_inverse[dof]) / m.actuator_forcerange[:, 1])), d
+
+
+def test_three_leg_static_with_payload(exported):             # 19.8, 10.5: không nới 50%
+    m = build_model(exported)
+    assert m.geom("payload_geom").id >= 0                       # có tải 2 kg, không qua được khi không tải
+    floor, torso = m.geom("floor").id, m.geom("torso_geom").id
+    for lift in LEGS:
+        r, d = three_leg_ratios(m, lift)
+        touching = {g for c in d.contact[:d.ncon] if floor in (c.geom1, c.geom2) for g in (c.geom1, c.geom2)}
+        assert m.geom(f"{lift}_foot_geom").id not in touching and torso not in touching, lift
+        assert max(r.values()) <= 0.5, (lift, {k: round(v, 3) for k, v in r.items()})
 
 
 def test_actuator_limits_follow_servo(exported):               # 9.1, 12.7
