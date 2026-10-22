@@ -1,4 +1,5 @@
-# Danh mục servo. Số datasheet ở 4.8 V. Mô-men cực đại = mô-men kẹt (stall).
+# Danh mục servo. Mô-men cực đại = mô-men kẹt (stall). Điện áp của số liệu và mức ước lượng
+# ghi riêng trong trường `source` của từng servo.
 # armature, damping, frictionloss là ƯỚC LƯỢNG, hiệu chỉnh ở Giai đoạn 8 (13.4).
 
 [MG90S]
@@ -43,7 +44,7 @@ travel_deg = 180                      # độ
 armature = 5e-3                       # kg·m² (ước lượng)
 damping = 0.2                         # N·m·s/rad (ước lượng)
 frictionloss = 0.1                    # N·m (ước lượng)
-source = "ước lượng cho servo 35 kg·cm (19.4), chưa đối chiếu datasheet; hiệu chỉnh ở Giai đoạn 8 (13.4)"
+source = "ước lượng cho servo 35 kg·cm ở khoảng 6 V (19.4), chưa đối chiếu datasheet; hiệu chỉnh ở Giai đoạn 8 (13.4)"
 
 [DS3240]
 stall_torque = 3.92                   # N·m (~40 kg·cm)
@@ -54,4 +55,4 @@ travel_deg = 180                      # độ
 armature = 5e-3                       # kg·m² (ước lượng)
 damping = 0.2                         # N·m·s/rad (ước lượng)
 frictionloss = 0.1                    # N·m (ước lượng)
-source = "ước lượng cho servo 40 kg·cm (19.4), chưa đối chiếu datasheet; hiệu chỉnh ở Giai đoạn 8 (13.4)"
+source = "ước lượng cho servo 40 kg·cm ở khoảng 6 V (19.4), chưa đối chiếu datasheet; hiệu chỉnh ở Giai đoạn 8 (13.4)"
